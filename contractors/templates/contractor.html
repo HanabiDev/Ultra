@@ -1,11 +1,50 @@
 {% extends 'admin/base/base.html' %}
 
-{% block title %}Nuevo contratista{% endblock %}
+{% block title %}{% if editing %}Editar contratista{% else %}Nuevo contratista{% endif %}{% endblock %}
+
+{% block section_title %}Contratistas{% endblock %}
 
 {% block main %}
-    <div class="row">
-        <div class="col-md-6">
+<h2 style="margin-top: 0px;">{% if editing %}Editar contratista{% else %}Registrar contratista{% endif %}</h2>
 
+<div class="row">
+    <form action="." method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        {% for fieldset in form.fieldsets %}
+        <div class="col-md-6">
+             <div class="card">
+                <div class="header">
+                    <h4 class="title">
+                        {{fieldset.legend}}
+                    </h4>
+                </div>
+                <div class="content">
+                    {% for field in fieldset %}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{field.label}}</label>
+                            <div class="col-md-8">
+                                {{field}}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% if forloop.last  %}
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">{{field.label}}</label>
+                        <div class="col-md-8">
+                            <a type="submit" class="btn btn-fill btn-danger" href="#">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar contratista{% endif %}">
+                        </div>
+                    </div>
+
+                    {% endif %}
+                </div>
+             </div>
         </div>
-    </div>
+        {% endfor %}
+    </form>
+</div>
 {% endblock %}

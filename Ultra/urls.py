@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^contratistas/', include('contractors.urls', 'contractors'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -71,3 +71,12 @@
 body.nude{
     background-color: #f4f3ef;
 }
+
+
+.dataTables_length, .dataTables_info{
+    padding-left:20px;
+}
+
+div#datatables_filter, .dataTables_paginate {
+    padding-right: 20px;
+}
