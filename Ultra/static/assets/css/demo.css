@@ -80,3 +80,21 @@ body.nude{
 div#datatables_filter, .dataTables_paginate {
     padding-right: 20px;
 }
+
+.navbar-ct-success {
+    background-color: #27ae60;
+}
+
+.card .btn-success{background-color: #27ae60;border-color:#27ae60;}
+
+.alert-danger {
+    background-color: #ce1111;
+    color: #fff;
+}
+
+.sidebar-mini .sidebar, .sidebar-mini .main-panel {
+    overflow: visible;
+    max-height: none;
+    height: 100vh;
+    overflow: hidden;
+}

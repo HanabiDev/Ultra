@@ -1,0 +1,40 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}{% if editing %}Editar programa{% else %}Nuevo programa{% endif %}{% endblock %}
+
+{% block section_title %}{% if editing %}Editar programa{% else %}Nuevo programa{% endif %}{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="
+        {% if editing %}{% url 'programs:edit_program' program.id %}
+        {% else %}{% url 'programs:new_program' %}{% endif %}
+        " method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-8">
+             <div class="card">
+                <div class="content">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{field.label}}</label>
+                            <div class="col-md-8">
+                                {{field}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="#">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar programa{% endif %}">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

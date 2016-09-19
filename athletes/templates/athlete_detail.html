@@ -1,0 +1,133 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver deportista{% endblock %}
+
+{% block section_title %}Ver deportista{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-4 col-md-5">
+        <div class="card card-user">
+            <div class="image">
+                <img src="{% static 'assets/img/background.jpg' %}" alt="..."/>
+            </div>
+            <div class="content">
+                <div class="author">
+                  <img class="avatar border-white" src="/media/{{ athlete.photo }}" alt="..."/>
+                  <h4 class="title">{{athlete}}<br />
+                     <a href="#"><small>Deportista</small></a>
+                  </h4>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-1">
+                        <h5>
+                            <a href="{% url 'athletes:edit_athlete' athlete.id %}" class="text-warning">
+                                <i class="ti-pencil-alt"></i>
+                                <br />
+                                <small>Editar</small>
+                            </a>
+                        </h5>
+                    </div>
+                    <div class="col-md-5">
+                        <h5>
+                            <i class="ti-lock"></i>
+                            <br />
+                            <small>Bloquear</small>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-7">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Información</h4>
+                <hr>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nombres</label>
+                                <p class="form-control-static">{{athlete.first_name}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Apellidos</label>
+                                <p class="form-control-static">{{athlete.last_name}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Cargo</label>
+                                <p class="form-control-static">Deportista</p>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Tipo de documento</label>
+                                <p class="form-control-static">{{athlete.get_document_type_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Número de documento</label>
+                                <p class="form-control-static">{{athlete.document_number}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <p class="form-control-static">{{athlete.address}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Provincia</label>
+                                <p class="form-control-static">{{athlete.province}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Municipio</label>
+                                <p class="form-control-static">{{athlete.municipality}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Teléfono Fijo</label>
+                                <p class="form-control-static">{{athlete.phone}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Correo electrónico</label>
+                                <p class="form-control-static">{{athlete.email}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

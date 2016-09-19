@@ -1,0 +1,115 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Programas{% endblock %}
+
+{% block section_title %}Programas{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <a class="btn btn-fill btn-success" href="{% url 'programs:new_program' %}">
+                    Agregar programa
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-field="ID">ID</th>
+                    <th data-field="Nombre">Nombre</th>
+                    <th data-field="Estado">Estado</th>
+                    <th data-field="Subprogramas" class="text-center">Subprogramas</th>
+                    <th data-field="" class="disabled-sorting">Acción</th>
+                </thead>
+                <tbody>
+                    {% for program in programs %}
+                    <tr>
+                        <td>{{program.id}}</td>
+                        <td>{{program.name}}</td>
+                        <td>{{program.get_status_display}}</td>
+                        <td class="text-center">{{program.subprogram_set.all.count}}</td>
+                        <td>
+                            <a href="{% url 'programs:view_program' program.id %}" class="btn btn-simple text-success btn-icon edit"><i class="ti-eye"></i></a>
+                            <a href="{% url 'programs:edit_program' program.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>
+                            <a href="{% url 'programs:toggle_block_program' program.id %}" class="btn btn-simple btn-danger btn-icon like">
+                                {% if contractor.is_active %}
+                                    <i class="ti-lock"></i>
+                                {% else %}
+                                    <i class="ti-unlock"></i>
+                                {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

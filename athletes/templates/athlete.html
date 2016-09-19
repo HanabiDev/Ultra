@@ -1,0 +1,74 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}{% if editing %}Editar deportista{% else %}Nuevo deportista{% endif %}{% endblock %}
+
+{% block section_title %}{% if editing %}Editar deportista{% else %}Nuevo deportista{% endif %}{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="
+        {% if editing %}{% url 'athletes:edit_athlete' athlete.id %}
+        {% else %}{% url 'athletes:new_athlete' %}{% endif %}
+        " method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+
+        {{form.errors}}
+
+        {% for fieldset in form.fieldsets %}
+        <div class="col-md-6">
+             <div class="card">
+                <div class="header">
+                    <h4 class="title">
+                        {{fieldset.legend}}
+                    </h4>
+                </div>
+                <div class="content">
+                    {% for field in fieldset %}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{field.label}}</label>
+                            <div class="col-md-8">
+                                {{field}}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% if forloop.last  %}
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">{{field.label}}</label>
+                        <div class="col-md-8">
+                            <a type="submit" class="btn btn-fill btn-danger" href="#">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar deportista{% endif %}">
+                        </div>
+                    </div>
+
+                    {% endif %}
+                </div>
+             </div>
+        </div>
+        {% endfor %}
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#id_province").change(function(){
+                $.get(
+                    '{% url 'athletes:municipalities' %}',
+                    {'province_id':$("#id_province").val()},
+                    function(data){
+                        $("#id_municipality").html(data)
+
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                );
+            });
+        });
+    </script>
+{% endblock %}

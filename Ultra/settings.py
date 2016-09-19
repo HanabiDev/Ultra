@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'betterforms',
     'Ultra',
+    'app_auth',
     'programs',
     'contractors',
+    'athletes',
 ]
 
 MIDDLEWARE = [

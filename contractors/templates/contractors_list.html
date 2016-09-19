@@ -2,59 +2,60 @@
 
 {% load static %}
 
-{% block title %}Nuevo contratista{% endblock %}
+{% block title %}Contratistas{% endblock %}
 
 {% block section_title %}Contratistas{% endblock %}
 
 {% block main %}
-<h2 class="title" style="margin-top:0;">Contratistas</h2>
 <div class="row">
     <div class="col-md-12">
 
-        <div class="card">
-            <div class="content table-full-width">
-                <div class="toolbar text-right" style="padding:10px 20px 20px;">
-                    <a class="btn btn-fill btn-success" href="{% url 'contractors:new' %}">
-                        Agregar contratista
-                    </a>
-                </div>
-                <div class="fresh-datatables">
-                    <table id="datatables" class="table table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Cargo</th>
-                            <th>Teléfono</th>
-                            <th>Móvil</th>
-                            <th>Correo</th>
-                            <th class="disabled-sorting">Actions</th>
-                        </tr>
-                    </thead>
+        <div class="fresh-table color-green">
 
-                    <tbody>
-
-                        {% for contractor in contractors %}
-                        <tr>
-                            <td>{{contractor.get_full_name}}</td>
-                            <td>{{contractor.get_type_display}}</td>
-                            <td>{{contractor.phone}}</td>
-                            <td>{{contractor.mobile}}</td>
-                            <td>{{contractor.email}}</td>
-                            <td>
-                                <a href="{% url 'contractors:view' contractor.id %}" class="btn btn-simple btn-success btn-icon edit"><i class="ti-eye"></i></a>
-                                <a href="{% url 'contractors:edit' contractor.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>
-                                <a href="#" class="btn btn-simple btn-danger btn-icon like"><i class="ti-lock"></i></a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                       </tbody>
-                    </table>
-                </div>
-
-
+            <div class="toolbar">
+                <a class="btn btn-fill btn-success" href="{% url 'contractors:new_contractor' %}">
+                    Agregar contratista
+                </a>
             </div>
-        </div><!--  end card  -->
-    </div> <!-- end col-md-12 -->
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-field="Foto" class="disabled-sorting"><span style="color:#fff;">Foto</span></th>
+                    <th data-field="Documento">Documento</th>
+                    <th data-field="Nombre">Nombre</th>
+                    <th data-field="Cargo">Cargo</th>
+                    <th data-field="Teléfono">Teléfono</th>
+                    <th data-field="Móvil">Móvil</th>
+                    <th data-field="Correo">Correo</th>
+                    <th data-field="" class="disabled-sorting">Acción</th>
+                </thead>
+                <tbody>
+                    {% for contractor in contractors %}
+                    <tr>
+                        <td><img src="/media/{{contractor.avatar}}" class="img-circle" style="max-height:40px;"></td>
+                        <td>{{contractor.dni}}</td>
+                        <td>{{contractor.get_full_name}}</td>
+                        <td>{{contractor.get_type_display}}</td>
+                        <td>{{contractor.phone}}</td>
+                        <td>{{contractor.mobile}}</td>
+                        <td>{{contractor.email}}</td>
+                        <td>
+                            <a href="{% url 'contractors:view_contractor' contractor.id %}" class="btn btn-simple text-success btn-icon edit"><i class="ti-eye"></i></a>
+                            <a href="{% url 'contractors:edit_contractor' contractor.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>
+                            <a href="{% url 'contractors:toggle_block_contractor' contractor.id %}" class="btn btn-simple btn-danger btn-icon like">
+                                {% if contractor.is_active %}
+                                    <i class="ti-lock"></i>
+                                {% else %}
+                                    <i class="ti-unlock"></i>
+                                {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -64,34 +65,57 @@
 	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
 
     <script type="text/javascript">
-	    $(document).ready(function() {
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
 
-	        $('#datatables').DataTable({
-	            "pagingType": "full_numbers",
-	            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-	            responsive: true,
-	            language: {
-	            search: "_INPUT_",
-		            searchPlaceholder: "Search records",
-		        }
-	        });
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
 
 
-	        var table = $('#datatables').DataTable();
-	         // Edit record
-
-	         // Delete a record
-	         table.on( 'click', '.remove', function (e) {
-	            $tr = $(this).closest('tr');
-	            table.row($tr).remove().draw();
-	            e.preventDefault();
-	         } );
-
-	        //Like record
-	        table.on( 'click', '.like', function () {
-	            alert('You clicked on Like button');
-	         });
-
-	    });
-</script>
+    </script>
 {% endblock %}

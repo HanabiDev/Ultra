@@ -2,13 +2,15 @@
 
 {% block title %}{% if editing %}Editar contratista{% else %}Nuevo contratista{% endif %}{% endblock %}
 
-{% block section_title %}Contratistas{% endblock %}
+{% block section_title %}{% if editing %}Editar contratista{% else %}Nuevo contratista{% endif %}{% endblock %}
 
 {% block main %}
-<h2 style="margin-top: 0px;">{% if editing %}Editar contratista{% else %}Registrar contratista{% endif %}</h2>
 
 <div class="row">
-    <form action="." method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form action="
+        {% if editing %}{% url 'contractors:edit_contractor' contractor.id %}
+        {% else %}{% url 'contractors:new_contractor' %}{% endif %}
+        " method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
         {% for fieldset in form.fieldsets %}
         <div class="col-md-6">

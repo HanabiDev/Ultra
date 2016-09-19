@@ -1,5 +1,7 @@
 {% load static %}
-<div class="sidebar" data-background-color="white" data-active-color="danger">
+{% load nav_tags %}
+
+<div class="sidebar" data-background-color="white" data-active-color="success">
 	    <!--
 			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
@@ -21,7 +23,7 @@
 	                </div>
 	                <div class="info">
 	                    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-	                        Administrador
+	                        {{request.user.get_full_name}}
 	                        <b class="caret"></b>
 	                    </a>
 	                    <div class="collapse" id="collapseExample">
@@ -34,12 +36,47 @@
 	                </div>
 	            </div>
 	            <ul class="nav">
-                    <li>
-	                    <a href="{% url 'contractors:list' %}">
+                    <li class="{% navactive request 'list_programs new_program view_program edit_program' %}">
+                        <a data-toggle="collapse" href="#programs">
+	                        <i class="ti-bar-chart"></i>
+	                        <p>
+								Programas
+	                           <b class="caret"></b>
+	                        </p>
+	                    </a>
+	                    <div class="collapse" id="programs">
+	                        <ul class="nav">
+								<li class="{% navactive request 'list_programs new_program view_program edit_program' %}">
+									<a href="{% url 'programs:list_programs' %}">Programas</a>
+								</li>
+								<li>
+									<a href="#">Subprogramas</a>
+								</li>
+								<li>
+									<a href="#">Proyectos</a>
+								</li>
+	                        </ul>
+	                    </div>
+	                </li>
+
+                    <li class="{% navactive request 'list_contractors new_contractor view_contractor edit_contractor' %}">
+	                    <a href="{% url 'contractors:list_contractors' %}">
 	                        <i class="ti-clipboard"></i>
 	                        <p>Contratistas</p>
 	                    </a>
 	                </li>
+
+					<li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'athletes:list_athletes' %}">
+	                        <i class="ti-medall-alt"></i>
+	                        <p>Deportistas</p>
+	                    </a>
+	                </li>
+
+
+
+
+
 					<!--
 					<li>
 						<a data-toggle="collapse" href="#componentsExamples">

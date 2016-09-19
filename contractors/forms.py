@@ -4,18 +4,6 @@ from contractors.models import Contractor
 from django import forms
 
 
-class ContractorForm(forms.ModelForm):
-    class Meta:
-        model = Contractor
-        fields = '__all__'
-
-
-
-
-
-
-
-
 from betterforms.forms import Fieldset
 from django.forms.utils import flatatt
 from django.forms.widgets import Widget
@@ -54,14 +42,14 @@ class ContractorForm(b_forms.BetterModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'dni_type': forms.Select(attrs={'class': 'form-control'}),
+            'dni_type': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'dni': forms.NumberInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'mobile': forms.TextInput(attrs={'class': 'form-control'}),
 
             'avatar': forms.FileInput(attrs={'class': 'form-control'}),
-            'type': forms.Select(attrs={'class': 'form-control'}),
+            'type': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'password': forms.PasswordInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
