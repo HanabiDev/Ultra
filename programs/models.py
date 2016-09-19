@@ -33,7 +33,7 @@ class Program(models.Model):
         return self.name
 
 class Subprogram(models.Model):
-    program = models.ForeignKey('Program')
+    program = models.ForeignKey('Program', verbose_name=u'Programa')
     name = models.CharField(max_length=100, verbose_name=u'Nombre')
     status = models.CharField(max_length=1, choices=STATUS_TYPES, verbose_name=u'Estado')
     description = models.TextField(verbose_name=u'Descripción')

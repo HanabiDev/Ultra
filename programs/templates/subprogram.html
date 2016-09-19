@@ -1,19 +1,15 @@
 {% extends 'admin/base/base.html' %}
 
-{% block title %}{% if editing %}Editar programa{% else %}Nuevo programa{% endif %}{% endblock %}
+{% block title %}{% if editing %}Editar subprograma{% else %}Nuevo subprograma{% endif %}{% endblock %}
 
-{% block section_title %}
-    {% if editing %}
-        Editar información del programa<br><small style="font-size:12px">{{program.name}}</small>
-    {% else %}Nuevo programa{% endif %}
-{% endblock %}
+{% block section_title %}{% if editing %}Editar subprograma{% else %}Nuevo subprograma{% endif %}{% endblock %}
 
 {% block main %}
 
 <div class="row">
     <form action="
-        {% if editing %}{% url 'programs:edit_program' program.id %}
-        {% else %}{% url 'programs:new_program' %}{% endif %}
+        {% if editing %}{% url 'subprograms:edit_subprogram' subprogram.id %}
+        {% else %}{% url 'subprograms:new_subprogram' %}{% endif %}
         " method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
         <div class="col-md-8">
@@ -30,10 +26,10 @@
                     <hr>
                     <div class="form-group">
                         <div class="col-md-12 text-right">
-                            <a class="btn btn-fill btn-danger" href="{% url 'programs:list_programs' %}">
+                            <a class="btn btn-fill btn-danger" href="#">
                                 Cancelar
                             </a>
-                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar programa{% endif %}">
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar subprograma{% endif %}">
                         </div>
                     </div>
                 </div>

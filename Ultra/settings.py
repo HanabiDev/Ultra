@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'betterforms',
+    'django_summernote',
     'Ultra',
     'app_auth',
     'programs',
@@ -134,3 +135,41 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'gomexa.10@gmail.com'
 EMAIL_HOST_PASSWORD = 'vywydroxwloijnop'
 
+
+
+
+
+
+SUMMERNOTE_CONFIG = {
+
+    # Use native HTML tags (`<b>`, `<i>`, ...) instead of style attributes
+    # (Firefox, Chrome only)
+    'styleWithTags': True,
+
+    # Change editor size
+    'width': '100%',
+    'height': '250',
+
+    # Use proper language setting automatically (default)
+    'lang': None,
+
+    # Or, set editor language/locale forcely
+    'lang': 'es-CO',
+
+    # Customize toolbar buttons
+    'toolbar': [
+
+        ['misc', ['undo', 'redo', 'help']],
+
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+
+        ['para', ['ul', 'ol', 'height', 'paragraph']],
+
+        ['insert', ['link', 'image', 'video', 'ruler']],
+
+
+    ],
+
+    # Need authentication while uploading attachments.
+    'attachment_require_authentication': True,
+}

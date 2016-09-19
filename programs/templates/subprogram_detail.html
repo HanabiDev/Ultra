@@ -4,21 +4,25 @@
 
 {% block title %}Ver Programa{% endblock %}
 
-{% block section_title %}Información de Programa <br><small style="font-size:12px">{{program.name}}</small>{% endblock %}
+{% block section_title %}Ver Programa{% endblock %}
 
 {% block main %}
 <div class="row">
-    <div class="col-lg-5 col-md-5">
+    <div class="col-lg-4 col-md-5">
         <div class="card">
             <div class="header">
-                <h4 class="title">
-                    Nombre del programa <br>
-                    <small>{{program.name}}</small>
-                </h4>
+                <h4 class="title">Programa</h4>
                 <hr>
             </div>
             <div class="content">
-                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <p>{{program.name}}</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -45,23 +49,17 @@
 
 
                 <div class="clearfix"></div>
-                <hr>
-                <p class="text-center">
-                    <a class="btn btn-fill btn-warning" href="{% url 'programs:edit_program' program.id %}">
-                        Editar información del programa
-                    </a>
-                </p>
             </div>
         </div>
     </div>
-    <div class="col-lg-7 col-md-7">
-        <div class="fresh-table color-green">
+    <div class="col-lg-8 col-md-7">
+        <div class="fresh-table color-green card">
 
             <div class="toolbar">
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block;">
                     Subprogramas
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'subprograms:new_subprogram' %}">
+                <a class="btn btn-fill btn-success" href="{% url 'athletes:new_athlete' %}">
                     Agregar subprograma
                 </a>
             </div>
@@ -80,10 +78,10 @@
                         <td>{{sub.name}}</td>
                         <td>{{sub.get_status_display}}</td>
                         <td>
-                            <a href="{% url 'subprograms:view_subprogram' sub.id %}" class="btn btn-simple text-success btn-icon edit">
+                            <a href="{% url 'athletes:view_athlete' athlete.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="ti-eye"></i>
                             </a>
-                            <a href="{% url 'subprograms:edit_subprogram' sub.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                            <a href="{% url 'athletes:edit_athlete' athlete.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="ti-pencil-alt"></i>
                             </a>
                         </td>

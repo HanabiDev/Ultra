@@ -98,7 +98,8 @@ div#datatables_filter, .dataTables_paginate {
     height: 100vh;
 }
 
-.sidebar-mini .sidebar .sidebar-wrapper > .nav li:hover .collapse {
+.sidebar-mini .sidebar .sidebar-wrapper > .nav li:hover .collapse,
+.sidebar-mini .sidebar .user:hover .collapse {
     left: 86px;
 }
 

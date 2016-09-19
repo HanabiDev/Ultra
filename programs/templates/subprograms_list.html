@@ -13,8 +13,8 @@
         <div class="fresh-table color-green">
 
             <div class="toolbar">
-                <a class="btn btn-fill btn-success" href="{% url 'programs:new_program' %}">
-                    Agregar programa
+                <a class="btn btn-fill btn-success" href="{% url 'subprograms:new_subprogram' %}">
+                    Agregar subprograma
                 </a>
             </div>
 
@@ -23,21 +23,21 @@
                     <th data-field="ID">ID</th>
                     <th data-field="Nombre">Nombre</th>
                     <th data-field="Estado">Estado</th>
-                    <th data-field="Subprogramas" class="text-center">Subprogramas</th>
+                    <th data-field="Subprogramas" class="text-center">Proyectos</th>
                     <th data-field="" class="disabled-sorting">Acción</th>
                 </thead>
                 <tbody>
-                    {% for program in programs %}
+                    {% for sub in subprograms %}
                     <tr>
-                        <td>{{program.id}}</td>
-                        <td>{{program.name}}</td>
-                        <td>{{program.get_status_display}}</td>
-                        <td class="text-center">{{program.subprogram_set.all.count}}</td>
+                        <td>{{sub.id}}</td>
+                        <td>{{sub.name}}</td>
+                        <td>{{sub.get_status_display}}</td>
+                        <td class="text-center">{{sub.project_set.all.count}}</td>
                         <td>
-                            <a href="{% url 'programs:view_program' program.id %}" class="btn btn-simple text-success btn-icon edit">
+                            <a href="{% url 'subprograms:view_subprogram' sub.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="ti-eye"></i>
                             </a>
-                            <a href="{% url 'programs:edit_program' program.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                            <a href="{% url 'subprograms:edit_subprogram' sub.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="ti-pencil-alt"></i>
                             </a>
                         </td>

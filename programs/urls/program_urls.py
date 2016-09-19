@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-import programs.views as programs
+import programs.views.program_views as programs
 
 urlpatterns = [
     url(r'^$', programs.list_programs, name='list_programs'),

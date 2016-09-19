@@ -29,11 +29,13 @@ def toggle_sidebar(request):
 
 urlpatterns = [
     url(r'^$', app_auth.views.home, name='home'),
+    url(r'^summernote/', include('django_summernote.urls')),
     url(r'^toggle_sidebar/', toggle_sidebar),
     url(r'^auth/', include('app_auth.urls', 'auth')),
     url(r'^auth/login/$', app_auth.views.app_login, name='login'),
     url(r'^auth/logout/$', app_auth.views.app_logout, name='logout'),
-    url(r'^programas/', include('programs.urls', 'programs')),
+    url(r'^programas/', include('programs.urls.program_urls', 'programs')),
+    url(r'^subprogramas/', include('programs.urls.subprogram_urls', 'subprograms')),
     url(r'^contratistas/', include('contractors.urls', 'contractors')),
     url(r'^deportistas/', include('athletes.urls', 'athletes'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
