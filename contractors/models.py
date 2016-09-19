@@ -9,7 +9,7 @@ from django_resized.forms import ResizedImageField
 class AppUser(User):
     ResizedImageField(
         size=[150, 150], crop=['middle', 'center'],
-        upload_to='uploads/avatars', null=True, blank=True, verbose_name=u'Foto'
+        upload_to='uploads/avatars', null=False, blank=False, verbose_name=u'Foto'
     ).contribute_to_class(User, 'avatar')
 
 

@@ -96,5 +96,16 @@ div#datatables_filter, .dataTables_paginate {
     overflow: visible;
     max-height: none;
     height: 100vh;
-    overflow: hidden;
+}
+
+.sidebar-mini .sidebar .sidebar-wrapper > .nav li:hover .collapse {
+    left: 86px;
+}
+
+
+.sidebar-mini .sidebar .sidebar-wrapper .collapse .nav li > a:hover, .sidebar-mini .sidebar .sidebar-wrapper .collapse .nav li > a:focus {
+    background-color: #27ae60;
+    color: rgba(255, 255, 255, 0.85);
+    opacity: 1;
+    text-decoration: none;
 }

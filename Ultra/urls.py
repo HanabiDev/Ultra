@@ -17,11 +17,22 @@ import app_auth.views
 from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
+from django.http import HttpResponse
+
+
+def toggle_sidebar(request):
+    #del request.session['sidebar_off']
+    request.session['sidebar_off']= not request.session.get('sidebar_off')
+
+    return HttpResponse("OK")
+
 
 urlpatterns = [
     url(r'^$', app_auth.views.home, name='home'),
-    url(r'^login/$', app_auth.views.app_login, name='login'),
-    url(r'^logout/$', app_auth.views.app_logout, name='logout'),
+    url(r'^toggle_sidebar/', toggle_sidebar),
+    url(r'^auth/', include('app_auth.urls', 'auth')),
+    url(r'^auth/login/$', app_auth.views.app_login, name='login'),
+    url(r'^auth/logout/$', app_auth.views.app_logout, name='logout'),
     url(r'^programas/', include('programs.urls', 'programs')),
     url(r'^contratistas/', include('contractors.urls', 'contractors')),
     url(r'^deportistas/', include('athletes.urls', 'athletes'))

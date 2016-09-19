@@ -10679,3 +10679,13 @@ input.ct-danger + span + label + span.switch-right {
     padding: 5px 15px;
   }
 }
+
+.errorlist{
+  padding: 5px 0 0 5px;
+}
+
+.errorlist li{
+  list-style: none;
+  color: #c0392b;
+  font-size: 12px;
+}

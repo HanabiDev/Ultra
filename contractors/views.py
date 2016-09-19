@@ -1,5 +1,5 @@
 from athletes.views import permissions
-from contractors.forms import ContractorForm
+from contractors.forms import ContractorForm, EditContractorForm, PasswordForm
 from contractors.models import Contractor
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render_to_response, render, redirect
@@ -40,19 +40,45 @@ def view_contractor(request, user_id):
 @login_required(login_url='login')
 def update_contractor(request, user_id):
 
+    pass_change = False
+    if request.session.get('pass_changed'):
+        pass_change = True
+        del request.session['pass_changed']
+
     contractor = Contractor.objects.get(id=user_id)
     if request.method == 'GET':
-        form = ContractorForm(instance=contractor)
-        return render(request, 'contractor.html', {'contractor':contractor, 'form': form, 'editing': True})
+        form = EditContractorForm(instance=contractor)
+        return render(request, 'contractor.html', {'contractor':contractor, 'pass':pass_change, 'form': form, 'editing': True})
 
     if request.method == 'POST':
-        form = ContractorForm(request.POST, request.FILES, instance=contractor)
+        form = EditContractorForm(request.POST, request.FILES, instance=contractor)
 
         if form.is_valid():
             contractor = form.save()
             return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
 
-        return render(request, 'contractor.html', {'contractor':contractor, 'form': form, 'editing':True})
+        return render(request, 'contractor.html', {'contractor':contractor, 'form': form, 'pass':pass_change, 'editing':True})
+
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def update_password(request, user_id):
+    user = Contractor.objects.get(id=user_id)
+
+    if request.method == 'GET':
+        form = PasswordForm(user, None)
+        return render(request, 'update_password.html', {'form':form, 'editing':True, 'contractor':user})
+
+    if request.method == 'POST':
+        form = PasswordForm(user,request.POST)
+        if form.is_valid():
+            form.save()
+            request.session['pass_changed']=True
+            return redirect('contractors:edit_contractor', user_id=user_id)
+
+        return render(request, 'update_password.html', {'form':form, 'editing':True, 'contractor':user})
+
 
 
 @user_passes_test(permissions, login_url='login')

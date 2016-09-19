@@ -44,14 +44,14 @@
 
 <!--         <div class="col-sm-1"></div> -->
         <div class="col-md-4 col-sm-6 col-sm-offset-4">
-             <div class="card-container manual-flip">
+             <div class="card-container manual-flip {% if restoring %}hover{% endif %}">
                 <div class="card">
                     <div class="front">
                         <div class="cover">
                             <!--img src="{% static 'assets/img/background.jpg' %}"-->
                         </div>
                         <div class="use text-center" style="padding-top:0px;">
-                            <img class="img-circl" src="{% static 'assets/img/logo.png' %}" height="30px">
+                            <img src="{% static 'assets/img/logo.png' %}" style="height:60px">
                             <p><br></p>
                         </div>
                         <div class="content" style="padding-top:0;">
@@ -81,46 +81,38 @@
                         </div>
                     </div> <!-- end front panel -->
                     <div class="back">
+                        
                         <div class="header">
-                            <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                            <h5 class="text-center">Recuperar contraseña</h5>
+                            <hr/>
                         </div>
                         <div class="content">
-                            <div class="main">
-                                <h4 class="text-center">Job Description</h4>
-                                <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
-
-                                <div class="stats-container">
-                                    <div class="stats">
-                                        <h4>235</h4>
-                                        <p>
-                                            Followers
-                                        </p>
+                            <div class="main text-justify">
+                                <p class="text-center text-danger"><small>{% if rest_error %}{{rest_error}}{% endif %}</small></p>
+                                {% if message %}
+                                    <p>{{message}}</p>
+                                    <a class="col-xs-12 btn btn-primary btn-fill" href="{% url 'login' %}">
+                                        Volver al inicio de sesión
+                                    </a>
+                                {% else %}
+                                <form action="{% url 'auth:restore_password' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Email o usuario</label>
+                                        <input name="user" type="text" class="form-control" placeholder="Email o usuario">
                                     </div>
-                                    <div class="stats">
-                                        <h4>114</h4>
-                                        <p>
-                                            Following
-                                        </p>
-                                    </div>
-                                    <div class="stats">
-                                        <h4>35</h4>
-                                        <p>
-                                            Projects
-                                        </p>
-                                    </div>
-                                </div>
-
+                                    <button type="submit" class="col-xs-12 btn btn-primary btn-fill">
+                                        Recuperar contraseña
+                                    </button>
+                                </form>
+                                {% endif %}
                             </div>
-                        </div>
-                        <div class="footer">
-                            <button class="btn btn-simple" rel="tooltip" title="" onclick="rotateCard(this)" data-original-title="Flip Card">
-                                <i class="fa fa-reply"></i> Back
-                            </button>
-                            <div class="social-links text-center">
-                                <a href="http://creative-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
-                                <a href="http://creative-tim.com" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
-                                <a href="http://creative-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
-                            </div>
+                            <hr>
+                            {% if not message %}
+                            <span class="btn btn-simple" rel="tooltip" title="Volver a inicio de sesión" onclick="rotateCard(this)">
+                                <i class="fa fa-angle-left"></i> Iniciar sesión
+                            </span>
+                            {% endif %}
                         </div>
                     </div> <!-- end back panel -->
                 </div> <!-- end card -->

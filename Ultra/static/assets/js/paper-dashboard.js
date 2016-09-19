@@ -138,6 +138,10 @@ pdp = {
         $('#minimizeSidebar').click(function(){
             var $btn = $(this);
 
+            $.get("/toggle_sidebar", function( data ) {
+                console.log(data);
+            });
+
             if(pdp.misc.sidebar_mini_active == true){
                 $('body').removeClass('sidebar-mini');
                 $btn.html('<i class="ti-more-alt"></i>');

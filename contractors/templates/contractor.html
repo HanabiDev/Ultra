@@ -7,6 +7,14 @@
 {% block main %}
 
 <div class="row">
+
+    {% if pass %}
+    <div class="alert alert-success">
+        Se ha cambiado la clave del usuario
+        {{form.errors}}
+    </div>
+    {% endif %}
+
     <form action="
         {% if editing %}{% url 'contractors:edit_contractor' contractor.id %}
         {% else %}{% url 'contractors:new_contractor' %}{% endif %}
@@ -26,6 +34,9 @@
                             <label class="col-md-4 control-label">{{field.label}}</label>
                             <div class="col-md-8">
                                 {{field}}
+                                {% if field.errors %}
+                                    {{field.errors}}
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -35,7 +46,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">{{field.label}}</label>
                         <div class="col-md-8">
-                            <a type="submit" class="btn btn-fill btn-danger" href="#">
+                            <a class="btn btn-fill btn-danger" href="{% url 'contractors:list_contractors' %}">
                                 Cancelar
                             </a>
                             <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar contratista{% endif %}">

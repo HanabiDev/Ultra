@@ -30,7 +30,7 @@
     <link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet">
 </head>
 
-<body>
+<body class="{% if request.session.sidebar_off %} sidebar-mini {% endif %}">
 	<div class="wrapper">
 
         {% include 'admin/base/sidebar.html' %}
@@ -57,12 +57,12 @@
                     </div>
                     <div class="collapse navbar-collapse">
 
-                        <form class="navbar-form navbar-left navbar-search-form" role="search">
+                        <!--form class="navbar-form navbar-left navbar-search-form" role="search">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                 <input type="text" value="" class="form-control" placeholder="Search...">
                             </div>
-                        </form>
+                        </form-->
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
