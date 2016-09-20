@@ -92,15 +92,14 @@ div#datatables_filter, .dataTables_paginate {
     color: #fff;
 }
 
-.sidebar-mini .sidebar, .sidebar-mini .main-panel {
-    overflow: visible;
-    max-height: none;
-    height: 100vh;
-}
 
 .sidebar-mini .sidebar .sidebar-wrapper > .nav li:hover .collapse,
 .sidebar-mini .sidebar .user:hover .collapse {
     left: 86px;
+}
+
+.perfect-scrollbar-off .main-panel {
+    overflow: auto;
 }
 
 
@@ -109,4 +108,35 @@ div#datatables_filter, .dataTables_paginate {
     color: rgba(255, 255, 255, 0.85);
     opacity: 1;
     text-decoration: none;
+}
+
+.prog_link a{
+    color: #27ae60;
+}
+
+@media (min-width: 992px){
+
+    .sidebar-mini .main-panel {
+        overflow: auto;
+        max-height: none;
+        height: 100vh;
+    }
+}
+
+html{
+    overflow: hidden;
+}
+
+.main-panel:before {
+    display: none !important;
+}
+
+
+@media (max-width: 992px){
+
+    .sidebar .sidebar-wrapper, .off-canvas-sidebar .sidebar-wrapper {
+        width: 230px;
+        box-shadow: inset 1px 0px 0px 0px #cfcfca;
+        overflow: auto !important;
+    }
 }

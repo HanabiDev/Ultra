@@ -4858,7 +4858,7 @@ strong {
 .sidebar .user, .sidebar[data-background-color="white"] .user,
 .off-canvas-sidebar .user,
 .off-canvas-sidebar[data-background-color="white"] .user {
-  margin-top: 20px;
+  padding-top: 20px;
 }
 .sidebar .user .photo, .sidebar[data-background-color="white"] .user .photo,
 .off-canvas-sidebar .user .photo,
@@ -4987,7 +4987,7 @@ strong {
 
 .perfect-scrollbar-off .sidebar .sidebar-wrapper,
 .perfect-scrollbar-off .main-panel {
-  overflow: auto;
+  overflow: visible;
 }
 
 @media (min-width: 992px) {

@@ -1,20 +1,17 @@
 {% extends 'admin/base/base.html' %}
 
-{% block title %}{% if editing %}Editar programa{% else %}Nuevo programa{% endif %}{% endblock %}
+{% block title %}{% if editing %}Editar programa{% else %}Registrar programa{% endif %}{% endblock %}
 
 {% block section_title %}
     {% if editing %}
         Editar información del programa<br><small style="font-size:12px">{{program.name}}</small>
-    {% else %}Nuevo programa{% endif %}
+    {% else %}Registrar programa{% endif %}
 {% endblock %}
 
 {% block main %}
 
 <div class="row">
-    <form action="
-        {% if editing %}{% url 'programs:edit_program' program.id %}
-        {% else %}{% url 'programs:new_program' %}{% endif %}
-        " method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
         <div class="col-md-8">
              <div class="card">

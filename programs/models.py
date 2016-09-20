@@ -43,7 +43,7 @@ class Subprogram(models.Model):
 
 
 class Project(models.Model):
-    subprogram = models.ForeignKey('Subprogram')
+    subprogram = models.ForeignKey('Subprogram', verbose_name=u'Subprograma')
     consecutive = models.CharField(max_length=100, verbose_name=u'Registro')
     name = models.CharField(max_length=100, verbose_name=u'Nombre')
     status = models.CharField(max_length=1, choices=STATUS_TYPES, verbose_name=u'Estado')

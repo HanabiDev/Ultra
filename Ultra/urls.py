@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'^auth/logout/$', app_auth.views.app_logout, name='logout'),
     url(r'^programas/', include('programs.urls.program_urls', 'programs')),
     url(r'^subprogramas/', include('programs.urls.subprogram_urls', 'subprograms')),
+    url(r'^proyectos/', include('programs.urls.project_urls', 'projects')),
     url(r'^contratistas/', include('contractors.urls', 'contractors')),
     url(r'^deportistas/', include('athletes.urls', 'athletes'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

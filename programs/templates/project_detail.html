@@ -2,9 +2,9 @@
 
 {% load static %}
 
-{% block title %}Ver información de subprograma{% endblock %}
+{% block title %}Ver información de proyecto{% endblock %}
 
-{% block section_title %}Ver información de subprograma <br><small style="font-size:12px">{{subprogram.name}}</small>{% endblock %}
+{% block section_title %}Ver información de proyecto <br><small style="font-size:12px">{{project.name}}</small>{% endblock %}
 
 {% block main %}
 <div class="row">
@@ -12,8 +12,8 @@
         <div class="card">
             <div class="header">
                 <h4 class="title">
-                    Nombre del subprograma <br>
-                    <small>{{subprogram.name}}</small>
+                    Nombre del proyecto <br>
+                    <small>{{project.name}}</small>
                 </h4>
                 <hr>
             </div>
@@ -25,20 +25,28 @@
                         <div class="form-group">
                             <label>Programa</label>
                             <p class="form-control-static prog_link">
-                                <a href="{% url 'programs:view_program' subprogram.program.id %}">{{subprogram.program.name}}</a>
+                                <a href="{% url 'programs:view_program' project.subprogram.program.id %}">{{project.subprogram.program.name}}</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Subprograma</label>
+                            <p class="form-control-static prog_link">
+                                <a href="{% url 'subprograms:view_subprogram' project.subprogram.id %}">{{project.subprogram.name}}</a>
                             </p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Estado</label>
-                            <p class="form-control-static">{{subprogram.get_status_display}}</p>
+                            <p class="form-control-static">{{project.get_status_display}}</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Proyectos</label>
-                            <p class="form-control-static">{{subprogram.project_set.all.count}}</p>
+                            <p class="form-control-static">{{project.project_set.all.count}}</p>
                         </div>
                     </div>
                 </div>
@@ -46,7 +54,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Descripción</label>
-                            {{subprogram.description|safe}}
+                            {{project.description|safe}}
                         </div>
                     </div>
                 </div>
@@ -55,8 +63,8 @@
                 <div class="clearfix"></div>
                 <hr>
                 <p class="text-center">
-                    <a class="btn btn-fill btn-warning" href="{% url 'subprograms:edit_subprogram' subprogram.id %}">
-                        Editar información del subprograma
+                    <a class="btn btn-fill btn-warning" href="{% url 'projects:edit_project' project.id %}">
+                        Editar información del proyecto
                     </a>
                 </p>
             </div>
@@ -69,20 +77,20 @@
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
                     Proyectos
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'subprograms:proj' subprogram.id %}">
+                <a class="btn btn-fill btn-success" href="#">
                     Agregar proyecto
                 </a>
             </div>
 
             <table id="fresh-table" class="table">
                 <thead>
-                    <th data-sortable="true" data-field="Consecutivo">Consecutivo</th>
+                    <th data-sortable="true" data-field="ID">ID</th>
                     <th data-sortable="true" data-field="Nombre">Nombre</th>
                     <th data-sortable="true" data-field="Estado">Estado</th>
                     <th data-field="Acción">Acción</th>
                 </thead>
                 <tbody>
-                    {% for project in subprogram.project_set.all %}
+                    {% for project in program.project_set.all %}
                     <tr>
                         <td>{{project.consecutive}}</td>
                         <td>{{project.name}}</td>
@@ -91,7 +99,7 @@
                             <a href="{% url 'projects:view_project' project.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="ti-eye"></i>
                             </a>
-                            <a href="{% url 'projects:edit_project' project.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                            <a href="{% url 'project:edit_project' project.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="ti-pencil-alt"></i>
                             </a>
                         </td>

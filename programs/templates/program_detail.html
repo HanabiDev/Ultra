@@ -58,19 +58,20 @@
         <div class="fresh-table color-green">
 
             <div class="toolbar">
-                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block;">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
                     Subprogramas
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'subprograms:new_subprogram' %}">
+                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' program.id %}">
                     Agregar subprograma
                 </a>
             </div>
 
             <table id="fresh-table" class="table">
                 <thead>
-                    <th data-field="ID">ID</th>
-                    <th data-field="Nombre">Nombre</th>
-                    <th data-field="Estado">Estado</th>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Estado">Estado</th>
+                    <th data-sortable="true" data-field="Proyectos" class="text-center">Proyectos</th>
                     <th data-field="Acción">Acción</th>
                 </thead>
                 <tbody>
@@ -79,6 +80,7 @@
                         <td>{{sub.id}}</td>
                         <td>{{sub.name}}</td>
                         <td>{{sub.get_status_display}}</td>
+                        <td class="text-center">{{sub.project_set.all.count}}</td>
                         <td>
                             <a href="{% url 'subprograms:view_subprogram' sub.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="ti-eye"></i>

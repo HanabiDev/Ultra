@@ -7,10 +7,7 @@
 {% block main %}
 
 <div class="row">
-    <form action="
-        {% if editing %}{% url 'athletes:edit_athlete' athlete.id %}
-        {% else %}{% url 'athletes:new_athlete' %}{% endif %}
-        " method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
 
         {{form.errors}}

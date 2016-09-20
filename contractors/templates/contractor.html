@@ -15,10 +15,7 @@
     </div>
     {% endif %}
 
-    <form action="
-        {% if editing %}{% url 'contractors:edit_contractor' contractor.id %}
-        {% else %}{% url 'contractors:new_contractor' %}{% endif %}
-        " method="POST" enctype="multipart/form-data" class="form-horizontal">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
         {% for fieldset in form.fieldsets %}
         <div class="col-md-6">
