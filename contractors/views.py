@@ -1,6 +1,6 @@
 from athletes.views import permissions
-from contractors.forms import ContractorForm, EditContractorForm, PasswordForm
-from contractors.models import Contractor
+from contractors.forms import ContractorForm, EditContractorForm, PasswordForm, FormationItemForm
+from contractors.models import Contractor, FormationItem
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render_to_response, render, redirect
 from django.template.context import RequestContext
@@ -58,6 +58,51 @@ def update_contractor(request, user_id):
             return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
 
         return render(request, 'contractor.html', {'contractor':contractor, 'form': form, 'pass':pass_change, 'editing':True})
+
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def add_formation(request, user_id):
+
+    contractor = Contractor.objects.get(id=user_id)
+    if request.method == 'GET':
+        form = FormationItemForm(initial={'trainer':contractor})
+
+        print form
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True})
+
+    if request.method == 'POST':
+        form = FormationItemForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            formation_item = form.save()
+            return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
+
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True})
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def edit_formation(request, user_id, formation_id):
+
+    contractor = Contractor.objects.get(id=user_id)
+    formation = FormationItem.objects.get(id=formation_id)
+
+    if request.method == 'GET':
+        form = FormationItemForm(instance=formation, initial={'trainer':contractor})
+
+        print form
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
+
+    if request.method == 'POST':
+        form = FormationItemForm(request.POST, request.FILES, instance=formation)
+
+        if form.is_valid():
+            formation_item = form.save()
+            return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
+
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
 
 
 

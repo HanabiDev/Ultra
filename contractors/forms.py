@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from contractors.models import Contractor
+from contractors.models import Contractor, FormationItem
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 
@@ -12,6 +12,7 @@ from betterforms import forms as b_forms
 from django import forms
 from django.urls.base import reverse_lazy
 
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 
 class Button(Widget):
     def render(self, name, value, attrs=None):
@@ -123,8 +124,6 @@ class EditContractorForm(b_forms.BetterModelForm):
             ), legend=u'2. Información de la cuenta'),
         )
 
-
-
 class PasswordForm(SetPasswordForm):
 
 
@@ -138,8 +137,31 @@ class PasswordForm(SetPasswordForm):
 
     class Meta:
         model = Contractor
-        exclude = '__all__'
+        fields = '__all__'
 
         widgets = {
             'new_password1':forms.PasswordInput(attrs={'class':'form-control'})
+        }
+
+
+class FormationItemForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(FormationItemForm, self).__init__(*args, **kwargs)
+        
+        if kwargs.get('initial'):
+            trainer = kwargs.get('initial').get('trainer')
+            if trainer:
+                self.fields['trainer'].choices = [(trainer.id, trainer.get_full_name())]
+
+
+    class Meta:
+        model = FormationItem
+        fields = '__all__'
+
+        widgets = {
+            'trainer': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'year': forms.TextInput(attrs={'class': 'form-control'}),
+            'support': forms.FileInput(attrs={'class': 'form-control'}),
         }

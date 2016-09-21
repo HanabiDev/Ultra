@@ -6,10 +6,13 @@ from django.db import models
 from django_resized.forms import ResizedImageField
 
 
+def get_path(instance,file):
+    return 'uploads/contractors/'+str(instance.trainer.id)+'/'+file
+
 class AppUser(User):
     ResizedImageField(
         size=[150, 150], crop=['middle', 'center'],
-        upload_to='uploads/avatars', null=False, blank=False, verbose_name=u'Foto'
+        upload_to=get_path, null=False, blank=False, verbose_name=u'Foto'
     ).contribute_to_class(User, 'avatar')
 
 
@@ -33,17 +36,26 @@ class Contractor(AppUser):
     models.CharField(max_length=10, verbose_name=u'Teléfono Fijo').contribute_to_class(User, 'phone')
     models.CharField(max_length=12, verbose_name=u'Teléfono Móvil').contribute_to_class(User, 'mobile')
 
+    def __unicode__(self):
+        return self.get_full_name()
+
 
 
 class FormationItem(models.Model):
-    trainer = models.ForeignKey('Contractor')
-    description = models.TextField(verbose_name=u'Descripción');
-    year = models.TextField(verbose_name=u'Año');
-    support = models.FileField(verbose_name=u'Soporte')
+    trainer = models.ForeignKey('Contractor', verbose_name=u'Contratista')
+    description = models.CharField(max_length=100, verbose_name=u'Descripción');
+    year = models.CharField(max_length=4, verbose_name=u'Año');
+    support = models.FileField(upload_to=get_path, verbose_name=u'Soporte')
+
+    class Meta:
+        ordering = ['-year']
 
 
 class SportsAchievements(models.Model):
-    trainer = models.ForeignKey('Contractor')
-    description = models.TextField(verbose_name=u'Descripción');
-    year = models.TextField(verbose_name=u'Año');
-    support = models.FileField(verbose_name=u'Soporte')
+    trainer = models.ForeignKey('Contractor', verbose_name=u'Contratista')
+    description = models.CharField(max_length=100, verbose_name=u'Descripción');
+    year = models.CharField(max_length=4, verbose_name=u'Año');
+    support = models.FileField(upload_to=get_path, verbose_name=u'Soporte')
+
+    class Meta:
+        ordering = ['-year']
