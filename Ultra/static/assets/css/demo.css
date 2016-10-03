@@ -140,3 +140,18 @@ html{
         overflow: auto !important;
     }
 }
+
+
+.square {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 10vw;
+    height: 10vw;
+    min-width: 120px;
+    min-height: 120px;
+    display: inline-block;
+    margin: 20px 10px 20px 0;
+}
+.square h2 i{
+    width: 100%;
+}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'programs',
     'contractors',
     'athletes',
+    'settings',
 ]
 
 MIDDLEWARE = [

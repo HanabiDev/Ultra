@@ -38,5 +38,7 @@ urlpatterns = [
     url(r'^subprogramas/', include('programs.urls.subprogram_urls', 'subprograms')),
     url(r'^proyectos/', include('programs.urls.project_urls', 'projects')),
     url(r'^contratistas/', include('contractors.urls', 'contractors')),
-    url(r'^deportistas/', include('athletes.urls', 'athletes'))
+    url(r'^deportistas/', include('athletes.urls', 'athletes')),
+
+    url(r'^configuracion/', include('settings.urls', 'settings'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
