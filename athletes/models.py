@@ -7,7 +7,24 @@ from django_resized.forms import ResizedImageField
 from programs.models import Province, Municipality
 
 
+def get_path(instance,file):
+    return 'uploads/athletes/'+str(instance.id)+'/'+file
+
 class Athlete(models.Model):
+
+    HEALTHCARE = (
+        ('E', 'EPS'),
+        ('S', 'SISBEN')
+    )
+
+    CLOTHES_SIZE = (
+        ('XS', 'XS'),
+        ('S', 'S'),
+        ('M', 'M'),
+        ('L', 'L'),
+        ('XL', 'XL'),
+        ('XXL', 'XXL')
+    )
 
     DNI_TYPES = (
         ('R', 'Registro Civil'),
@@ -59,7 +76,20 @@ class Athlete(models.Model):
     institution = models.CharField(max_length=50, verbose_name=u'Institucion educativa')
 
     photo = ResizedImageField(size=[150, 150], crop=['middle', 'center'],
-        upload_to='uploads/avatars', null=True, blank=True, verbose_name=u'Foto')
+        upload_to=get_path, null=True, blank=True, verbose_name=u'Foto')
+    dni_support = models.FileField(upload_to=get_path, verbose_name=u'Copia del documento de identidad')
+
+    healthcare = models.CharField(max_length=1, verbose_name=u'Regimen de Salud', choices=HEALTHCARE)
+    eps_name = models.CharField(max_length=50, verbose_name=u'Nombre de la empresa')
+    clothes_size = models.CharField(max_length=3, verbose_name=u'Talla de ropa', choices=CLOTHES_SIZE)
+    shoes_size  = models.IntegerField(verbose_name=u'Talla de zapatos')
+
+
+    contact_fullname = models.CharField(max_length=100, verbose_name=u'Nombre completo')
+    contact_phone = models.CharField(max_length=15, verbose_name=u'Teléfono')
+    contact_address = models.CharField(max_length=70, verbose_name=u'Dirección')
+    contact_mail = models.EmailField(max_length=50, verbose_name=u'Correo electrónico')
+
 
     def __unicode__(self):
         return self.first_name +" "+ self.last_name
@@ -70,5 +100,61 @@ class Athlete(models.Model):
 
 
 # disciplinas y clubes
+class Sport(models.Model):
+    name = models.CharField(max_length=60, verbose_name=u'Nombre')
+
+    def __unicode__(self):
+        return self.name
+
+class League(models.Model):
+    name = models.CharField(max_length=60, verbose_name=u'Nombre')
+    sport = models.ForeignKey('Sport', verbose_name=u'Deporte')
+
+    def __unicode__(self):
+        return self.name
+
+class Club(models.Model):
+    name = models.CharField(max_length=60, verbose_name=u'Nombre')
+    league = models.ForeignKey('League', verbose_name=u'Liga')
+
+    def __unicode__(self):
+        return self.name
+
+class SportsTab(models.Model):
+    athlete = models.ForeignKey('Athlete')
+    sport = models.ForeignKey('Sport', verbose_name=u'Deporte')
+    category = models.CharField(max_length=50, verbose_name=u'Categoría')
+    modality = models.CharField(max_length=50, verbose_name=u'Modalidad', blank=True, null=True)
+    league = models.ForeignKey('League', verbose_name=u'Liga')
+    club = models.ForeignKey('Club', verbose_name=u'Club')
+    admission_date = models.DateField(verbose_name=u'Fecha de ingreso')
+    activity_start_date = models.DateField(verbose_name=u'Fecha de inicio en el deporte')
 
 
+class Result(models.Model):
+
+    event = models.CharField(max_length=100, verbose_name=u'Evento')
+    test = models.CharField(max_length=40, verbose_name=u'Prueba')
+    result = models.CharField(max_length=1, verbose_name=u'Resultado (Puesto)')
+    mark = models.FloatField(verbose_name=u'Marca', blank=True, null=True)
+
+class MarkReference(models.Model):
+    result = models.ForeignKey('Result')
+    athlete = models.CharField(max_length=60, verbose_name=u'Deportista')
+    event = models.CharField(max_length=100, verbose_name=u'Evento')
+    test = models.CharField(max_length=40, verbose_name=u'Prueba')
+    ref_result = models.CharField(max_length=1, verbose_name=u'Resultado (Puesto)')
+    mark = models.FloatField(verbose_name=u'Marca', blank=True, null=True)
+
+class TestReference(models.Model):
+    value = models.FloatField(verbose_name=u'Marca')
+
+class PhysicalTest(models.Model):
+    ref = models.ForeignKey('TestReference')
+    test_name = models.CharField(max_length=50, verbose_name=u'Prueba')
+    result = models.FloatField(verbose_name=u'Resultado')
+
+class TechnicalTest(models.Model):
+    ref = models.ForeignKey('TestReference')
+    test_name = models.CharField(max_length=50, verbose_name=u'Prueba')
+    result = models.FloatField(verbose_name=u'Resultado')

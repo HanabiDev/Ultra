@@ -1,0 +1,53 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}
+    {% if editing %}Editar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}
+    {% else %}Registrar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}{% endif %}
+{% endblock %}
+
+{% block section_title %}
+    {% if editing %}Editar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}
+    {% else %}Registrar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}{% endif %}
+    <br><small style="font-size:12px">{{athlete.first_name}} {{athlete.last_name}}</small>
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-8">
+             <div class="card">
+                <div class="content">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{field.label}}</label>
+                            <div class="col-md-10">
+                                {{field}}
+                                {% if field.errors %}
+                                    {{field.errors}}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <hr>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">{{field.label}}</label>
+                        <div class="col-md-8 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'athletes:view_athlete' athlete.id %}">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="
+                                {% if editing %}Guardar cambios{% else %}Registrar
+                                    {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}
+                                {% endif %}">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

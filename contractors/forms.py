@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from contractors.models import Contractor, FormationItem
+from contractors.models import Contractor, FormationItem, SportsAchievements
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 
@@ -161,6 +161,27 @@ class FormationItemForm(forms.ModelForm):
 
         widgets = {
             'trainer': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
+            'description': forms.TextInput(attrs={'class': 'form-control'}),
+            'year': forms.TextInput(attrs={'class': 'form-control'}),
+            'support': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+
+#TODO make support field optional when editing
+class AchievementForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AchievementForm, self).__init__(*args, **kwargs)
+
+        if kwargs.get('initial'):
+            trainer = kwargs.get('initial').get('trainer')
+            if trainer:
+                self.fields['trainer'].choices = [(trainer.id, trainer.get_full_name())]
+
+    class Meta:
+        model = SportsAchievements
+        fields = '__all__'
+
+        widgets = {
+            'trainer': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'description': forms.TextInput(attrs={'class': 'form-control'}),
             'year': forms.TextInput(attrs={'class': 'form-control'}),
             'support': forms.FileInput(attrs={'class': 'form-control'}),

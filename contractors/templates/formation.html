@@ -39,7 +39,10 @@
                             <a class="btn btn-fill btn-danger" href="{% url 'contractors:view_contractor' contractor.id %}">
                                 Cancelar
                             </a>
-                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar formación{% endif %}">
+                            <input type="submit" class="btn btn-fill btn-success" value="
+                                {% if editing %}Guardar cambios{% else %}Registrar
+                                    {% if formation %}formación{% else %}logro deportivo{% endif %}
+                                {% endif %}">
                         </div>
                     </div>
                 </div>

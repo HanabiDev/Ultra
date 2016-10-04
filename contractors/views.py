@@ -1,6 +1,6 @@
 from athletes.views import permissions
-from contractors.forms import ContractorForm, EditContractorForm, PasswordForm, FormationItemForm
-from contractors.models import Contractor, FormationItem
+from contractors.forms import ContractorForm, EditContractorForm, PasswordForm, FormationItemForm, AchievementForm
+from contractors.models import Contractor, FormationItem, SportsAchievements
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render_to_response, render, redirect
 from django.template.context import RequestContext
@@ -68,8 +68,6 @@ def add_formation(request, user_id):
     contractor = Contractor.objects.get(id=user_id)
     if request.method == 'GET':
         form = FormationItemForm(initial={'trainer':contractor})
-
-        print form
         return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True})
 
     if request.method == 'POST':
@@ -105,6 +103,60 @@ def edit_formation(request, user_id, formation_id):
         return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
 
 
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def delete_formation(request, user_id, formation_id):
+    formation = FormationItem.objects.get(id=formation_id, trainer__id=user_id)
+    formation.delete()
+    return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(user_id)}))
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def add_achievement(request, user_id):
+
+    contractor = Contractor.objects.get(id=user_id)
+    if request.method == 'GET':
+        form = AchievementForm(initial={'trainer':contractor})
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form})
+
+    if request.method == 'POST':
+        form = AchievementForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            achievement = form.save()
+            return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
+
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form})
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def edit_achievement(request, user_id, achievement_id):
+
+    contractor = Contractor.objects.get(id=user_id)
+    achievement = SportsAchievements.objects.get(id=achievement_id)
+
+    if request.method == 'GET':
+        form = FormationItemForm(instance=achievement, initial={'trainer':contractor})
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
+
+    if request.method == 'POST':
+        form = FormationItemForm(request.POST, request.FILES, instance=achievement)
+
+        if form.is_valid():
+            achievement = form.save()
+            return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
+
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def delete_achievement(request, user_id, achievement_id):
+    achievement = SportsAchievements.objects.get(id=achievement_id, trainer__id=user_id)
+    achievement.delete()
+    return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(user_id)}))
 
 @user_passes_test(permissions, login_url='login')
 @login_required(login_url='login')

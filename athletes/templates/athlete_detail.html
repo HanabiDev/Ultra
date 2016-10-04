@@ -1,5 +1,6 @@
 {% extends "admin/base/base.html" %}
 
+{% load user_tags %}
 {% load static %}
 
 {% block title %}Ver deportista{% endblock %}
@@ -17,7 +18,8 @@
                 <div class="author">
                   <img class="avatar border-white" src="/media/{{ athlete.photo }}" alt="..."/>
                   <h4 class="title">{{athlete}}<br />
-                     <a href="#"><small>Deportista</small></a>
+                     <a href="#"><small>Deportista</small></a><br>
+                     <small>{{ athlete.birth_date|timesince|upto:',' }}</small>
                   </h4>
                 </div>
             </div>
@@ -55,27 +57,20 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Nombres</label>
-                                <p class="form-control-static">{{athlete.first_name}}</p>
+                                <label>Nombre Completo</label>
+                                <p class="form-control-static">{{athlete.first_name}} {{athlete.last_name}}</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Apellidos</label>
-                                <p class="form-control-static">{{athlete.last_name}}</p>
+                                <label>Lugar y fecha de nacimiento</label>
+                                <p class="form-control-static">{{athlete.birthplace}}, {{athlete.birth_date}}</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Cargo</label>
-                                <p class="form-control-static">Deportista</p>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Tipo de documento</label>
                                 <p class="form-control-static">{{athlete.get_document_type_display}}</p>
@@ -87,15 +82,21 @@
                                 <p class="form-control-static">{{athlete.document_number}}</p>
                             </div>
                         </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>Género</label>
+                                <p class="form-control-static">{{athlete.get_genre_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>RH</label>
+                                <p class="form-control-static">{{athlete.get_rh_display}}</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Dirección</label>
-                                <p class="form-control-static">{{athlete.address}}</p>
-                            </div>
-                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Provincia</label>
@@ -106,6 +107,12 @@
                             <div class="form-group">
                                 <label>Municipio</label>
                                 <p class="form-control-static">{{athlete.municipality}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <p class="form-control-static">{{athlete.address}}</p>
                             </div>
                         </div>
                     </div>
@@ -126,6 +133,185 @@
 
                     <div class="clearfix"></div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-lg-7 col-md-7">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Información adicional</h4>
+                <hr>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="row">
+                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Nivel de estudios</label>
+                                <p class="form-control-static">{{athlete.get_school_level_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Institución</label>
+                                <p class="form-control-static">{{athlete.institution}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Cubrimiento en salud</label>
+                                <p class="form-control-static">{{athlete.get_healthcare_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Empresa</label>
+                                <p class="form-control-static">{{athlete.eps_name}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Talla de ropa</label>
+                                <p class="form-control-static">{{athlete.get_clothes_size_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Talla de zapatos</label>
+                                <p class="form-control-static">{{athlete.shoes_size}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-5">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Contacto alternativo</h4>
+                <hr>
+            </div>
+            <div class="content">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nombre Completo</label>
+                                <p class="form-control-static">{{athlete.contact_fullname}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Teléfono</label>
+                                <p class="form-control-static">{{athlete.contact_phone}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <p class="form-control-static">{{athlete.contact_address}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Dirección</label>
+                                <p class="form-control-static">{{athlete.contact_mail}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title col-lg-8" style="margin-top:8px">Ficha deportiva</h4>
+                <p class="text-right">
+                    {% if athlete.sportstab_set.all.count == 0%}
+                         <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_card' athlete.id %}">Agregar ficha deportiva</a>
+                    {% else %}
+                        <a class="btn btn-fill btn-success" href="{% url 'athletes:edit_athlete_card' athlete.id %}">Editar ficha deportiva</a>
+                    {% endif %}
+
+                </p>
+                <hr>
+            </div>
+            <div class="content">
+                {% if athlete.sportstab_set.all.count == 0%}
+                <p class="text-center">No se ha creado ficha deportiva para este deportista</p>
+                {% else %}
+                <form>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Deporte</label>
+                                <p class="form-control-static">{{athlete.sportstab_set.first.sport}}</p>
+                            </div>
+                        </div>
+                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                <p class="form-control-static">{{athlete.sportstab_set.first.category}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Modalidad</label>
+                                <p class="form-control-static">
+                                    {% if athlete.sportstab_set.first.modality %}
+                                        {{athlete.sportstab_set.first.modality}}
+                                    {% else %}
+                                        ----
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Fecha de inicio en el deporte</label>
+                                <p class="form-control-static">
+                                    {{athlete.sportstab_set.first.activity_start_date}}
+                                    ({{athlete.sportstab_set.first.activity_start_date|timesince|upto:',' }})
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Liga</label>
+                                <p class="form-control-static">{{athlete.sportstab_set.first.league}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Club</label>
+                                <p class="form-control-static">{{athlete.sportstab_set.first.club}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Fecha de ingreso</label>
+                                <p class="form-control-static">{{athlete.sportstab_set.first.admission_date}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>
