@@ -139,7 +139,7 @@
 
     <div class="clearfix"></div>
 
-    <div class="col-lg-7 col-md-7">
+    <div class="col-lg-4 col-md-4">
         <div class="card">
             <div class="header">
                 <h4 class="title">Información adicional</h4>
@@ -148,31 +148,31 @@
             <div class="content">
                 <form>
                     <div class="row">
-                         <div class="col-md-4">
+                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Nivel de estudios</label>
                                 <p class="form-control-static">{{athlete.get_school_level_display}}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Institución</label>
                                 <p class="form-control-static">{{athlete.institution}}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Cubrimiento en salud</label>
                                 <p class="form-control-static">{{athlete.get_healthcare_display}}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Empresa</label>
                                 <p class="form-control-static">{{athlete.eps_name}}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Talla de ropa</label>
                                 <p class="form-control-static">{{athlete.get_clothes_size_display}}</p>
@@ -191,7 +191,73 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5 col-md-5">
+
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Información Socio-Económica</h4>
+                <hr>
+            </div>
+            <div class="content">
+                <form>
+                    {% if athlete.socialcard_set.all.count == 1 %}
+                    <div class="row">
+                         <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Estrato</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.stratum}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Sector</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.get_sector_display}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nucleo familiar</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.family_members}} personas</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ocup. del padre</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.father_job}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ocup. de la madre</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.mother_job}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Estado civil</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.civil_status}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Número de hijos</label>
+                                <p class="form-control-static">{{athlete.socialcard_set.first.children}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p class="text-center">
+                        <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_scard' athlete.id %}">
+                            Agregar información
+                        </a>
+                    </p>
+                    {% endif %}
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4">
         <div class="card">
             <div class="header">
                 <h4 class="title">Contacto alternativo</h4>
@@ -218,7 +284,7 @@
                                 <p class="form-control-static">{{athlete.contact_address}}</p>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label>Dirección</label>
                                 <p class="form-control-static">{{athlete.contact_mail}}</p>
@@ -315,5 +381,133 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-12 col-md-12">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <span style="font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Resultados Deportivos
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_result' athlete.id %}">
+                    Agregar resultado
+                </a>
+            </div>
+
+
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="Fecha">Resultado</th>
+                    <th data-sortable="true" data-field="Evento">Referentes</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for res in athlete.result_set.all %}
+                    <tr >
+                        <td>
+                            {{res.result_date}} <br>
+                            {{res.event}} <br>
+                            <b>Prueba:</b>{{res.test}} <br>
+                            <b>Resultado (Puesto):</b> {{res.result}} <br>
+                            {% if res.mark %}
+                                <b>Marca:</b> {{res.mark}} <br>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% for ref in res.markreference_set.all %}
+                                {{ref.result_date}} <br>
+                                {{ref.event}} <br>
+                                {{ref.athlete}} <br>
+                                <b>Prueba:</b>{{ref.test}} <br>
+                                <b>Resultado (Puesto):</b> {{ref.ref_result}} <br>
+                                {% if ref.mark %}
+                                    <b>Marca:</b> {{ref.mark}} <br>
+                                {% endif %}
+                                {% if not forloop.last %}
+                                <hr>
+                                {% endif %}
+                            {% empty %}
+                                <a class="btn btn-fill btn-success" href="{% url 'athletes:edit_athlete_result' athlete.id res.id %}">
+                                    Agregar referente
+                                </a>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{% url 'athletes:athlete_result_ref' athlete.id res.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a href="{% url 'athletes:edit_athlete_result' athlete.id res.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
 {% endblock %}

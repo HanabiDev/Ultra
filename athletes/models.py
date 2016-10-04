@@ -120,8 +120,19 @@ class Club(models.Model):
     def __unicode__(self):
         return self.name
 
+class SocialCard(models.Model):
+    athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
+    stratum = models.CharField(max_length=10, verbose_name=u'Estrato')
+    sector = models.CharField(max_length=1, choices=(('U','Urbano'),('R', 'Rural')), verbose_name=u'Sector')
+    family_members = models.IntegerField(verbose_name=u'Nucleo familiar (número de personas)')
+    father_job = models.CharField(max_length=30, verbose_name=u'Ocupación del padre')
+    mother_job = models.CharField(max_length=30, verbose_name=u'Ocupación de la madre')
+    civil_status = models.CharField(max_length=15, verbose_name=u'Estado civil')
+    children = models.IntegerField(verbose_name=u'Hijos')
+
+
 class SportsTab(models.Model):
-    athlete = models.ForeignKey('Athlete')
+    athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
     sport = models.ForeignKey('Sport', verbose_name=u'Deporte')
     category = models.CharField(max_length=50, verbose_name=u'Categoría')
     modality = models.CharField(max_length=50, verbose_name=u'Modalidad', blank=True, null=True)
@@ -132,19 +143,28 @@ class SportsTab(models.Model):
 
 
 class Result(models.Model):
-
+    athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
     event = models.CharField(max_length=100, verbose_name=u'Evento')
     test = models.CharField(max_length=40, verbose_name=u'Prueba')
     result = models.CharField(max_length=1, verbose_name=u'Resultado (Puesto)')
     mark = models.FloatField(verbose_name=u'Marca', blank=True, null=True)
+    result_date = models.DateField(verbose_name=u'Fecha')
+
+
+    def __unicode__(self):
+        return self.event+" ("+self.result+" puesto)"
 
 class MarkReference(models.Model):
-    result = models.ForeignKey('Result')
+    result = models.ForeignKey('Result', verbose_name=u'Resultado')
     athlete = models.CharField(max_length=60, verbose_name=u'Deportista')
     event = models.CharField(max_length=100, verbose_name=u'Evento')
     test = models.CharField(max_length=40, verbose_name=u'Prueba')
     ref_result = models.CharField(max_length=1, verbose_name=u'Resultado (Puesto)')
     mark = models.FloatField(verbose_name=u'Marca', blank=True, null=True)
+    result_date = models.DateField(verbose_name=u'Fecha')
+
+
+
 
 class TestReference(models.Model):
     value = models.FloatField(verbose_name=u'Marca')

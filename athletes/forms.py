@@ -7,7 +7,7 @@ from django.utils.html import format_html
 from betterforms import forms as b_forms
 from django import forms
 
-from athletes.models import Athlete, SportsTab
+from athletes.models import Athlete, SportsTab, Result, MarkReference, SocialCard
 
 
 class Button(Widget):
@@ -94,6 +94,65 @@ class AthleteCardForm(forms.ModelForm):
             'category': forms.TextInput(attrs={'class': 'form-control'}),
             'modality': forms.TextInput(attrs={'class': 'form-control'}),
             'activity_start_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
+        }
+
+
+class AthleteSocialCardForm(forms.ModelForm):
+
+    class Meta:
+        model = SocialCard
+        fields = [
+            'athlete', 'stratum', 'sector', 'family_members', 'father_job', 'mother_job', 'civil_status', 'children'
+        ]
+
+        widgets = {
+            'athlete': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'stratum': forms.TextInput(attrs={'class': 'form-control'}),
+            'sector': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'family_members': forms.NumberInput(attrs={'class': 'form-control'}),
+            'father_job': forms.TextInput(attrs={'class': 'form-control'}),
+            'mother_job': forms.TextInput(attrs={'class': 'form-control'}),
+            'civil_status': forms.TextInput(attrs={'class': 'form-control'}),
+            'children': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+
+class AthleteResultForm(forms.ModelForm):
+
+    class Meta:
+        model = Result
+        fields = [
+            'athlete','event', 'result_date', 'test', 'result', 'mark'
+        ]
+
+        widgets = {
+            'athlete': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'event': forms.TextInput(attrs={'class': 'form-control'}),
+            'test': forms.TextInput(attrs={'class': 'form-control'}),
+            'result': forms.TextInput(attrs={'class': 'form-control'}),
+            'mark': forms.NumberInput(attrs={'class': 'form-control'}),
+            'result_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
 
         }
+
+class AthleteResultRefForm(forms.ModelForm):
+
+    class Meta:
+        model = MarkReference
+        fields = [
+            'result', 'athlete','event', 'result_date', 'test', 'ref_result', 'mark'
+        ]
+
+        widgets = {
+            'result': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'athlete': forms.TextInput(attrs={'class': 'form-control'}),
+            'event': forms.TextInput(attrs={'class': 'form-control'}),
+            'test': forms.TextInput(attrs={'class': 'form-control'}),
+            'ref_result': forms.TextInput(attrs={'class': 'form-control'}),
+            'mark': forms.NumberInput(attrs={'class': 'form-control'}),
+            'result_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
+        }
+
+
+
 
