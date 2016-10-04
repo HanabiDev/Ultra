@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="header">
-                        <h4 class="title col-lg-8" style="margin-top:8px">Formación</h4>
+                        <h4 class="title col-lg-6" style="margin-top:8px">Formación</h4>
                         <p class="text-right">
                             <a class="btn btn-fill btn-success" href="{% url 'contractors:add_formation' contractor.id %}">Agregar formación</a>
                         </p>
@@ -164,7 +164,7 @@
                                 <a href="{% url 'contractors:edit_formation' contractor.id item.id %}" class="text-primary" style="font-size:20px;">
                                     <i class="fa fa-pencil-square"></i>
                                 </a>
-                                <a href="{% url 'contractors:edit_formation' contractor.id item.id %}" class="text-primary" style="font-size:20px;">
+                                <a href="{% url 'contractors:delete_formation' contractor.id item.id %}" class="text-primary" style="font-size:20px;">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
@@ -179,7 +179,7 @@
                     <div class="header">
                         <h4 class="title col-lg-8" style="margin-top:8px">Logros deportivos</h4>
                         <p class="text-right">
-                            <a class="btn btn-fill btn-success" href="{% url 'contractors:add_formation' contractor.id %}">Agregar logro</a>
+                            <a class="btn btn-fill btn-success" href="{% url 'contractors:add_achievement' contractor.id %}">Agregar logro</a>
                         </p>
                         <hr>
                     </div>
@@ -199,10 +199,10 @@
                             </div>
 
                             <div class="col-lg-2">
-                                <a href="/contratistas/editar/1/" class="text-primary" style="font-size:20px;">
+                                <a href="{% url 'contractors:edit_achievement' contractor.id item.id %}" class="text-primary" style="font-size:20px;">
                                     <i class="fa fa-pencil-square"></i>
                                 </a>
-                                <a href="/contratistas/editar/1/" class="text-primary" style="font-size:20px;">
+                                <a href="{% url 'contractors:delete_achievement' contractor.id item.id %}" class="text-primary" style="font-size:20px;">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </div>
@@ -220,3 +220,6 @@
     </div>
 </div>
 {% endblock %}
+
+<!-- TODO alert the user when deleting items -->
+<!-- TODO redistribute contractor info for more beauty layout -->
