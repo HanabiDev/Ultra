@@ -6,9 +6,12 @@ from django_resized.forms import ResizedImageField
 
 from programs.models import Province, Municipality
 
+from  django.core.validators import MinValueValidator, MaxValueValidator
+
 
 def get_path(instance,file):
     return 'uploads/athletes/'+str(instance.id)+'/'+file
+
 
 class Athlete(models.Model):
 
@@ -98,13 +101,13 @@ class Athlete(models.Model):
         unique_together = (("document_type", "document_number"),)
 
 
-
 # disciplinas y clubes
 class Sport(models.Model):
     name = models.CharField(max_length=60, verbose_name=u'Nombre')
 
     def __unicode__(self):
         return self.name
+
 
 class League(models.Model):
     name = models.CharField(max_length=60, verbose_name=u'Nombre')
@@ -113,12 +116,14 @@ class League(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Club(models.Model):
     name = models.CharField(max_length=60, verbose_name=u'Nombre')
     league = models.ForeignKey('League', verbose_name=u'Liga')
 
     def __unicode__(self):
         return self.name
+
 
 class SocialCard(models.Model):
     athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
@@ -154,6 +159,7 @@ class Result(models.Model):
     def __unicode__(self):
         return self.event+" ("+self.result+" puesto)"
 
+
 class MarkReference(models.Model):
     result = models.ForeignKey('Result', verbose_name=u'Resultado')
     athlete = models.CharField(max_length=60, verbose_name=u'Deportista')
@@ -164,17 +170,77 @@ class MarkReference(models.Model):
     result_date = models.DateField(verbose_name=u'Fecha')
 
 
-
-
 class TestReference(models.Model):
     value = models.FloatField(verbose_name=u'Marca')
+
 
 class PhysicalTest(models.Model):
     ref = models.ForeignKey('TestReference')
     test_name = models.CharField(max_length=50, verbose_name=u'Prueba')
     result = models.FloatField(verbose_name=u'Resultado')
 
+
 class TechnicalTest(models.Model):
     ref = models.ForeignKey('TestReference')
     test_name = models.CharField(max_length=50, verbose_name=u'Prueba')
     result = models.FloatField(verbose_name=u'Resultado')
+
+
+class BiomedicTab(models.Model):
+    athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
+    date = models.DateField(verbose_name=u'Fecha', auto_now=True)
+
+    def __unicode__(self):
+        return self.athlete.__unicode__()
+
+
+class AptitudeTest(models.Model):
+    
+    APTITUDE_STATUS = (
+        ('A', 'APTO'),
+        ('N', 'NO APTO'),
+        ('R', 'APTO CON RECOMENDACIONES'),
+        ('X', 'APTO CON RESTRICCIONES')
+    )
+
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    diagnostic = models.TextField(verbose_name=u'Diagnóstico')
+    status = models.CharField(verbose_name=u'Estado', max_length=1, choices=APTITUDE_STATUS)
+
+
+class SFPBValoration(models.Model):
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    diagnostic = models.TextField(verbose_name=u'Diagnóstico')
+
+
+class AntropometricValoration(models.Model):
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    diagnostic = models.TextField(verbose_name=u'Diagnóstico')
+    body_weight = models.FloatField(verbose_name=u'Peso corporal (Kg)')
+    muscle_weight = models.FloatField(verbose_name=u'Peso muscular (%)', validators = [MinValueValidator(0), MaxValueValidator(100)])
+    fat_weight = models.FloatField(verbose_name=u'Peso graso (%)', validators = [MinValueValidator(0), MaxValueValidator(100)])
+    six_skinfolds =  models.FloatField(verbose_name=u'Sumatoria de seis pliegues')
+
+
+class PsicologicValoration(models.Model):
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    diagnostic = models.TextField(verbose_name=u'Diagnóstico')
+    confidence =  models.IntegerField(verbose_name=u'Confianza')
+    motivation = models.IntegerField(verbose_name=u'Motivación')
+    concentration = models.IntegerField(verbose_name=u'Concentración')
+    emotinal_sensibility = models.IntegerField(verbose_name=u'Sensibilidad emocional')
+    imagination = models.IntegerField(verbose_name=u'Imaginación')
+    positive_attitude = models.IntegerField(verbose_name=u'Actitud positiva')
+    competitive_challege = models.IntegerField(verbose_name=u'Reto competitivo')
+
+
+class PhysiologicalTest(models.Model):
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    vo2_max = models.FloatField(verbose_name=u'VO2 Máx')
+    aerobic_capacity = models.FloatField(verbose_name=u'Capacidad aeróbica')
+    fc_max = models.FloatField(verbose_name=u'FC Máx')
+    speed_power_max = models.FloatField(verbose_name=u'Velocidad o Potencia Máx')
+    wingate = models.FloatField(verbose_name=u'Wingate')
+    squat_jump = models.FloatField(verbose_name=u'Squat Jump')
+    counter_movement_jump = models.FloatField(verbose_name=u'Counter Movement Jump')
+    drop_jump = models.FloatField(verbose_name=u'Drop Jump')

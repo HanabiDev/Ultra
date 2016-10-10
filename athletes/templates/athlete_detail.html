@@ -385,7 +385,7 @@
     <div class="col-lg-12 col-md-12">
         <div class="fresh-table color-green">
 
-            <div class="toolbar">
+            <div class="toolbar1">
                 <span style="font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
                     Resultados Deportivos
                 </span>
@@ -393,8 +393,6 @@
                     Agregar resultado
                 </a>
             </div>
-
-
 
             <table id="fresh-table" class="table">
                 <thead>
@@ -448,6 +446,50 @@
             </table>
         </div>
     </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="col-lg-12 col-md-12" style="margin-top:20px">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar2">
+                <span style="font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Valoraciones Biomédicas
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_biomedic_card' athlete.id %}">
+                    Agregar valoración
+                </a>
+            </div>
+
+
+
+            <table id="fresh-table2" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="Fecha">Fecha</th>
+                    <th data-sortable="true" data-field="Evento">Resultado</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+
+                    {% for tab in athlete.biomedictab_set.all %}
+                    <tr >
+                        <td>
+                            {{tab.date}}
+                        </td>
+                        <td>
+                            {{tab.aptitudetest_set.first.get_status_display}}
+                        </td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -463,7 +505,7 @@
 
         $().ready(function(){
             $table.bootstrapTable({
-                toolbar: ".toolbar",
+                toolbar: ".toolbar1",
 
                 showRefresh: false,
                 search: true,
@@ -507,6 +549,61 @@
             });
 
         });
+
+
+        var $table2 = $('#fresh-table2'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table2.bootstrapTable({
+                toolbar: ".toolbar2",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table2.bootstrapTable('resetView');
+            });
+
+        });
+
+
+        
 
 
     </script>

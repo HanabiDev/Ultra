@@ -7,8 +7,8 @@ from django.utils.html import format_html
 from betterforms import forms as b_forms
 from django import forms
 
-from athletes.models import Athlete, SportsTab, Result, MarkReference, SocialCard
-
+from athletes.models import Athlete, SportsTab, Result, MarkReference, SocialCard, AptitudeTest, SFPBValoration, AntropometricValoration, PsicologicValoration
+from athletes.models import PhysiologicalTest
 
 class Button(Widget):
     def render(self, name, value, attrs=None):
@@ -135,6 +135,7 @@ class AthleteResultForm(forms.ModelForm):
 
         }
 
+
 class AthleteResultRefForm(forms.ModelForm):
 
     class Meta:
@@ -154,5 +155,78 @@ class AthleteResultRefForm(forms.ModelForm):
         }
 
 
+class AptitudeTestForm(forms.ModelForm):
+
+    class Meta:
+        model = AptitudeTest
+        fields = '__all__'
+
+        widgets = {
+            'tab': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'diagnostic': forms.Textarea(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+        }
+
+class SFPBValorationForm(forms.ModelForm):
+
+    class Meta:
+        model = SFPBValoration
+        fields = '__all__'
+
+        widgets = {
+            'tab': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'diagnostic': forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
 
+class AntropometricValorationForm(forms.ModelForm):
+
+    class Meta:
+        model = AntropometricValoration
+        fields = '__all__'
+
+        widgets = {
+            'tab': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'diagnostic': forms.Textarea(attrs={'class': 'form-control'}),
+            'body_weight': forms.NumberInput(attrs={'class': 'form-control'}),
+            'muscle_weight': forms.NumberInput(attrs={'class': 'form-control'}),
+            'fat_weight': forms.NumberInput(attrs={'class': 'form-control'}),
+            'six_skinfolds': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+        
+class PsicologicValorationForm(forms.ModelForm):
+    class Meta:
+        model = PsicologicValoration
+        fields = '__all__'
+
+        widgets = {
+            'tab': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'diagnostic': forms.Textarea(attrs={'class': 'form-control'}),
+            'confidence':forms.NumberInput(attrs={'class': 'form-control'}),
+            'motivation':forms.NumberInput(attrs={'class': 'form-control'}),
+            'concentration':forms.NumberInput(attrs={'class': 'form-control'}),
+            'emotinal_sensibility':forms.NumberInput(attrs={'class': 'form-control'}),
+            'imagination':forms.NumberInput(attrs={'class': 'form-control'}),
+            'positive_attitude':forms.NumberInput(attrs={'class': 'form-control'}),
+            'competitive_challege':forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
+
+class PhysiologicalTestForm(forms.ModelForm):
+
+    class Meta:
+        model = PhysiologicalTest
+        fields = '__all__'
+
+        widgets = {
+            'tab': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'vo2_max': forms.NumberInput(attrs={'class': 'form-control'}),
+            'aerobic_capacity': forms.NumberInput(attrs={'class': 'form-control'}),
+            'fc_max': forms.NumberInput(attrs={'class': 'form-control'}),
+            'speed_power_max': forms.NumberInput(attrs={'class': 'form-control'}),
+            'wingate': forms.NumberInput(attrs={'class': 'form-control'}),
+            'squat_jump': forms.NumberInput(attrs={'class': 'form-control'}),
+            'counter_movement_jump': forms.NumberInput(attrs={'class': 'form-control'}),
+            'drop_jump': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
