@@ -1,0 +1,223 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver Deporte{% endblock %}
+
+{% block section_title %}Información de deporte <br><small style="font-size:12px">{{sport.name}}</small>{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">
+                    Deporte <br>
+                    <small>{{sport.name}}</small>
+                </h4>
+                <hr>
+            </div>
+            <div class="content">
+                <p class="text-center">
+                    <a class="btn btn-fill btn-warning" href="{% url 'settings:edit_sport' sport.id %}">
+                        Editar información del deporte
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="fresh-table color-green">
+
+            <div class="toolbar2">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Ligas
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' sport.id %}">
+                    Agregar Liga
+                </a>
+            </div>
+
+            <table id="fresh-table2" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Proyectos" class="text-center">Clubes</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for league in sport.league_set.all %}
+                    <tr>
+                        <td>{{league.id}}</td>
+                        <td>{{league.name}}</td>
+                        <td>{{league.club_set.all.count}}</td>
+                        <td>
+                            <a href="{% url 'subprograms:view_subprogram' sport.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a href="{% url 'subprograms:edit_subprogram' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="ti-pencil-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 col-md-6">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Clubes
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' sport.id %}">
+                    Agregar Club
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Deportistas" class="text-center">Deportistas</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for league in sport.league_set.all %}
+                        {% for club in league.club_set.all %}
+                        <tr>
+                            <td>{{club.id}}</td>
+                            <td>{{club.name}}</td>
+                            <td>{{club.get_status_display}}</td>
+                            <td>
+                                <a href="{% url 'subprograms:view_subprogram' sport.id %}" class="btn btn-simple text-success btn-icon edit">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <a href="{% url 'subprograms:edit_subprogram' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                    <i class="ti-pencil-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+        var $table2 = $('#fresh-table2'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table2.bootstrapTable({
+                toolbar: ".toolbar2",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table2.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}{% if editing %}Editar Club{% else %}Registrar Club{% endif %}{% endblock %}
+
+{% block section_title %}
+    {% if editing %}
+        Editar información de la Club<br><small style="font-size:12px">{{club.name}}</small>
+    {% else %}Registrar Club{% endif %}
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-8">
+             <div class="card">
+                <div class="content">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{field.label}}</label>
+                            <div class="col-md-10">
+                                {{field}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'settings:clubs_index' %}">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar Club{% endif %}">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

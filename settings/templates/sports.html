@@ -1,0 +1,115 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Deportes{% endblock %}
+
+{% block section_title %}Deportes{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <a class="btn btn-fill btn-success" href="{% url 'settings:new_sport' %}">
+                    Agregar deporte
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Estado">Ligas</th>
+                    <th data-sortable="true" data-field="Subprogramas" class="text-center">Clubes</th>
+                    <th data-field="" class="disabled-sorting">Acción</th>
+                </thead>
+                <tbody>
+                    {% for sport in sports %}
+                    <tr>
+                        <td>{{sport.id}}</td>
+                        <td>{{sport.name|capfirst}}</td>
+                        <td>{{sport.league_set.all.count}}</td>
+                        <td class="text-center">{{sport.subprogram_set.all.count}}</td>
+                        <td>
+                            <a href="{% url 'settings:view_sport' sport.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a href="{% url 'settings:edit_sport' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="{% url 'settings:delete_sport' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

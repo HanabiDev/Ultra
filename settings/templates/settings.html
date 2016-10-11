@@ -15,22 +15,20 @@
                 <h2><i class="fa fa-users"></i></h2>
                 <p>Usuarios </p>
             </a>
-            <a class="btn btn-primary square" href="#">
+            <a class="btn btn-primary square" href="{% url 'settings:sports_index' %}">
                 <h2><i class="fa fa-futbol-o"></i></h2>
                 <p>Deportes </p>
             </a>
 
-            <a class="btn btn-primary square" href="#">
+            <a class="btn btn-primary square" href="{% url 'settings:leagues_index' %}">
                 <h2><i class="fa fa-spinner"></i></h2>
                 <p>Ligas </p>
             </a>
-            <a class="btn btn-primary square" href="#">
+            <a class="btn btn-primary square" href="{% url 'settings:clubs_index' %}">
                 <h2><i class="fa fa-flag-checkered"></i></h2>
                 <p>Clubes </p>
             </a>
         </div>
-
-       
     </div>
 </div>
 {% endblock %}
