@@ -41,8 +41,8 @@
                         <td>{{ athlete.email}}</td>
                         <td>{{ athlete.birth_date|timesince|upto:',' }}</td>
                         <td>
-                            <a href="{% url 'athletes:view_athlete' athlete.id %}" class="btn btn-simple text-success btn-icon edit"><i class="ti-eye"></i></a>
-                            <a href="{% url 'athletes:edit_athlete' athlete.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>
+                            <a href="{% url 'athletes:view_athlete' athlete.id %}" class="btn btn-simple text-success btn-icon edit"><i class="fa fa-eye"></i></a>
+                            <a href="{% url 'athletes:edit_athlete' athlete.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-pencil"></i></a>
                         </td>
                     </tr>
                     {% endfor %}

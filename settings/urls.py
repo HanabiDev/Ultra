@@ -11,6 +11,7 @@ urlpatterns = [
 	url(r'^deportes/ver/(?P<sport_id>\d+)/$', settings.view_sport, name='view_sport'),
 	url(r'^deportes/editar/(?P<sport_id>\d+)/$', settings.edit_sport, name='edit_sport'),
 	url(r'^deportes/eliminar/(?P<sport_id>\d+)/$', settings.delete_sport, name='delete_sport'),
+    url(r'^deportes/(?P<sport_id>\d+)/nueva-liga/$', settings.create_league, name='new_sport_league'),
 
 
 	url(r'^ligas/$', settings.leagues_index, name='leagues_index'),
@@ -18,6 +19,7 @@ urlpatterns = [
 	url(r'^ligas/ver/(?P<league_id>\d+)/$', settings.view_league, name='view_league'),
 	url(r'^ligas/editar/(?P<league_id>\d+)/$', settings.edit_league, name='edit_league'),
 	url(r'^ligas/eliminar/(?P<league_id>\d+)/$', settings.delete_league, name='delete_league'),
+	url(r'^ligas/(?P<league_id>\d+)/nuevo-club/$', settings.create_club, name='new_league_club'),
 
 
 	url(r'^clubes/$', settings.clubs_index, name='clubs_index'),

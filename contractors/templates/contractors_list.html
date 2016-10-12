@@ -40,8 +40,8 @@
                         <td>{{contractor.mobile}}</td>
                         <td>{{contractor.email}}</td>
                         <td>
-                            <a href="{% url 'contractors:view_contractor' contractor.id %}" class="btn btn-simple text-success btn-icon edit"><i class="ti-eye"></i></a>
-                            <a href="{% url 'contractors:edit_contractor' contractor.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="ti-pencil-alt"></i></a>
+                            <a href="{% url 'contractors:view_contractor' contractor.id %}" class="btn btn-simple text-success btn-icon edit"><i class="fa fa-eye"></i></a>
+                            <a href="{% url 'contractors:edit_contractor' contractor.id %}" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-pencil"></i></a>
                             <a href="{% url 'contractors:toggle_block_contractor' contractor.id %}" class="btn btn-simple btn-danger btn-icon like">
                                 {% if contractor.is_active %}
                                     <i class="ti-lock"></i>

@@ -32,7 +32,7 @@
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
                     Ligas
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' sport.id %}">
+                <a class="btn btn-fill btn-success" href="{% url 'settings:new_sport_league' sport.id %}">
                     Agregar Liga
                 </a>
             </div>
@@ -51,11 +51,11 @@
                         <td>{{league.name}}</td>
                         <td>{{league.club_set.all.count}}</td>
                         <td>
-                            <a href="{% url 'subprograms:view_subprogram' sport.id %}" class="btn btn-simple text-success btn-icon edit">
-                                <i class="fa fa-plus"></i>
+                            <a href="{% url 'settings:view_league' league.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
                             </a>
-                            <a href="{% url 'subprograms:edit_subprogram' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
-                                <i class="ti-pencil-alt"></i>
+                            <a href="{% url 'settings:edit_league' league.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
                             </a>
                         </td>
                     </tr>
@@ -73,9 +73,6 @@
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
                     Clubes
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' sport.id %}">
-                    Agregar Club
-                </a>
             </div>
 
             <table id="fresh-table" class="table">
@@ -91,13 +88,13 @@
                         <tr>
                             <td>{{club.id}}</td>
                             <td>{{club.name}}</td>
-                            <td>{{club.get_status_display}}</td>
+                            <td>{{club.sportstab_set.all.count}}</td>
                             <td>
-                                <a href="{% url 'subprograms:view_subprogram' sport.id %}" class="btn btn-simple text-success btn-icon edit">
-                                    <i class="fa fa-plus"></i>
+                                <a href="{% url 'settings:view_club' club.id %}" class="btn btn-simple text-success btn-icon edit">
+                                    <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{% url 'subprograms:edit_subprogram' sport.id %}" class="btn btn-simple btn-warning btn-icon edit">
-                                    <i class="ti-pencil-alt"></i>
+                                <a href="{% url 'settings:edit_club' club.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                    <i class="fa fa-pencil"></i>
                                 </a>
                             </td>
                         </tr>

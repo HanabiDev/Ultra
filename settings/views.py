@@ -66,10 +66,15 @@ def leagues_index(request):
 	return render(request, "leagues.html", {'leagues':leagues})
 
 
-def create_league(request):
+def create_league(request, sport_id=None):
 
 	if request.method == 'GET':
 		form = LeagueForm()
+
+		if sport_id is not None:
+			sport = Sport.objects.get(id=sport_id)
+			form = LeagueForm(initial={'sport': sport})
+
 		return render(request, 'league.html', {'form': form})
 
 	if request.method == 'POST':
@@ -124,10 +129,15 @@ def clubs_index(request):
 	return render(request, "clubs.html", {'clubes':clubes})
 
 
-def create_club(request):
+def create_club(request, league_id=None):
 
 	if request.method == 'GET':
+
 		form = ClubForm()
+		if league_id is not None:
+			league = League.objects.get(id=league_id)
+			form = ClubForm(initial={'league': league})
+
 		return render(request, 'club.html', {'form': form})
 
 	if request.method == 'POST':

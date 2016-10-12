@@ -70,6 +70,8 @@
                     }
                 );
             });
+
+            $('#id_birth_date').val('{{athlete.birth_date|date:"d/m/Y"}}');
         });
     </script>
 {% endblock %}

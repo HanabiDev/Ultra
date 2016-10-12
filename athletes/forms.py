@@ -34,7 +34,7 @@ class AthleteForm(b_forms.BetterModelForm):
             'last_name': forms.TextInput(attrs={'class': 'form-control'}),
             'document_type': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'document_number': forms.NumberInput(attrs={'class': 'form-control'}),
-            'birth_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
+            'birth_date': forms.DateInput(attrs={'class': 'form-control datepicker'}),
             'birthplace': forms.TextInput(attrs={'class': 'form-control'}),
             'province': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'municipality': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),

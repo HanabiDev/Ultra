@@ -2,67 +2,40 @@
 
 {% load static %}
 
-{% block title %}Ver Programa{% endblock %}
+{% block title %}Ver Liga{% endblock %}
 
-{% block section_title %}Información de Programa <br><small style="font-size:12px">{{program.name}}</small>{% endblock %}
+{% block section_title %}Información de la Liga <br><small style="font-size:12px">{{league.name}}</small>{% endblock %}
 
 {% block main %}
 <div class="row">
-    <div class="col-lg-5 col-md-5">
+    <div class="col-lg-6 col-md-6">
         <div class="card">
             <div class="header">
                 <h4 class="title">
-                    Nombre del programa <br>
-                    <small>{{program.name}}</small>
+                    Liga <br>
+                    <small>{{league.name}}</small>
                 </h4>
                 <hr>
             </div>
             <div class="content">
-                
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <p class="form-control-static">{{program.get_status_display}}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Subprogramas</label>
-                            <p class="form-control-static">{{program.subprogram_set.all.count}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            {{program.description|safe}}
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="clearfix"></div>
-                <hr>
                 <p class="text-center">
-                    <a class="btn btn-fill btn-warning" href="{% url 'programs:edit_program' program.id %}">
-                        Editar información del programa
+                    <a class="btn btn-fill btn-warning" href="{% url 'settings:edit_league' league.id %}">
+                        Editar información de la Liga
                     </a>
                 </p>
             </div>
         </div>
     </div>
-    <div class="col-lg-7 col-md-7">
+
+    <div class="col-lg-6 col-md-6">
         <div class="fresh-table color-green">
 
             <div class="toolbar">
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
-                    Subprogramas
+                    Clubes
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'programs:program_sub' program.id %}">
-                    Agregar subprograma
+                <a class="btn btn-fill btn-success" href="{% url 'settings:new_league_club' league.id %}">
+                    Agregar Club
                 </a>
             </div>
 
@@ -70,22 +43,20 @@
                 <thead>
                     <th data-sortable="true" data-field="ID">ID</th>
                     <th data-sortable="true" data-field="Nombre">Nombre</th>
-                    <th data-sortable="true" data-field="Estado">Estado</th>
-                    <th data-sortable="true" data-field="Proyectos" class="text-center">Proyectos</th>
+                    <th data-sortable="true" data-field="Deportistas" class="text-center">Deportistas</th>
                     <th data-field="Acción">Acción</th>
                 </thead>
                 <tbody>
-                    {% for sub in program.subprogram_set.all %}
+                    {% for club in league.club_set.all %}
                     <tr>
-                        <td>{{sub.id}}</td>
-                        <td>{{sub.name}}</td>
-                        <td>{{sub.get_status_display}}</td>
-                        <td class="text-center">{{sub.project_set.all.count}}</td>
+                        <td>{{club.id}}</td>
+                        <td>{{club.name}}</td>
+                        <td>{{club.sportstab_set.all.count}}</td>
                         <td>
-                            <a href="{% url 'subprograms:view_subprogram' sub.id %}" class="btn btn-simple text-success btn-icon edit">
-                                <i class="fa fa-plus"></i>
+                            <a href="{% url 'settings:view_club' club.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
                             </a>
-                            <a href="{% url 'subprograms:edit_subprogram' sub.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                            <a href="{% url 'settings:edit_club' club.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
                         </td>
@@ -95,6 +66,7 @@
             </table>
         </div>
     </div>
+
 </div>
 {% endblock %}
 
@@ -150,6 +122,57 @@
 
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');
+            });
+
+        });
+
+        var $table2 = $('#fresh-table2'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table2.bootstrapTable({
+                toolbar: ".toolbar2",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table2.bootstrapTable('resetView');
             });
 
         });
