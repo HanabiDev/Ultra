@@ -1,0 +1,51 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver Programa{% endblock %}
+
+{% block section_title %}Información de Programa <br><small style="font-size:12px">{{program.name}}</small>{% endblock %}
+
+{% block main %}
+<div class="row" style="height:500px">
+    <div id="map" style="height: 100%">Mapa</div>
+</div>
+{% endblock %}
+
+{% block script %}
+   <script>
+
+       var projects = [
+
+       {% for intervention in intervs %}
+       {
+            id: {{intervention.id}},
+            name: "{{intervention.municipality}}",
+            address: "{{intervention.address}}",
+            municipality:"{{intervention.municipality}}",
+           department:'Boyacá',
+           imagePlace: 'img/CEA4.jpg',
+                       //6.3338358,-72.6848472
+       },
+       {% endfor %}
+
+       ];
+
+
+   </script>
+
+
+
+
+    <script src= "{% static 'assets/js/boyaca-map.js' %}" ></script>
+    <script src= "{% static 'assets/js/map.js' %}" ></script>
+
+
+    <script
+        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC45NvazWwPzkQWvFMcXoXbiMNC5JauF1s&callback=initMap">
+    </script>
+{% endblock %}

@@ -28,6 +28,8 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet">
+
+	<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 </head>
 
 <body class="{% if request.session.sidebar_off %} sidebar-mini {% endif %}">
@@ -609,9 +611,6 @@
 
     <!-- Vector Map plugin -->
 	<script src="{% static 'assets/js/jquery-jvectormap.js' %}"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
 
 	<!-- Wizard Plugin    -->
     <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}"></script>

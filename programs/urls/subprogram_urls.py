@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^nuevo', subprograms.create_subprogram, name='new_subprogram'),
     url(r'^ver/(?P<subprogram_id>\d+)/', subprograms.view_subprogram, name='view_subprogram'),
     url(r'^(?P<subprogram_id>\d+)/nuevo-proyecto/$', projects.create_project, name='proj'),
+    url(r'^(?P<subprogram_id>\d+)/reporte/$', subprograms.report, name='subprog_report'),
     url(r'^editar/(?P<subprogram_id>\d+)/', subprograms.update_subprogram, name='edit_subprogram'),
     #url(r'^bloquear/(?P<program_id>\d+)/', subprograms.toggle_lock, name='toggle_block_subprogram'),
 ]

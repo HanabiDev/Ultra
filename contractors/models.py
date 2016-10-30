@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django_resized.forms import ResizedImageField
 
+from programs.models import Subprogram, Municipality, Province
+
 
 def get_path(instance,file):
     return 'uploads/contractors/'+str(instance.trainer.id)+'/'+file
@@ -59,3 +61,65 @@ class SportsAchievements(models.Model):
 
     class Meta:
         ordering = ['-year']
+
+
+
+class Intervention(models.Model):
+    contractor = models.ForeignKey('Contractor', verbose_name=u'Contratista', null=True, blank=True)
+    subprogram = models.ForeignKey(Subprogram, verbose_name=u'Subprograma')
+    province = models.ForeignKey(Province, verbose_name=u'Provincia')
+    municipality = models.ForeignKey(Municipality, verbose_name=u'Municipio')
+    neighborhood = models.CharField(max_length=60, verbose_name=u'Barrio/Vereda')
+    address = models.CharField(max_length=100, verbose_name=u'Dirección')
+
+
+
+class TimeSchedule(models.Model):
+
+    WEEK_DAYS = (
+        ('Lu', 'Lunes'),
+        ('Ma', 'Martes'),
+        ('Mi', 'Miércoles'),
+        ('Ju', 'Jueves'),
+        ('Vi', 'Viernes'),
+    )
+
+    intervention = models.ForeignKey('Intervention')
+    day = models.CharField(max_length=2, choices=WEEK_DAYS)
+    startTime = models.TimeField()
+    endTime = models.TimeField()
+
+
+class Session(models.Model):
+    date = models.DateTimeField(auto_now=True)
+    intervention = models.ForeignKey('Intervention')
+
+
+class BeneficiaryCategory(models.Model):
+
+    AGE_RANGES = (
+        ('1','0 a 5 Años'),
+        ('2', '6 a 12 Años'),
+        ('3', '13 a 17 Años'),
+        ('4', '18 a 29 Años'),
+        ('5', '30 a 59 Años'),
+        ('6', 'Más de 60 Años')
+    )
+    session = models.ForeignKey('Session')
+    age_range =  models.CharField(max_length=2, choices=AGE_RANGES)
+
+
+class BeneficiaryGroup(models.Model):
+    SOCIAL_CONDITIONS = (
+        ('M', 'Mestizos'),
+        ('I', 'Indígenas'),
+        ('C', 'Campesinos'),
+        ('D', 'Discapacitados'),
+        ('A', 'Afrodescendientes')
+
+    )
+
+    category = models.ForeignKey('BeneficiaryCategory')
+    group_name = models.CharField(max_length=2, choices=SOCIAL_CONDITIONS)
+    femenine_individuals = models.IntegerField()
+    masculine_individuals = models.IntegerField()
