@@ -71,6 +71,12 @@ class Intervention(models.Model):
     municipality = models.ForeignKey(Municipality, verbose_name=u'Municipio')
     neighborhood = models.CharField(max_length=60, verbose_name=u'Barrio/Vereda')
     address = models.CharField(max_length=100, verbose_name=u'Dirección')
+    group_name = models.CharField(max_length=100, verbose_name=u'Nombre del grupo')
+    veedor = models.CharField(max_length=100, verbose_name=u'Veedor del grupo')
+    veedor_phone = models.CharField(max_length=100, verbose_name=u'Teléfono del veedor')
+    latitude = models.CharField(max_length=20)
+    longitude = models.CharField(max_length=20)
+
 
 
 

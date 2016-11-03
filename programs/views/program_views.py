@@ -40,14 +40,6 @@ def view_program(request, program_id):
 
 @user_passes_test(permissions, login_url='login')
 @login_required(login_url='login')
-def view_program_map(request, program_id):
-    interventions = Intervention.objects.filter(subprogram__id="1")[0:10]
-    return render(request, 'program_map.html', {'intervs': interventions})
-
-
-
-@user_passes_test(permissions, login_url='login')
-@login_required(login_url='login')
 def update_program(request, program_id):
 
     program = Program.objects.get(id=program_id)

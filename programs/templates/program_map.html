@@ -6,10 +6,13 @@
 
 {% block section_title %}Información de Programa <br><small style="font-size:12px">{{program.name}}</small>{% endblock %}
 
+{% block instyle %}style="padding:0;"{% endblock %}
 {% block main %}
-<div class="row" style="height:500px">
+<div class="row" style="height: 78vh;">
     <div id="map" style="height: 100%">Mapa</div>
 </div>
+
+<!-- /.modal -->
 {% endblock %}
 
 {% block script %}
@@ -22,10 +25,15 @@
             id: {{intervention.id}},
             name: "{{intervention.municipality}}",
             address: "{{intervention.address}}",
+            neighborhood:"{{intervention.neighborhood}}",
             municipality:"{{intervention.municipality}}",
-           department:'Boyacá',
-           imagePlace: 'img/CEA4.jpg',
-                       //6.3338358,-72.6848472
+            department:'Boyacá',
+            imagePlace: 'img/CEA4.jpg',
+            program: "{{intervention.subprogram.program}}",
+            subprogram:"{{intervention.subprogram}}",
+               veedor:
+            lat:{{intervention.latitude}},
+            lon:{{intervention.longitude}},
        },
        {% endfor %}
 
@@ -48,4 +56,36 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC45NvazWwPzkQWvFMcXoXbiMNC5JauF1s&callback=initMap">
     </script>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="markerTitle"></h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-8">
+                      <p><b>Programa</b></p>
+                      <p id="markerProg"></p>
+                      <p><b>Subprograma</b></p>
+                      <p id="markerSub"></p>
+                      <p><b>Dirección</b></p>
+                      <p id="markerAddr"></p>
+                      <p><b>Barrio/Vereda</b></p>
+                      <p id="markerNeigh"></p>
+                      <p><b>Veedor</b></p>
+                      <p id="markerVeedor"></p>
+                  </div>
+                  <div class="col-md-4">
+                  </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
 {% endblock %}

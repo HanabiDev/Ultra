@@ -8,7 +8,7 @@
 
 {% block main %}
 <div class="row">
-    <div class="col-lg-5 col-md-5">
+    <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="header">
                 <h4 class="title">
@@ -21,7 +21,7 @@
                 
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label>Programa</label>
                             <p class="form-control-static prog_link">
@@ -29,18 +29,18 @@
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Estado</label>
                             <p class="form-control-static">{{subprogram.get_status_display}}</p>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <!--div class="col-md-6">
                         <div class="form-group">
                             <label>Proyectos</label>
                             <p class="form-control-static">{{subprogram.project_set.all.count}}</p>
                         </div>
-                    </div>
+                    </div-->
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -54,7 +54,7 @@
 
                 <div class="clearfix"></div>
                 <hr>
-                <p class="text-center">
+                <p class="text-right">
                     <a class="btn btn-fill btn-warning" href="{% url 'subprograms:edit_subprogram' subprogram.id %}">
                         Editar información del subprograma
                     </a>
@@ -62,39 +62,41 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-7 col-md-7">
+    <div class="col-lg-12 col-md-12">
         <div class="fresh-table color-green">
 
             <div class="toolbar">
                 <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
-                    Proyectos
+                    Intervenciones
                 </span>
-                <a class="btn btn-fill btn-success" href="{% url 'subprograms:proj' subprogram.id %}">
-                    Agregar proyecto
+                <a class="btn btn-fill btn-success" href="{% url 'subprograms:map' subprogram.id %}">
+                    Ver en mapa
                 </a>
             </div>
 
             <table id="fresh-table" class="table">
                 <thead>
-                    <th data-sortable="true" data-field="Consecutivo">Consecutivo</th>
-                    <th data-sortable="true" data-field="Nombre">Nombre</th>
-                    <th data-sortable="true" data-field="Estado">Estado</th>
+                    <th data-sortable="true" data-field="Municipio">Municipio</th>
+                    <th data-sortable="true" data-field="Direccion">Dirección</th>
+                    <th data-sortable="true" data-field="Barrio">Barrio</th>
+                    <th data-sortable="true" data-field="Contratista">Contratista</th>
                     <th data-field="Acción">Acción</th>
                 </thead>
                 <tbody>
-                    {% for project in subprogram.project_set.all %}
+                    {% for interv in subprogram.intervention_set.all %}
                     <tr>
-                        <td>{{project.consecutive}}</td>
-                        <td>{{project.name}}</td>
-                        <td>{{project.get_status_display}}</td>
-                        <td>
-                            <a href="{% url 'projects:view_project' project.id %}" class="btn btn-simple text-success btn-icon edit">
+                        <td>{{interv.municipality}}</td>
+                        <td>{{interv.address}}</td>
+                        <td>{{interv.neighborhood}}</td>
+                        <td>{{interv.contractor}}</td>
+                        <!--td>
+                            <a href="#" class="btn btn-simple text-success btn-icon edit">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            <a href="{% url 'projects:edit_project' project.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                            <a href="#" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                        </td>
+                        </td-->
                     </tr>
                     {% endfor %}
                 </tbody>

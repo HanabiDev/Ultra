@@ -2,6 +2,8 @@
 from functools import partial
 from io import BytesIO
 
+from django.db.models import Sum, F
+
 from django.http.response import HttpResponse
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
@@ -9,6 +11,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 from reportlab.platypus.doctemplate import SimpleDocTemplate, BaseDocTemplate, PageTemplate
+from reportlab.platypus.flowables import PageBreak
 from reportlab.platypus.frames import Frame
 from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.tables import Table, TableStyle
@@ -18,10 +21,10 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.urls.base import reverse_lazy
 
-from contractors.models import AppUser
+from contractors.models import AppUser, BeneficiaryCategory, Intervention
 from programs.models import Program, Subprogram
 from programs.forms import SubprogramForm
-from reports.pdf_test import styleH2, styleN, styleH2E, styleH
+from reports.pdf_test import styleH2, styleN, styleH2E, styleH, BreakdownPieDrawing
 
 
 @login_required(login_url='login')
@@ -65,6 +68,16 @@ def view_subprogram(request, subprogram_id):
 
 @user_passes_test(permissions, login_url='login')
 @login_required(login_url='login')
+def view_map(request, subprogram_id):
+    subprogram = Subprogram.objects.get(id=subprogram_id)
+    interventions = subprogram.intervention_set.all()
+    return render(request, 'program_map.html', {'intervs': interventions})
+
+
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
 def update_subprogram(request, subprogram_id):
 
     subprogram = Subprogram.objects.get(id=subprogram_id)
@@ -82,11 +95,18 @@ def update_subprogram(request, subprogram_id):
         return render(request, 'subprogram.html', {'subprogram':subprogram, 'form': form, 'editing':True})
 
 
+from django.db.models import F
+
 from reports.pdf_test import header as h
 def report(request, subprogram_id):
     subprogram = Subprogram.objects.get(id=subprogram_id)
 
+    get_gender_category_resume(subprogram)
+    get_gender_social_resume(subprogram)
+    get_social_category_resume(subprogram)
+
     response = HttpResponse(content_type='application/pdf')
+
     pdf_name = "beneficiarios.pdf"  # llamado clientes
     # la linea 26 es por si deseas descargar el pdf a tu computadora
     # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
@@ -106,15 +126,244 @@ def report(request, subprogram_id):
 
     text = []
     text.append(Paragraph("<br/>", styleH))
-    text.append(Paragraph("Beneficiarios del Subrograma: "+subprogram.name+"",styleH2E))
-    text.append(Paragraph("(Clasificación por rango de edad)", styleH2E))
 
-    text.append(Paragraph("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
-                          "<br/><br/><br/><br/>Beneficiarios del Subrograma: " + subprogram.name + "", styleH2E))
+    #text.append(Paragraph("Beneficiarios del Subrograma: "+subprogram.name+"",styleH2E))
+    #text.append(Paragraph("(Clasificación por género)", styleH2E))
+    g_data, g_labels = get_gender_resume(subprogram)
+    gender_graph = BreakdownPieDrawing(8 * cm, 8 * cm, doc.leftMargin + 2 * cm, 0, g_data, g_labels)
+    #text.append(PageBreak())
+
+    """
+    text.append(
+        Paragraph("<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
+                  "<br/><br/><br/><br/>Beneficiarios del Subrograma: " + subprogram.name + "", styleH2E))
     text.append(Paragraph("(Clasificación por condición social)", styleH2E))
+    """
+    s_data, s_labels = get_social_resume(subprogram)
+    social_graph = BreakdownPieDrawing(8 * cm, 8 * cm, 0, 8*cm, s_data, s_labels)
+
+    #c_data, c_labels = get_category_resume(subprogram)
+    #category_graph = BreakdownPieDrawing(8 * cm, 8 * cm, doc.leftMargin + 2 * cm, doc.height - 14 * cm, c_data, c_labels)
+
+    text.append(gender_graph)
+    text.append(social_graph)
+    #text.append(category_graph)
 
     doc.build(text)
 
     response.write(buff.getvalue())
     buff.close()
     return response
+
+
+
+def get_gender_resume(subprogram):
+
+    intervs = subprogram.intervention_set.all()
+
+    M = 0
+    F = 0
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for cat in categories:
+                Mt = cat.beneficiarygroup_set.all().aggregate(
+                    Mtotal=Sum('masculine_individuals')
+                )['Mtotal']
+
+                Ft = cat.beneficiarygroup_set.all().aggregate(
+                    Mtotal=Sum('femenine_individuals')
+                )['Mtotal']
+
+                M += Mt
+                F += Ft
+
+    return  ([M,F],['Masculino','Femenino'])
+
+
+def get_social_resume(subprogram):
+    intervs = subprogram.intervention_set.all()
+
+    G1 = 0
+    G2 = 0
+    G3 = 0
+    G4 = 0
+    G5 = 0
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for cat in categories:
+                G1 += cat.beneficiarygroup_set.get(group_name='M').masculine_individuals
+                G1 += cat.beneficiarygroup_set.get(group_name='M').femenine_individuals
+
+                G2 += cat.beneficiarygroup_set.get(group_name='I').masculine_individuals
+                G2 += cat.beneficiarygroup_set.get(group_name='I').femenine_individuals
+
+                G3 += cat.beneficiarygroup_set.get(group_name='C').masculine_individuals
+                G3 += cat.beneficiarygroup_set.get(group_name='C').femenine_individuals
+
+                G4 += cat.beneficiarygroup_set.get(group_name='D').masculine_individuals
+                G4 += cat.beneficiarygroup_set.get(group_name='D').femenine_individuals
+
+                G5 += cat.beneficiarygroup_set.get(group_name='A').masculine_individuals
+                G5 += cat.beneficiarygroup_set.get(group_name='A').femenine_individuals
+
+    return ([G1, G2, G3, G4, G5],['Mestizos', 'Indígenas', 'Campesinos', 'Discapacitados', 'Afrodescendientes'])
+
+
+def get_category_resume(subprogram):
+    intervs = subprogram.intervention_set.all()
+    data = [0, 0, 0, 0, 0, 0]
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for index, cat in enumerate(categories):
+                masc = cat.beneficiarygroup_set.all().aggregate(
+                    total=Sum('masculine_individuals')
+                )['total']
+
+                masc += cat.beneficiarygroup_set.all().aggregate(
+                    total=Sum('femenine_individuals')
+                )['total']
+
+                data[index] += masc
+
+    return (data,['0 a 5 Años','6 a 12 Años','13 a 17 Años','18 a 29 Años','30 a 59 Años','Más de 60 Años'])
+
+
+def get_gender_social_resume(subprogram):
+    intervs = subprogram.intervention_set.all()
+
+    G1 = 0
+    G2 = 0
+    G3 = 0
+    G4 = 0
+    G5 = 0
+    G1f = 0
+    G2f = 0
+    G3f = 0
+    G4f = 0
+    G5f = 0
+
+    data = [[0,0,0,0,0],[0,0,0,0,0]]
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for cat in categories:
+                G1 += cat.beneficiarygroup_set.get(group_name='M').masculine_individuals
+                G1f += cat.beneficiarygroup_set.get(group_name='M').femenine_individuals
+
+                G2 += cat.beneficiarygroup_set.get(group_name='I').masculine_individuals
+                G2f += cat.beneficiarygroup_set.get(group_name='I').femenine_individuals
+
+                G3 += cat.beneficiarygroup_set.get(group_name='C').masculine_individuals
+                G3f += cat.beneficiarygroup_set.get(group_name='C').femenine_individuals
+
+                G4 += cat.beneficiarygroup_set.get(group_name='D').masculine_individuals
+                G4f += cat.beneficiarygroup_set.get(group_name='D').femenine_individuals
+
+                G5 += cat.beneficiarygroup_set.get(group_name='A').masculine_individuals
+                G5f += cat.beneficiarygroup_set.get(group_name='A').femenine_individuals
+
+    data = [
+        [G1,G2,G3,G4,G5],
+        [G1f, G2f, G3f, G4f, G5f],
+    ]
+
+    labels = [
+        ['Hombres', None] + [str(d) for d in data[0]],
+        ['Mujeres', None] + [str(d) for d in data[1]]
+    ]
+    categories = ['Mestizos', 'Indígenas', 'Campesinos', 'Discapacitados', 'Afrodescendientes']
+
+    return (data,labels,categories)
+
+
+def get_gender_category_resume(subprogram):
+    intervs = subprogram.intervention_set.all()
+    data = [[0, 0, 0, 0, 0, 0],[0, 0, 0, 0, 0, 0]]
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for index, cat in enumerate(categories):
+                masc = cat.beneficiarygroup_set.all().aggregate(
+                    total=Sum('masculine_individuals')
+                )['total']
+
+                data[0][index] += masc
+
+                masc = cat.beneficiarygroup_set.all().aggregate(
+                    total=Sum('femenine_individuals')
+                )['total']
+
+                data[1][index] += masc
+    labels = [
+        ['Hombres', None] + [str(d) for d in data[0]],
+        ['Mujeres', None] + [str(d) for d in data[1]]
+    ]
+    categories = ['0 a 5 Años', '6 a 12 Años', '13 a 17 Años', '18 a 29 Años', '30 a 59 Años', 'Más de 60 Años']
+
+    return (data,labels,categories)
+
+
+def get_social_category_resume(subprogram):
+    intervs = subprogram.intervention_set.all()
+
+    G1 = 0
+    G2 = 0
+    G3 = 0
+    G4 = 0
+    G5 = 0
+
+    data = [
+        [0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]
+    ]
+
+    for interv in intervs:
+        sessions = interv.session_set.all()
+        for session in sessions:
+
+            categories = session.beneficiarycategory_set.all()
+
+            for index,cat in enumerate(categories):
+
+                G1 = cat.beneficiarygroup_set.get(group_name='M').masculine_individuals
+                G1 += cat.beneficiarygroup_set.get(group_name='M').femenine_individuals
+
+                G2 = cat.beneficiarygroup_set.get(group_name='I').masculine_individuals
+                G2 += cat.beneficiarygroup_set.get(group_name='I').femenine_individuals
+
+                G3 = cat.beneficiarygroup_set.get(group_name='C').masculine_individuals
+                G3 += cat.beneficiarygroup_set.get(group_name='C').femenine_individuals
+
+                G4 = cat.beneficiarygroup_set.get(group_name='D').masculine_individuals
+                G4 += cat.beneficiarygroup_set.get(group_name='D').femenine_individuals
+
+                G5 = cat.beneficiarygroup_set.get(group_name='A').masculine_individuals
+                G5 += cat.beneficiarygroup_set.get(group_name='A').femenine_individuals
+
+                for i, val in enumerate([G1,G2,G3,G4,G5]):
+                    data[i][index] += val
+
+    print data, sum(data[0])+sum(data[1])+sum(data[2])+sum(data[3])+sum(data[4])
+    return ([G1, G2, G3, G4, G5], ['Mestizos', 'Indígenas', 'Campesinos', 'Discapacitados', 'Afrodescendientes'])
