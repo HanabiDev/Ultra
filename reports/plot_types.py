@@ -6,11 +6,11 @@ from reportlab.graphics.charts.piecharts import Pie
 
 pdf_chart_colors = [
     HexColor("#1abc9c"),
-    HexColor("#2ecc71"),
-    HexColor("#3498db"),
-    HexColor("#9b59b6"),
+    HexColor("#f1c40f"),
     HexColor("#e74c3c"),
-    HexColor("#f1c40f")
+    HexColor("#8e44ad"),
+    HexColor("#2c3e50"),
+    HexColor("#3498db")
 ]
 
 def setItems(n, obj, attr, values):
@@ -76,29 +76,38 @@ from reportlab.graphics.widgets.table import TableWidget
 from reportlab.graphics.charts.barcharts import VerticalBarChart
 
 class GroupedBarChart(_DrawingEditorMixin,Drawing):
-    def __init__(self,data, labels, categories, width=403,height=163,*args,**kw):
+    def __init__(self,data, labels, categories, small, padded, width=403,height=163,*args,**kw):
         Drawing.__init__(self,width,height,*args,**kw)
         fontName = 'Helvetica'
-        fontSize = 5
-        bFontName = 'Times-Bold'
-        bFontSize = 7
-        colorsList = [PCMYKColor(0, 73, 69, 56), PCMYKColor(0, 3, 7, 6),PCMYKColor(41, 25, 0, 21)]
+        fontSize = 11
+        bFontName = 'Helvetica'
+        bFontSize = 11
+        colorsList = pdf_chart_colors
+
+        self.hAlign = 'CENTER'
+        self.width = 18 * cm
+        self.height = 200
+
         self._add(self,VerticalBarChart(),name='chart',validate=None,desc=None)
-        self.chart.height                  = 73
+        self.chart.height                  = 4*cm
+        self.chart.width                  = 12.7*cm
         self.chart.fillColor               = None
         self.chart.data                    = data
-        #self.chart.bars.fillColor         = color
         self.chart.bars.strokeWidth        = 0.5
-        self.chart.bars.strokeColor        = PCMYKColor(0,0,0,100)
+        self.chart.bars.strokeColor        = colors.transparent
         for i, color in enumerate(colorsList): self.chart.bars[i].fillColor = color
+
+
         self.chart.valueAxis.labels.fontName       = fontName
-        self.chart.valueAxis.labels.fontSize       = fontSize
+        self.chart.valueAxis.labels.fillColor      = colors.HexColor('#777777')
+        self.chart.valueAxis.labels.fontSize       = 9
         self.chart.valueAxis.strokeDashArray       = (5,0)
         self.chart.valueAxis.visibleGrid           = False
         self.chart.valueAxis.visibleTicks          = False
         self.chart.valueAxis.tickLeft              = 0
         self.chart.valueAxis.tickRight             = 11
         self.chart.valueAxis.strokeWidth           = 0.25
+        self.chart.valueAxis.strokeColor = colors.HexColor('#777777')
         self.chart.valueAxis.avoidBoundFrac        = 0#1#0.5
         self.chart.valueAxis.rangeRound            ='both'
         self.chart.valueAxis.gridStart             = 13
@@ -107,22 +116,32 @@ class GroupedBarChart(_DrawingEditorMixin,Drawing):
         self.chart.valueAxis.forceZero              = True
         self.chart.valueAxis.labels.boxAnchor       = 'e'
         self.chart.valueAxis.labels.dx              = -1
-        self.chart.categoryAxis.strokeDashArray        = (5,0)
+
+
+
+
+
+
+        self.chart.categoryAxis.strokeDashArray     = (1,0)
         self.chart.categoryAxis.visibleGrid         = False
         self.chart.categoryAxis.visibleTicks        = False
         self.chart.categoryAxis.strokeWidth         = 0.25
+        self.chart.categoryAxis.strokeColor = colors.HexColor('#777777')
         self.chart.categoryAxis.tickUp              = 5
         self.chart.categoryAxis.tickDown            = 0
         self.chart.categoryAxis.labelAxisMode       ='low'
-        self.chart.categoryAxis.labels.textAnchor   ='end'
-        self.chart.categoryAxis.labels.fillColor    = black
+        self.chart.categoryAxis.labels.textAnchor   ='middle'
+        self.chart.categoryAxis.labels.fillColor    = colors.HexColor('#777777')
         self.chart.categoryAxis.labels.angle        = 0
         self.chart.categoryAxis.labels.fontName     = bFontName
         self.chart.categoryAxis.labels.fontSize     = bFontSize
-        self.chart.categoryAxis.labels.boxAnchor    = 'e'
-        self.chart.categoryAxis.labels.dx           = 7#-10
-        self.chart.categoryAxis.labels.dy           = -5
+        self.chart.categoryAxis.labels.boxAnchor    = 'c'
+        self.chart.categoryAxis.labels.dx           = 0#-10
+        self.chart.categoryAxis.labels.dy           = -10
         self._add(self,Legend(),name='legend',validate=None,desc=None)
+
+
+
         self.legend.deltay           = 8
         self.legend.fontName         = fontName
         self.legend.fontSize         = fontSize
@@ -133,45 +152,68 @@ class GroupedBarChart(_DrawingEditorMixin,Drawing):
         self.legend.variColumn       = True
         self.legend.subCols.minWidth = self.chart.width/2 # 175
         self.legend.colorNamePairs   = Auto(obj=self.chart)
+
         self._add(self,TableWidget(),name='table',validate=None,desc=None)
-        self.table.x = 0
+
+        if small:
+            self.table.width = 17 * cm
+            self.table.x = 1*cm
+        else:
+            self.table.width = 18 * cm
+            self.table.x = 0
+
         self.table.y = 0
-        self.table.height = 45
-        self.table.borderStrokeColor = PCMYKColor(0, 12, 24, 36)
-        self.table.fillColor = PCMYKColor(0, 3, 7, 6)
+        if padded:
+            self.table.height = 100
+            self.table.y = -60
+        else:
+            self.table.height = 45
+
+        self.table.borderStrokeColor = colors.transparent
+        self.table.fillColor = colors.HexColor("#ecf0f1")
         self.table.borderStrokeWidth = 0.5
-        self.table.horizontalDividerStrokeColor = PCMYKColor(0, 12, 24, 36)
+        self.table.horizontalDividerStrokeColor = colors.HexColor('#dddddd')
         self.table.verticalDividerStrokeColor = None
         self.table.horizontalDividerStrokeWidth = 0.5
         self.table.verticalDividerStrokeWidth = 0
         self.table.dividerDashArray = None
-
         self.table.data = labels
-        self.table.boxAnchor = 'sw'
+        self.table.boxAnchor = 'n'
         self.table.fontName = bFontName
         self.table.fontSize = bFontSize
-        self.table.fontColor = colors.black
+        self.table.fontColor = colors.HexColor("#333333")
         self.table.alignment = 'left'
-        self.table.textAnchor = 'start'
-        for i in range(len(self.chart.data)): self.chart.bars[i].name = labels[i][0]
+        self.table.textAnchor = 'middle'
+
+
+        for i in range(len(self.chart.data)):
+            self.chart.bars[i].name = labels[i][0]
+
         self.chart.categoryAxis.categoryNames = categories
-        self.width       = 400
-        self.table.width                        = 400
-        self.height      = 200
+
+
+
+
         self.legend.dx             = 8
         self.legend.dxTextSpace    = 5
         self.legend.deltax         = 0
         self.legend.alignment      = 'right'
-        self.legend.columnMaximum  = 3
+        self.legend.columnMaximum  = 6
         self.chart.y               = 75
         self.chart.barWidth        = 2
         self.chart.groupSpacing    = 5
-        self.chart.width           = 250
         self.chart.barSpacing      = 0.5
-        self.chart.x               = 140
+        self.chart.x               = 150
         self.legend.y              = 75
         self.legend.boxAnchor      = 'sw'
         self.legend.x              = 24
-        self.chart.bars[0].fillColor   = PCMYKColor(100,60,0,50,alpha=100)
-        self.chart.bars[1].fillColor   = PCMYKColor(23,51,0,4,alpha=100)
-        self.chart.bars[2].fillColor   = PCMYKColor(100,0,90,50,alpha=100)
+
+
+
+
+        self.chart.bars[0].fillColor   = pdf_chart_colors[0]
+        self.chart.bars[1].fillColor   = pdf_chart_colors[3]
+        self.chart.bars[2].fillColor   = pdf_chart_colors[2]
+        self.chart.bars[3].fillColor   = pdf_chart_colors[1]
+        self.chart.bars[4].fillColor   = pdf_chart_colors[4]
+        self.chart.bars[4].fillColor   = pdf_chart_colors[5]

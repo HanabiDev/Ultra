@@ -83,7 +83,8 @@ $(document).ready(function(){
     //  Init Bootstrap Select Picker
     if($(".selectpicker").length != 0){
         $(".selectpicker").selectpicker({
-            size: 9
+            size: 9,
+            liveSearch: true
         });
     }
 

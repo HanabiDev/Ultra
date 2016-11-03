@@ -18,6 +18,12 @@ from reports.plot_types import BreakdownPieDrawing
 styles = getSampleStyleSheet()
 styleN = styles['Normal']
 
+styleNC = ParagraphStyle(
+        'para',
+        fontName='Helvetica',
+        fontSize=11,
+        alignment=TA_CENTER,
+)
 
 styleH = ParagraphStyle(
         'title',
@@ -32,6 +38,14 @@ styleH2 = ParagraphStyle(
     fontName='Helvetica-Bold',
     fontSize=10,
     leading=42,
+    alignment=TA_CENTER,
+)
+
+styleH2M = ParagraphStyle(
+    'title',
+    fontName='Helvetica-Bold',
+    fontSize=10,
+    leading=20,
     alignment=TA_CENTER,
 )
 

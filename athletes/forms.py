@@ -22,7 +22,7 @@ class AthleteForm(b_forms.BetterModelForm):
         model = Athlete
         fields = [
             'first_name', 'last_name', 'document_type', 'document_number',
-            'birth_date', 'birthplace',
+            'birth_date', 'birthplace', 'genre','rh',
             'province', 'municipality', 'address', 'phone',
             'photo', 'email', 'school_level', 'institution', 'dni_support',
             'contact_fullname', 'contact_phone', 'contact_address', 'contact_mail',
@@ -36,6 +36,8 @@ class AthleteForm(b_forms.BetterModelForm):
             'document_number': forms.NumberInput(attrs={'class': 'form-control'}),
             'birth_date': forms.DateInput(attrs={'class': 'form-control datepicker'}),
             'birthplace': forms.TextInput(attrs={'class': 'form-control'}),
+            'genre': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'rh': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'province': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'municipality': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
@@ -54,7 +56,6 @@ class AthleteForm(b_forms.BetterModelForm):
             'clothes_size': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
             'shoes_size': forms.NumberInput(attrs={'class': 'form-control'}),
         }
-
         fieldsets = (
 
             Fieldset('basic', fields=(
@@ -63,18 +64,19 @@ class AthleteForm(b_forms.BetterModelForm):
 
             ), legend=u'1. Información básica'),
 
+            Fieldset('additional', fields=(
+                'genre','rh','photo', 'dni_support', 'healthcare', 'eps_name', 'clothes_size', 'shoes_size'
+            ), legend=u'2. Información adicional'),
+
             Fieldset('contact', fields=(
                 'province', 'municipality', 'address', 'phone', 'email'
-            ), legend=u'2. Información de contacto'),
-
-            Fieldset('additional', fields=(
-                'photo', 'dni_support', 'healthcare', 'eps_name', 'clothes_size', 'shoes_size'
-            ), legend=u'3. Información adicional'),
+            ), legend=u'3. Información de contacto'),
 
             Fieldset('alternate_contact', fields=(
                 'contact_fullname', 'contact_phone', 'contact_address', 'contact_mail',
             ), legend=u'4. Contacto alternativo'),
         )
+
 
 
 class AthleteCardForm(forms.ModelForm):

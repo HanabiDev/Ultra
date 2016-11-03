@@ -1,0 +1,38 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}Reporte de deportistas por liga{% endblock %}
+
+{% block section_title %}
+    Reporte de deportistas por liga
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-8">
+             <div class="card">
+                <div class="content">
+                    <label for="leagues">Seleccione la liga o presione siguiente para reportar todas las ligas</label>
+                    <select name="league" id="leagues" class="selectpicker" data-style="btn-info btn-fill btn-block">
+                        <option value="0">Todas las ligas</option>
+                        {% for league in leagues %}
+                        <option value="{{league.id}}">{{league.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'athletes:list_athletes' %}">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="Siguiente">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
