@@ -58,6 +58,9 @@
                     <a class="btn btn-fill btn-warning" href="{% url 'subprograms:edit_subprogram' subprogram.id %}">
                         Editar información del subprograma
                     </a>
+		     <a id="report" class="btn btn-fill btn-info" href="{% url 'subprograms:subprog_report' subprogram.id %}">
+                       Ver reporte de beneficiarios
+                    </a>
                 </p>
             </div>
         </div>
@@ -159,9 +162,34 @@
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');
             });
-
+	    $("#report").click(function(e){
+		//e.preventDefault();
+	    	$('#loading-modal').modal({
+                  backdrop: 'static',
+                  keyboard: false
+                });
+		//return;
+	    });
         });
 
 
     </script>
+    <div class="modal fade" id="loading-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Generando reporte</h4>
+          </div>
+          <div class="modal-body text-center">
+            <span class="fa-stack fa-lg" style="font-size:60px;">
+                <i class="text-primary fa fa-circle-o-notch fa-spin fa-stack-2x"></i>
+                <i class="text-success fa fa-file fa-stack-1x"></i>
+            </span><br><br>
+              <p>
+                  Se está generando el reporte, por favor espere...
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}

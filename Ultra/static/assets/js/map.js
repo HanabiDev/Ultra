@@ -93,9 +93,11 @@
 				$("#markerTitle").html(data.name);
 				$("#markerProg").html(data.program);
 				$("#markerSub").html(data.subprogram);
-				$("#markerAddr").html(data.address);
+				$("#markerContractor").html(data.contractor);
+				$("#markerAddr").html(data.address+", "+data.municipality);
 				$("#markerNeigh").html(data.neighborhood);
 				$("#markerVeedor").html(data.veedor);
+				$("#markerVeedorPhone").html(data.veedor_phone);
 		    });
 	    
 	    })(i, marker);

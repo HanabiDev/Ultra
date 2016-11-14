@@ -366,8 +366,8 @@ def report_athletes(request):
         text.append(Paragraph("<br/>", styleH))
 
         id = request.POST.get('league')
-
-        leagues = [League.objects.get(id=int(id)).order_by('name'),] if id != '0' else  League.objects.all()
+	
+        leagues = [League.objects.get(id=int(id)),] if id != '0' else  League.objects.all()
 
         for league in leagues:
             if league.sportstab_set.all().count() >0:

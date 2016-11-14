@@ -23,7 +23,8 @@
        {% for intervention in intervs %}
        {
             id: {{intervention.id}},
-            name: "{{intervention.municipality}}",
+	    contractor: "{{intervention.contractor}}",
+            name: "{{intervention.group_name}}",
             address: "{{intervention.address}}",
             neighborhood:"{{intervention.neighborhood}}",
             municipality:"{{intervention.municipality}}",
@@ -31,7 +32,8 @@
             imagePlace: 'img/CEA4.jpg',
             program: "{{intervention.subprogram.program}}",
             subprogram:"{{intervention.subprogram}}",
-               veedor:
+            veedor:"{{intervention.veedor}}",
+	    veedor_phone:"{{intervention.veedor_phone}}",
             lat:{{intervention.latitude}},
             lon:{{intervention.longitude}},
        },
@@ -71,12 +73,16 @@
                       <p id="markerProg"></p>
                       <p><b>Subprograma</b></p>
                       <p id="markerSub"></p>
+		      <p><b>Contratista</b></p>
+                      <p id="markerContractor"></p>
                       <p><b>Dirección</b></p>
                       <p id="markerAddr"></p>
                       <p><b>Barrio/Vereda</b></p>
                       <p id="markerNeigh"></p>
                       <p><b>Veedor</b></p>
                       <p id="markerVeedor"></p>
+		      <p><b>Teléfono del veedor</b></p>
+                      <p id="markerVeedorPhone"></p>
                   </div>
                   <div class="col-md-4">
                   </div>
