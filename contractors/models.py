@@ -9,7 +9,10 @@ from programs.models import Subprogram, Municipality, Province
 
 
 def get_path(instance,file):
-    return 'uploads/contractors/'+str(instance.trainer.id)+'/'+file
+    return 'uploads/contractors/'+str(instance.contractor.id)+'/'+file
+
+def get_interv_path(instance,file):
+    return 'uploads/interventions/session_evidence/'+str(instance.intervention)+'/'+file
 
 class AppUser(User):
     ResizedImageField(
@@ -74,8 +77,8 @@ class Intervention(models.Model):
     group_name = models.CharField(max_length=100, verbose_name=u'Nombre del grupo')
     veedor = models.CharField(max_length=100, verbose_name=u'Veedor del grupo')
     veedor_phone = models.CharField(max_length=100, verbose_name=u'Teléfono del veedor')
-    latitude = models.CharField(max_length=20)
-    longitude = models.CharField(max_length=20)
+    latitude = models.CharField(max_length=20, verbose_name=u'Latitud')
+    longitude = models.CharField(max_length=20, verbose_name=u'Longitud')
 
 
 
@@ -88,6 +91,8 @@ class TimeSchedule(models.Model):
         ('Mi', 'Miércoles'),
         ('Ju', 'Jueves'),
         ('Vi', 'Viernes'),
+        ('Sa', 'Sábado'),
+        ('Do', 'Domingo'),
     )
 
     intervention = models.ForeignKey('Intervention')
@@ -99,6 +104,7 @@ class TimeSchedule(models.Model):
 class Session(models.Model):
     date = models.DateTimeField(auto_now=True)
     intervention = models.ForeignKey('Intervention')
+    evidence = models.ImageField(upload_to=get_interv_path, verbose_name=u'Evidencia')
 
 
 class BeneficiaryCategory(models.Model):

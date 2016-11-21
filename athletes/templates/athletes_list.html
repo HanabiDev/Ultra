@@ -29,7 +29,7 @@
                     <th data-sortable="true" data-field="Nombre">Nombre</th>
                     <th data-sortable="true" data-field="Municipio">Municipio</th>
                     <th data-sortable="true" data-field="Teléfono">Teléfono</th>
-                    <th data-sortable="true" data-field="Correo">Correo</th>
+                    <th data-sortable="true" data-field="Correo">Priorizado</th>
                     <th data-sortable="true" data-field="Edad">Edad</th>
                     <th class="disabled-sorting">Acción</th>
                 </thead>
@@ -41,7 +41,7 @@
                         <td>{{athlete}}</td>
                         <td>{{athlete.municipality}} ({{athlete.province}})</td>
                         <td>{{athlete.phone}}</td>
-                        <td>{{ athlete.email}}</td>
+                        <td>{{ athlete.sportstab_set.first.get_priorization_display}}</td>
                         <td>{{ athlete.birth_date|timesince|upto:',' }}</td>
                         <td>
                             <a href="{% url 'athletes:view_athlete' athlete.id %}" class="btn btn-simple text-success btn-icon edit"><i class="fa fa-eye"></i></a>

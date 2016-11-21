@@ -324,13 +324,13 @@
                                 <p class="form-control-static">{{athlete.sportstab_set.first.sport}}</p>
                             </div>
                         </div>
-                         <div class="col-md-3">
+                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Categoría</label>
                                 <p class="form-control-static">{{athlete.sportstab_set.first.category}}</p>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Modalidad</label>
                                 <p class="form-control-static">
@@ -342,12 +342,11 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label>Fecha de inicio en el deporte</label>
+                                <label>Priorización</label>
                                 <p class="form-control-static">
-                                    {{athlete.sportstab_set.first.activity_start_date}}
-                                    ({{athlete.sportstab_set.first.activity_start_date|timesince|upto:',' }})
+                                    {{athlete.sportstab_set.first.get_priorization_display}}
                                 </p>
                             </div>
                         </div>
@@ -356,11 +355,20 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label>Fecha de inicio en el deporte</label>
+                                <p class="form-control-static">
+                                    {{athlete.sportstab_set.first.activity_start_date}}
+                                    ({{athlete.sportstab_set.first.activity_start_date|timesince|upto:',' }})
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label>Liga</label>
                                 <p class="form-control-static">{{athlete.sportstab_set.first.league}}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Club</label>
                                 <p class="form-control-static">{{athlete.sportstab_set.first.club}}</p>
@@ -372,6 +380,16 @@
                                 <p class="form-control-static">{{athlete.sportstab_set.first.admission_date}}</p>
                             </div>
                         </div>
+                        {% if athlete.sportstab_set.first.functional %}
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Clasificación Funcional</label>
+                                <p class="form-control-static">
+                                    {{athlete.sportstab_set.first.functional}}
+                                </p>
+                            </div>
+                        </div>
+                        {% endif %}
 
                     </div>
 
@@ -422,11 +440,12 @@
                                 {% if ref.mark %}
                                     <b>Marca:</b> {{ref.mark}} <br>
                                 {% endif %}
+                                <a href="{% url 'athletes:edit_athlete_result_ref' athlete.id res.id ref.id%}">Editar</a>
                                 {% if not forloop.last %}
                                 <hr>
                                 {% endif %}
                             {% empty %}
-                                <a class="btn btn-fill btn-success" href="{% url 'athletes:edit_athlete_result' athlete.id res.id %}">
+                                <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_result_ref' athlete.id res.id %}">
                                     Agregar referente
                                 </a>
                             {% endfor %}
@@ -436,8 +455,58 @@
                                 <i class="fa fa-plus"></i>
                             </a>
                             <a href="{% url 'athletes:edit_athlete_result' athlete.id res.id %}" class="btn btn-simple btn-warning btn-icon edit">
-                                <i class="fa-pencil"></i>
+                                <i class="fa fa-edit"></i>
                             </a>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-lg-12 col-md-12" style="margin-top:20px">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar3">
+                <span style="font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Pruebas
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'athletes:athlete_test' athlete.id %}">
+                    Agregar prueba
+                </a>
+                <a class="btn btn-fill btn-primary" href="{% url 'athletes:athlete_ref_list' athlete.id %}">
+                    Administrar referentes
+                </a>
+            </div>
+
+
+
+            <table id="fresh-table3" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="Fecha">Fecha</th>
+                    <th data-sortable="true" data-field="prueba">Prueba</th>
+                    <th data-sortable="true" data-field="res">Resultado</th>
+                    <th data-sortable="true" data-field="ref">Referente</th>
+                </thead>
+                <tbody>
+
+                    {% for test in tests %}
+                    <tr>
+                        <td>
+                            {{test.date}}
+                        </td>
+                        <td>
+                            {{test.test_name}}
+                        </td>
+                        <td>
+                            {{test.result}}
+                        </td>
+                         <td>
+                            {{test.ref}}
                         </td>
                     </tr>
 
@@ -546,6 +615,57 @@
 
             $(window).resize(function () {
                 $table.bootstrapTable('resetView');
+            });
+
+        });
+
+        var $table3 = $('#fresh-table3'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table3.bootstrapTable({
+                toolbar: ".toolbar3",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table3.bootstrapTable('resetView');
             });
 
         });

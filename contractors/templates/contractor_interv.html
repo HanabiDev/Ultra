@@ -1,0 +1,134 @@
+{% extends 'admin/base/base.html' %}
+{% load static %}
+{% block title %}{% if editing %}Editar intervención{% else %}Nueva intervención{% endif %}{% endblock %}
+
+{% block style %}
+<link href="{% static 'assets/css/jquery.schedule.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/jquery.timepicker.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block section_title %}{% if editing %}Editar intervención{% else %}Nueva intervención{% endif %}{% endblock %}
+
+{% block main %}
+
+<div class="row">
+
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        {% for fieldset in form.fieldsets %}
+        <div class="col-md-6">
+             <div class="card">
+                <div class="header">
+                    <h4 class="title">
+                        {{fieldset.legend}}
+                    </h4>
+                </div>
+                <div class="content">
+                    {% for field in fieldset %}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">{{field.label}}</label>
+                            <div class="col-md-8">
+                                {{field}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+             </div>
+        </div>
+        {% if forloop.counter == 2 %}
+        <div class="clearfix"></div>
+        {% endif %}
+
+        {% endfor %}
+        <div class="col-md-12">
+             <div class="card" style="padding: 0 80px;">
+                <div class="content">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">{{field.label}}</label>
+                        <div class="col-md-8">
+                            {{field}}
+                            {% if field.errors %}
+                                {{field.errors}}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-12">Horario</label>
+
+                            <div class="col-md-12">
+                                <div id="businessHoursContainer"></div>
+                                <textarea name="schedule" id="schedule" cols="30" rows="10" class="hidden"></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'contractors:view_contractor' contractor.id %}">
+                                Cancelar
+                            </a>
+                            <input id="send" type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar intervención{% endif %}">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'assets/js/jquery.schedule.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'assets/js/jquery.timepicker.min.js' %}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#id_province").change(function(){
+                $.get(
+                    '{% url 'athletes:municipalities' %}',
+                    {'province_id':$("#id_province").val()},
+                    function(data){
+                        $("#id_municipality").html(data)
+
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                );
+            });
+
+            console.log({{data|safe}});
+            var businessHoursManager = $("#businessHoursContainer").businessHours({
+                    {% if editing %}
+                    operationTime: {{data|safe}},
+                    {% endif %}
+                    weekdays: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+                    postInit:function(){
+                        $('.operationTimeFrom, .operationTimeTill').timepicker({
+                            'timeFormat': 'H:i a',
+                            'step': 30
+                            });
+                    },
+                    dayTmpl:'<div class="dayContainer" style="width: 80px;">' +
+                        '<div data-original-title="" class="colorBox"><input type="checkbox" class="invisible operationState"></div>' +
+                        '<div class="weekday"></div>' +
+                        '<div class="operationDayTimeContainer">' +
+                        '<div class="operationTime input-group"><span class="input-group-addon">' +
+                            '<i class="fa fa-clock-o"></i></span>' +
+                            '<input type="text" name="startTime" class="mini-time form-control operationTimeFrom" value="">' +
+                        '</div>' +
+                        '<div class="operationTime input-group"><span class="input-group-addon">' +
+                            '<i class="fa fa-clock-o"></i></span>' +
+                            '<input type="text" name="endTime" class="mini-time form-control operationTimeTill" value="">' +
+                        '</div>' +
+                        '</div></div>'
+                });
+
+            $('#send').click(function(e){
+                e.preventDefault();
+                $("textarea#schedule").val(JSON.stringify(businessHoursManager.serialize()));
+                $('form').submit();
+            });
+
+            $('#id_birth_date').val('{{athlete.birth_date|date:"d/m/Y"}}');
+        });
+    </script>
+{% endblock %}

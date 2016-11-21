@@ -31,14 +31,33 @@ urlpatterns = [
     url(r'^$', app_auth.views.home, name='home'),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^toggle_sidebar/', toggle_sidebar),
-    url(r'^auth/', include('app_auth.urls', 'auth')),
-    url(r'^auth/login/$', app_auth.views.app_login, name='login'),
-    url(r'^auth/logout/$', app_auth.views.app_logout, name='logout'),
-    url(r'^programas/', include('programs.urls.program_urls', 'programs')),
-    url(r'^subprogramas/', include('programs.urls.subprogram_urls', 'subprograms')),
-    url(r'^proyectos/', include('programs.urls.project_urls', 'projects')),
-    url(r'^contratistas/', include('contractors.urls', 'contractors')),
-    url(r'^deportistas/', include('athletes.urls', 'athletes')),
+    url(r'^admin/auth/', include('app_auth.urls', 'auth')),
+    url(r'^admin/auth/login/$', app_auth.views.app_login, name='login'),
+    url(r'^admin/auth/logout/$', app_auth.views.app_logout, name='logout'),
+    url(r'^admin/programas/', include('programs.urls.program_urls', 'programs')),
+    url(r'^admin/subprogramas/', include('programs.urls.subprogram_urls', 'subprograms')),
+    url(r'^admin/proyectos/', include('programs.urls.project_urls', 'projects')),
+    url(r'^admin/contratistas/', include('contractors.urls', 'contractors')),
+    url(r'^admin/deportistas/', include('athletes.urls', 'athletes')),
+    url(r'^admin/encuestas/', include('polls.urls', 'polls')),
+
+
+
+    url(r'^contratista/$', app_auth.views.contractor_home, name='contractor_home'),
+    url(r'^contratista/reportar-actividad/$', app_auth.views.activity_report, name='activity_report'),
+    url(r'^contratista/perfil/$', app_auth.views.contractor_profile, name='contractor_profile'),
+    url(r'^contratista/perfil/actualizar/$', app_auth.views.edit_contractor_profile, name='contractor_profile_update'),
+    url(r'^contratista/perfil/cambiar-clave/$', app_auth.views.set_contractor_pass, name='contractor_password'),
+
+    url(r'^contratista/perfil/agregar-formacion/$', app_auth.views.add_formation, name='contractor_formation'),
+    url(r'^contratista/perfil/editar-formacion/(?P<formation_id>\d+)$', app_auth.views.edit_formation, name='edit_contractor_formation'),
+    url(r'^contratista/perfil/quitar-formacion/(?P<formation_id>\d+)$', app_auth.views.delete_formation, name='del_contractor_formation'),
+
+    url(r'^contratista/perfil/agregar-logro/$', app_auth.views.add_achievement, name='contractor_achievement'),
+    url(r'^contratista/perfil/editar-logro/(?P<achievement_id>\d+)$', app_auth.views.edit_achievement, name='edit_contractor_ach'),
+    url(r'^contratista/perfil/quitar-logro/(?P<achievement_id>\d+)$', app_auth.views.delete_achievement, name='del_contractor_ach'),
+
+
 
     url(r'^configuracion/', include('settings.urls', 'settings'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

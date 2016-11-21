@@ -30,6 +30,10 @@
     <link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet">
 
 	<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+	{% block style %}
+
+	{% endblock %}
 </head>
 
 <body class="{% if request.session.sidebar_off %} sidebar-mini {% endif %}">
@@ -67,7 +71,7 @@
                         </form-->
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
+                            <!--li>
                                 <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
                                     <i class="ti-panel"></i>
                                     <p>Stats</p>
@@ -88,7 +92,7 @@
                                     <li><a href="#not3">Notification 3</a></li>
                                     <li><a href="#not4">Notification 4</a></li>
                                     <li><a href="#another">Another notification</a></li>
-                                </ul>
+                                </ul-->
                             </li>
                             <li>
                                 <a href="{% url 'logout' %}" class="btn-rotate">

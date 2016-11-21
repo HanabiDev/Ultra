@@ -19,7 +19,7 @@
 	    	<div class="sidebar-wrapper">
 				<div class="user">
 	                <div class="photo">
-	                    <img src="{% static 'assets/img/faces/face-2.jpg' %}" />
+	                    <img src="/media/{{request.user.avatar}}" />
 	                </div>
 	                <div class="info">
 	                    <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -28,14 +28,13 @@
 	                    </a>
 	                    <div class="collapse" id="collapseExample">
 	                        <ul class="nav">
-	                            <li><a href="#profile">My Profile</a></li>
-	                            <li><a href="#editprofile">Edit Profile</a></li>
-	                            <li><a href="#settings">Settings</a></li>
+	                            <li><a href="{% url 'contractor_profile' %}">Mi cuenta</a></li>
 	                        </ul>
 	                    </div>
 	                </div>
 	            </div>
 	            <ul class="nav">
+                    {% if user.is_superuser %}
                     <li class="{% navactive request 'list_programs new_program view_program edit_program list_subprograms new_subprogram view_subprogram edit_subprogram list_projects new_project view_project edit_project' %}">
                         <a data-toggle="collapse" href="#programs">
 	                        <i class="fa fa-bar-chart"></i>
@@ -66,19 +65,36 @@
 	                    </a>
 	                </li>
 
-					<li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
 	                    <a href="{% url 'athletes:list_athletes' %}">
 	                        <i class="fa fa-trophy"></i>
 	                        <p>Deportistas</p>
 	                    </a>
 	                </li>
+                    {% endif %}
 
+                    {% if user.type == 'M' or user.type == 'I' %}
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'activity_report' %}">
+	                        <i class="fa fa-paste"></i>
+	                        <p>Reporte de actividad</p>
+	                    </a>
+	                </li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                    <li class="{% navactive request 'list_polls' %}">
+	                    <a href="{% url 'polls:list_polls' %}">
+	                        <i class="fa fa-tasks"></i>
+	                        <p>Encuestas</p>
+	                    </a>
+	                </li>
 	                <li class="{% navactive request 'settings_home' %}">
 	                    <a href="{% url 'settings:settings_home' %}">
 	                        <i class="fa fa-cogs"></i>
 	                        <p>Configuración</p>
 	                    </a>
 	                </li>
+                    {% endif %}
 
 
 

@@ -14,9 +14,11 @@ from reportlab.platypus.frames import Frame
 from reportlab.platypus.paragraph import Paragraph
 from reportlab.platypus.tables import Table, TableStyle
 
-from athletes.forms import AthleteForm, AthleteCardForm, AthleteResultForm, AthleteResultRefForm, AthleteSocialCardForm, AptitudeTestForm, SFPBValorationForm
+from athletes.forms import AthleteForm, AthleteCardForm, AthleteResultForm, AthleteResultRefForm, AthleteSocialCardForm, AptitudeTestForm, SFPBValorationForm, \
+    TestReferenceForm, PhysicalTestForm
 from athletes.forms import AntropometricValorationForm, PsicologicValorationForm, PhysiologicalTestForm
-from athletes.models import Athlete, SportsTab, Result, BiomedicTab, League
+from athletes.models import Athlete, SportsTab, Result, BiomedicTab, League, MarkReference, TestReference, \
+    PhysiologicalTest, PhysicalTest
 from django.urls.base import reverse_lazy
 
 from athletes.templatetags.user_tags import upto
@@ -65,7 +67,8 @@ def create_athlete(request):
 @login_required(login_url='login')
 def view_athlete(request, user_id):
     athlete = Athlete.objects.get(id=user_id)
-    return render(request, 'athlete_detail.html', {'athlete': athlete})
+    tests = PhysicalTest.objects.all()
+    return render(request, 'athlete_detail.html', {'athlete': athlete, 'tests':tests})
 
 
 @user_passes_test(permissions, login_url='login')
@@ -143,7 +146,7 @@ def create_athlete_result(request, user_id):
 
     if request.method == 'GET':
         form = AthleteResultForm(initial={'athlete':athlete})
-        return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete, 'sports':True})
+        return render(request, 'athlete_result.html', {'form': form, 'athlete':athlete, 'sports':True})
 
     if request.method == 'POST':
         form = AthleteResultForm(request.POST, request.FILES)
@@ -153,7 +156,7 @@ def create_athlete_result(request, user_id):
             return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
             #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
 
-        return render(request, 'result.html', {'form': form})
+        return render(request, 'athlete_result.html', {'form': form})
 
 
 @user_passes_test(permissions, login_url='login')
@@ -164,17 +167,17 @@ def edit_athlete_result(request, user_id, result_id):
 
     if request.method == 'GET':
         form = AthleteResultForm(instance=result, initial={'athlete':athlete})
-        return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete})
+        return render(request, 'athlete_result.html', {'form': form, 'editing':True, 'athlete':athlete})
 
     if request.method == 'POST':
-        form = AthleteCardForm(request.POST, request.FILES, instance=card)
+        form = AthleteResultForm(request.POST, request.FILES, instance=result)
 
         if form.is_valid():
             new_card = form.save()
             return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
             #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
 
-        return render(request, 'athlete.html', {'form': form})
+        return render(request, 'athlete_result.html', {'form': form, 'editing':True,  'athlete':athlete})
 
 
 @user_passes_test(permissions, login_url='login')
@@ -185,7 +188,7 @@ def create_athlete_result_ref(request, user_id, result_id):
 
     if request.method == 'GET':
         form = AthleteResultRefForm(initial={'result':result})
-        return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete, 'sports':True})
+        return render(request, 'result_ref.html', {'form': form, 'athlete':athlete, 'sports':True})
 
     if request.method == 'POST':
         form = AthleteResultRefForm(request.POST, request.FILES)
@@ -195,8 +198,26 @@ def create_athlete_result_ref(request, user_id, result_id):
             return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
             #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
 
-        return render(request, 'result.html', {'form': form})
+        return render(request, 'result_ref.html', {'form': form})
 
+def edit_athlete_result_ref(request, user_id, result_id, ref_id):
+    athlete = Athlete.objects.get(id=user_id)
+    result = Result.objects.get(id=result_id)
+    ref = MarkReference.objects.get(id=ref_id)
+
+    if request.method == 'GET':
+        form = AthleteResultRefForm(initial={'result':result}, instance=ref)
+        return render(request, 'result_ref.html', {'form': form, 'athlete':athlete, 'sports':True, 'editing':True})
+
+    if request.method == 'POST':
+        form = AthleteResultRefForm(request.POST, request.FILES, instance=ref)
+
+        if form.is_valid():
+            new_card = form.save()
+            return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
+            #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
+
+        return render(request, 'result_ref.html', {'form': form,'athlete':athlete, 'editing':True})
 
 @user_passes_test(permissions, login_url='login')
 @login_required(login_url='login')
@@ -250,6 +271,7 @@ def create_biomedic_card(request, user_id):
     if request.method == 'GET':
         biomedic_card = BiomedicTab(athlete=athlete)
         biomedic_card.save()
+
         form = AptitudeTestForm(initial={'tab':biomedic_card})
         return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete, 'sports':True})
 
@@ -403,3 +425,41 @@ def report_athletes(request):
         response.write(buff.getvalue())
         buff.close()
         return response
+
+
+
+def create_athlete_test(request, user_id):
+
+    if request.method == 'GET':
+        form = PhysicalTestForm()
+        return render(request, 'ref.html', {'form': form})
+
+    if request.method == 'POST':
+        form = PhysicalTestForm(request.POST)
+
+        if form.is_valid():
+            new_ref = form.save()
+            return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(user_id)}))
+
+        return render(request, 'ref.html', {'form': form})
+
+
+
+def list_test_ref(request, user_id):
+    refs = TestReference.objects.all()
+    return render(request, 'refs_list.html', {'refs':refs, 'athlete_id':user_id})
+
+def create_test_ref(request, user_id):
+
+    if request.method == 'GET':
+        form = TestReferenceForm()
+        return render(request, 'ref.html', {'form': form})
+
+    if request.method == 'POST':
+        form = TestReferenceForm(request.POST)
+
+        if form.is_valid():
+            new_ref = form.save()
+            return redirect(reverse_lazy('athletes:athlete_ref_list', kwargs={'user_id': str(user_id)}))
+
+        return render(request, 'ref.html', {'form': form})

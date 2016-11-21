@@ -1,6 +1,7 @@
 from athletes.views import permissions
-from contractors.forms import ContractorForm, EditContractorForm, PasswordForm, FormationItemForm, AchievementForm
-from contractors.models import Contractor, FormationItem, SportsAchievements
+from contractors.forms import ContractorForm, EditContractorForm, PasswordForm, FormationItemForm, AchievementForm, \
+    InterventionForm
+from contractors.models import Contractor, FormationItem, SportsAchievements, Intervention, TimeSchedule
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render_to_response, render, redirect
 from django.template.context import RequestContext
@@ -185,3 +186,87 @@ def toggle_lock(request, user_id):
     contractor.is_active = not contractor.is_active
     contractor.save()
     return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
+
+
+
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def add_interv(request, user_id):
+    contractor = Contractor.objects.get(id=user_id)
+
+    if request.method == 'GET':
+        form = InterventionForm(initial={'contractor':contractor})
+        return render(request, 'contractor_interv.html', {'form': form, 'contractor': contractor})
+
+    if request.method == 'POST':
+        form = InterventionForm(request.POST)
+        if form.is_valid():
+            inter = form.save()
+            sched_data = request.POST.get('schedule')
+            sched_dict = json.loads(sched_data)
+
+            for index, day in enumerate(sched_dict):
+                if day["isActive"]:
+                    sched = TimeSchedule(
+                        day=TimeSchedule.WEEK_DAYS[index][0],
+                        startTime=day["timeFrom"],
+                        endTime=day["timeTill"],
+                        intervention=inter
+                    )
+
+                    sched.save()
+            return redirect('contractors:view_contractor', user_id=user_id)
+
+        return render(request, 'contractor_interv.html', {'form': form, 'contractor': contractor})
+
+import json
+@user_passes_test(permissions, login_url='login')
+@login_required(login_url='login')
+def edit_interv(request, user_id, interv_id):
+    contractor = Contractor.objects.get(id=user_id)
+    interv = Intervention.objects.get(id=interv_id)
+
+    if request.method == 'GET':
+        form = InterventionForm(initial={'contractor':contractor}, instance=interv)
+
+        days = {'Lu':0, 'Ma':1, 'Mi':2, 'Ju':3, 'Vi':4, 'Sa':5, 'Do':6}
+        data = []
+
+        for d in days:
+            data.append({
+                'isActive': False,
+                'timeFrom': None,
+                'timeTill': None
+            })
+        for i in interv.timeschedule_set.all():
+            data[days[i.day]]["isActive"] = True
+            data[days[i.day]]["timeFrom"] = str(i.startTime)
+            data[days[i.day]]["timeTill"] = str(i.endTime)
+
+        print json.dumps(data)
+
+        return render(request, 'contractor_interv.html', {'form': form, 'editing': True, 'data':json.dumps(data), 'contractor': contractor})
+
+    if request.method == 'POST':
+
+        interv.timeschedule_set.all().delete()
+
+        form = InterventionForm(request.POST, instance=interv)
+        if form.is_valid():
+            inter = form.save()
+            sched_data = request.POST.get('schedule')
+            sched_dict = json.loads(sched_data)
+
+            for index, day in enumerate(sched_dict):
+                if day["isActive"]:
+                    sched = TimeSchedule(
+                        day=TimeSchedule.WEEK_DAYS[index][0],
+                        startTime=day["timeFrom"],
+                        endTime=day["timeTill"],
+                        intervention=inter
+                    )
+
+                    sched.save()
+            return redirect('contractors:view_contractor', user_id=user_id)
+
+        return render(request, 'contractor_interv.html', {'form': form, 'editing': True, 'contractor': contractor})

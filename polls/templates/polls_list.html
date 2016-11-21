@@ -1,0 +1,124 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Encuestas{% endblock %}
+
+{% block section_title %}Encuestas{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <a class="btn btn-fill btn-success" href="{% url 'polls:new_poll' %}">
+                    Agregar encuesta
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Título</th>
+                    <th data-sortable="true" data-field="Fecha">Fecha de creación</th>
+                    <th data-sortable="true" data-field="Estado" class="text-center">Abierta</th>
+                    <th data-sortable="true" data-field="Preguntas" class="text-center">Preguntas</th>
+                    <th data-field="" class="disabled-sorting">Acción</th>
+                </thead>
+                <tbody>
+                    {% for poll in polls %}
+                    <tr>
+                        <td>{{poll.id}}</td>
+                        <td>{{poll.title}}</td>
+                        <td>{{poll.creation_date}}</td>
+                        <td class="text-center">
+                            <a href="{% url 'polls:toggle_block_poll' poll.id %}">
+                            {% if poll.closed %}
+                            <span class="fa fa-circle text-danger"></span>
+                            {% else %}
+                            <span class="fa fa-circle text-success"></span>
+                            {% endif %}
+                            </a>
+                        </td>
+                        <td>
+                            {{poll.question_set.all.count}}
+                        </td>
+                        <td>
+                            <a href="{% url 'polls:view_poll' poll.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a href="{% url 'polls:edit_poll' poll.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

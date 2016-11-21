@@ -1,0 +1,155 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver Encuesta{% endblock %}
+
+{% block section_title %}Información de Encuesta <br><small style="font-size:12px">{{poll.name}}</small>{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">
+                    Título de la encuesta <br>
+                    <small>{{poll.title}}</small>
+                </h4>
+                <hr>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <p class="form-control-static">
+                            {% if poll.closed %}
+                            Cerrada
+                            {% else %}
+                            Abierta
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            {{poll.description|safe}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+                <hr>
+                <p class="text-center">
+                    <a class="btn btn-fill btn-warning" href="{% url 'polls:edit_poll' poll.id %}">
+                        Editar información de la encuesta
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Preguntas
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'polls:poll_question' poll.id %}">
+                    Agregar pregunta
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Enunciado">Enunciado</th>
+                    <th data-sortable="true" data-field="Opciones">Opciones</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for question in poll.question_set.all %}
+                    <tr>
+                        <td>{{question.id}}</td>
+                        <td>{{question.statement|safe}}</td>
+                        <td>{{question.option_set.all.count}}</td>
+                        <td>
+                            <a href="{% url 'polls:view_question' question.poll.id  question.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a href="{% url 'polls:edit_question' question.poll.id  question.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

@@ -137,10 +137,20 @@ class SocialCard(models.Model):
 
 
 class SportsTab(models.Model):
+
+    PRIOR_CHOICES = (
+        ('0', 'No priorizado'),
+        ('1', 'Nivel 1'),
+        ('2', 'Nivel 2'),
+        ('3', 'Nivel 3')
+    )
+
     athlete = models.ForeignKey('Athlete', verbose_name=u'Deportista')
     sport = models.ForeignKey('Sport', verbose_name=u'Deporte')
+    priorization = models.CharField(max_length=1, verbose_name=u'Priorización', default='0', choices=PRIOR_CHOICES)
     category = models.CharField(max_length=50, verbose_name=u'Categoría')
     modality = models.CharField(max_length=50, verbose_name=u'Modalidad', blank=True, null=True)
+    functional = models.CharField(max_length=10, null=False, blank=True, verbose_name=u'Clasificación funcional (Solo deporte paralímpico)')
     league = models.ForeignKey('League', verbose_name=u'Liga')
     club = models.ForeignKey('Club', verbose_name=u'Club')
     admission_date = models.DateField(verbose_name=u'Fecha de ingreso')
@@ -172,12 +182,16 @@ class MarkReference(models.Model):
 
 class TestReference(models.Model):
     value = models.FloatField(verbose_name=u'Marca')
+    intl = models.BooleanField(verbose_name=u'Internacional')
 
+    def __unicode__(self):
+        return str(self.value)
 
 class PhysicalTest(models.Model):
     ref = models.ForeignKey('TestReference')
     test_name = models.CharField(max_length=50, verbose_name=u'Prueba')
     result = models.FloatField(verbose_name=u'Resultado')
+    date = models.DateField(auto_now=True)
 
 
 class TechnicalTest(models.Model):
@@ -191,7 +205,7 @@ class BiomedicTab(models.Model):
     date = models.DateField(verbose_name=u'Fecha', auto_now=True)
 
     def __unicode__(self):
-        return self.athlete.__unicode__()
+        return str(self.date)
 
 
 class AptitudeTest(models.Model):
@@ -203,18 +217,18 @@ class AptitudeTest(models.Model):
         ('X', 'APTO CON RESTRICCIONES')
     )
 
-    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Fecha')
     diagnostic = models.TextField(verbose_name=u'Diagnóstico')
     status = models.CharField(verbose_name=u'Estado', max_length=1, choices=APTITUDE_STATUS)
 
 
 class SFPBValoration(models.Model):
-    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Fecha')
     diagnostic = models.TextField(verbose_name=u'Diagnóstico')
 
 
 class AntropometricValoration(models.Model):
-    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Fecha')
     diagnostic = models.TextField(verbose_name=u'Diagnóstico')
     body_weight = models.FloatField(verbose_name=u'Peso corporal (Kg)')
     muscle_weight = models.FloatField(verbose_name=u'Peso muscular (%)', validators = [MinValueValidator(0), MaxValueValidator(100)])
@@ -223,7 +237,7 @@ class AntropometricValoration(models.Model):
 
 
 class PsicologicValoration(models.Model):
-    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Fecha')
     diagnostic = models.TextField(verbose_name=u'Diagnóstico')
     confidence =  models.IntegerField(verbose_name=u'Confianza')
     motivation = models.IntegerField(verbose_name=u'Motivación')
@@ -235,7 +249,7 @@ class PsicologicValoration(models.Model):
 
 
 class PhysiologicalTest(models.Model):
-    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Deportista')
+    tab = models.ForeignKey('BiomedicTab', verbose_name=u'Fecha')
     vo2_max = models.FloatField(verbose_name=u'VO2 Máx')
     aerobic_capacity = models.FloatField(verbose_name=u'Capacidad aeróbica')
     fc_max = models.FloatField(verbose_name=u'FC Máx')

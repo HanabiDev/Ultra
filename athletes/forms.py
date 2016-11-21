@@ -7,7 +7,8 @@ from django.utils.html import format_html
 from betterforms import forms as b_forms
 from django import forms
 
-from athletes.models import Athlete, SportsTab, Result, MarkReference, SocialCard, AptitudeTest, SFPBValoration, AntropometricValoration, PsicologicValoration
+from athletes.models import Athlete, SportsTab, Result, MarkReference, SocialCard, AptitudeTest, SFPBValoration, AntropometricValoration, PsicologicValoration, \
+    TestReference, PhysicalTest
 from athletes.models import PhysiologicalTest
 
 class Button(Widget):
@@ -84,17 +85,19 @@ class AthleteCardForm(forms.ModelForm):
     class Meta:
         model = SportsTab
         fields = [
-            'athlete', 'sport', 'league', 'club', 'admission_date', 'category', 'modality', 'activity_start_date'
+            'athlete', 'sport', 'priorization', 'league', 'club', 'admission_date', 'category', 'modality', 'functional', 'activity_start_date'
         ]
 
         widgets = {
             'athlete': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'sport': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'priorization': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'league': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'club': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
             'admission_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
             'category': forms.TextInput(attrs={'class': 'form-control'}),
             'modality': forms.TextInput(attrs={'class': 'form-control'}),
+            'functional': forms.TextInput(attrs={'class': 'form-control'}),
             'activity_start_date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
         }
 
@@ -232,3 +235,29 @@ class PhysiologicalTestForm(forms.ModelForm):
             'counter_movement_jump': forms.NumberInput(attrs={'class': 'form-control'}),
             'drop_jump': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+class TestReferenceForm(forms.ModelForm):
+
+    class Meta:
+        model = TestReference
+        fields = '__all__'
+
+        widgets = {
+            'athlete': forms.TextInput(attrs={'class': 'form-control'}),
+            'intl': forms.CheckboxInput(),
+            'value': forms.NumberInput(attrs={'step':'0.001', 'class':'form-control'}),
+        }
+
+
+class PhysicalTestForm(forms.ModelForm):
+    class Meta:
+        model = PhysicalTest
+        fields = '__all__'
+
+        widgets = {
+            'ref': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'test_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'date': forms.TextInput(attrs={'class': 'form-control datepicker'}),
+            'result': forms.NumberInput(attrs={'step': '0.001', 'class': 'form-control'}),
+        }
+

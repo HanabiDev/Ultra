@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from contractors.models import Contractor, FormationItem, SportsAchievements
+from contractors.models import Contractor, FormationItem, SportsAchievements, Intervention
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 
@@ -124,6 +124,63 @@ class EditContractorForm(b_forms.BetterModelForm):
             ), legend=u'2. Información de la cuenta'),
         )
 
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(PasswordChangeForm, self).__init__(*args, **kwargs)
+        for key in ('old_password', 'new_password1', 'new_password2'):
+            self.fields[key] = self.fields.pop(key)
+
+        self.fields['old_password'].widget = forms.PasswordInput(
+            attrs={'placeholder': 'Contraseña antigua', 'class': 'form-control'})
+        self.fields['new_password1'].widget = forms.PasswordInput(
+            attrs={'placeholder': 'Nueva contraseña', 'class': 'form-control'})
+        self.fields['new_password2'].widget = forms.PasswordInput(
+            attrs={'placeholder': 'Confirmación', 'class': 'form-control'})
+
+
+
+
+class EditContractorProfileForm(b_forms.BetterModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(EditContractorProfileForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
+        self.fields['avatar'].required = False
+
+
+    class Meta:
+        model = Contractor
+        fields = [
+            'first_name', 'last_name', 'address',
+            'phone', 'mobile', 'avatar', 'email',
+        ]
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile': forms.TextInput(attrs={'class': 'form-control'}),
+            'avatar': forms.FileInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
+        fieldsets = (
+
+            Fieldset('basic', fields=(
+                'first_name', 'last_name', 'address', 'phone', 'mobile'
+            ), legend=u'1. Datos básicos'),
+
+            Fieldset('account', fields=(
+                'avatar', 'email',
+            ), legend=u'2. Información de la cuenta'),
+        )
+
+
+
 class PasswordForm(SetPasswordForm):
 
 
@@ -138,10 +195,6 @@ class PasswordForm(SetPasswordForm):
     class Meta:
         model = Contractor
         fields = '__all__'
-
-        widgets = {
-            'new_password1':forms.PasswordInput(attrs={'class':'form-control'})
-        }
 
 
 class FormationItemForm(forms.ModelForm):
@@ -186,3 +239,35 @@ class AchievementForm(forms.ModelForm):
             'year': forms.TextInput(attrs={'class': 'form-control'}),
             'support': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+class InterventionForm(b_forms.BetterModelForm):
+
+    class Meta:
+        model = Intervention
+        fields = '__all__'
+
+        widgets = {
+            'contractor': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'subprogram': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'province': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'municipality': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'neighborhood': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'group_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'veedor': forms.TextInput(attrs={'class': 'form-control'}),
+            'veedor_phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'latitude': forms.NumberInput(attrs={'class': 'form-control', 'step': "0.00000000001"}),
+            'longitude': forms.NumberInput(attrs={'class': 'form-control', 'step': "0.00000000001"}),
+        }
+
+        fieldsets = (
+
+            Fieldset('basic', fields=(
+                'contractor', 'subprogram', 'province', 'municipality', 'neighborhood', 'address'
+            ), legend=u'1. Ubicación'),
+
+            Fieldset('account', fields=(
+                'group_name', 'veedor', 'veedor_phone', 'latitude', 'longitude'
+            ), legend=u'2. Grupo'),
+        )

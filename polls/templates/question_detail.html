@@ -1,0 +1,131 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver Pregunta{% endblock %}
+
+{% block section_title %}Información de Pregunta <br><small style="font-size:12px">{{question.name}}</small>{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-5 col-md-5">
+        <div class="card">
+
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h4>Texto de la pregunta</h4>
+                            {{question.statement|safe}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+                <hr>
+                <p class="text-center">
+                    <a class="btn btn-fill btn-warning" href="{% url 'polls:edit_question' question.poll.id question.id %}">
+                        Editar información del pregunta
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-md-7">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Opciones
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'polls:poll_option' question.poll.id question.id %}">
+                    Agregar opción
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Texto</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for opt in question.option_set.all %}
+                    <tr>
+                        <td>{{opt.id}}</td>
+                        <td>{{opt.text}}</td>
+                        <td>
+                            <a href="{% url 'polls:edit_option'  question.poll.id question.id opt.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Contratista{% endblock %}
+
+{% block section_title %}Contratista{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-warning text-center">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Intervenciones</p>
+                            {{contractor.intervention_set.all.count}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <hr />
+                <div class="stats">
+                    <a href="{% url 'contractor_profile' %}">Ver mis intervenciones</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-success text-center">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Beneficiarios</p>
+                            {{benefs}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <hr />
+                <div class="stats">
+                    <i class="ti-calendar"></i> Según último reporte
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+        <div class="card">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="icon-big icon-danger text-center">
+                            <i class="ti-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <div class="numbers">
+                            <p>Sesiones</p>
+                            {{sessions}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <hr />
+                <div class="stats">
+                    <i class="ti-timer"></i> Total reportado
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+{% endblock %}

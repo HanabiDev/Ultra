@@ -15,7 +15,7 @@
             </div>
             <div class="content">
                 <div class="author">
-                  <img class="avatar border-white" src="/media/{{ contractor.avatar }}" alt="..."/>
+                  <img class="avatar border-white" src="/media/uploads/avatars/face-2.jpg" alt="..."/>
                   <h4 class="title">{{contractor.get_full_name}}<br />
                      <a href="#"><small>{{contractor.get_type_display}}</small></a>
                   </h4>
@@ -214,12 +214,112 @@
                     
                 </div>
             </div>
-
             <div class="clearfix" style="padding-top:20px;"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="fresh-table color-green">
+
+             <div class="toolbar">
+                <span style="    font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Intervenciones
+                </span>
+                <a class="btn btn-fill btn-success" href="{% url 'contractors:add_interv' contractor.id %}">
+                    Agregar intevención
+                </a>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="Municipio">Municipio</th>
+                    <th data-sortable="true" data-field="Direccion">Dirección</th>
+                    <th data-sortable="true" data-field="Barrio">Barrio</th>
+                    <th data-sortable="true" data-field="Grupo">Nombre del grupo</th>
+                    <th data-field="Acción">Acción</th>
+                </thead>
+                <tbody>
+                    {% for interv in contractor.intervention_set.all %}
+                    <tr>
+                        <td>{{interv.municipality}}</td>
+                        <td>{{interv.address}}</td>
+                        <td>{{interv.neighborhood}}</td>
+                        <td>{{interv.group_name}}</td>
+                        <td>
+                            <!--a href="#" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
+                            </a-->
+                            <a href="{% url 'contractors:edit_interv' contractor.id interv.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 {% endblock %}
 
-<!-- TODO alert the user when deleting items -->
-<!-- TODO redistribute contractor info for more beauty layout -->
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}
