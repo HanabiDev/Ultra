@@ -19,6 +19,8 @@ from programs.views.subprogram_views import get_gender_resume
 
 @login_required(login_url=reverse_lazy('login'))
 def home(request):
+    if request.user.is_staff or request.user.is_superuser:
+        return redirect(reverse_lazy('programs:list_programs'))
     return redirect(reverse_lazy('contractor_home'))
 
 def app_login(request):
