@@ -109,6 +109,8 @@ class Session(models.Model):
     date = models.DateTimeField(auto_now=True)
     intervention = models.ForeignKey('Intervention')
     evidence = models.ImageField(upload_to=get_interv_path, verbose_name=u'Evidencia')
+    plist = models.ImageField(upload_to=get_interv_path, verbose_name=u'Lista de personas')
+    observations = models.TextField()
 
 
 class BeneficiaryCategory(models.Model):

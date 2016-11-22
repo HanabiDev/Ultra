@@ -80,6 +80,22 @@ def contractor_home(request):
     benefs = 0
     for interv in contractor.intervention_set.all():
         sessions += interv.session_set.all().count()
+
+        for session in interv.session_set.all():
+
+            categories = session.beneficiarycategory_set.all()
+
+            for cat in categories:
+                Mt = cat.beneficiarygroup_set.all().aggregate(
+                    Mtotal=Sum('masculine_individuals')
+                )['Mtotal']
+
+                Ft = cat.beneficiarygroup_set.all().aggregate(
+                    Mtotal=Sum('femenine_individuals')
+                )['Mtotal']
+
+                benefs += Mt
+                benefs += Ft
         
     return render(request, 'contractor_home.html', {'contractor':contractor, 'sessions':sessions, 'benefs':benefs})
 
@@ -92,27 +108,79 @@ def activity_report(request):
 
         return render(request, 'activity_report.html', {'intervs':intervs})
     if request.method == 'POST':
+
+        c1 = [
+            [request.POST.get('c1g1m'), request.POST.get('c1g1f')],
+            [request.POST.get('c1g2m'), request.POST.get('c1g2f')],
+            [request.POST.get('c1g3m'), request.POST.get('c1g3f')],
+            [request.POST.get('c1g4m'), request.POST.get('c1g4f')],
+            [request.POST.get('c1g5m'), request.POST.get('c1g5f')]
+        ]
+        c2 = [
+            [request.POST.get('c2g1m'), request.POST.get('c2g1f')],
+            [request.POST.get('c2g2m'), request.POST.get('c2g2f')],
+            [request.POST.get('c2g3m'), request.POST.get('c2g3f')],
+            [request.POST.get('c2g4m'), request.POST.get('c2g4f')],
+            [request.POST.get('c2g5m'), request.POST.get('c2g5f')]
+        ]
+
+        c3 = [
+            [request.POST.get('c3g1m'), request.POST.get('c3g1f')],
+            [request.POST.get('c3g2m'), request.POST.get('c3g2f')],
+            [request.POST.get('c3g3m'), request.POST.get('c3g3f')],
+            [request.POST.get('c3g4m'), request.POST.get('c3g4f')],
+            [request.POST.get('c3g5m'), request.POST.get('c3g5f')]
+        ]
+
+        c4 = [
+            [request.POST.get('c4g1m'), request.POST.get('c4g1f')],
+            [request.POST.get('c4g2m'), request.POST.get('c4g2f')],
+            [request.POST.get('c4g3m'), request.POST.get('c4g3f')],
+            [request.POST.get('c4g4m'), request.POST.get('c4g4f')],
+            [request.POST.get('c4g5m'), request.POST.get('c4g5f')]
+        ]
+
+        c5 = [
+            [request.POST.get('c5g1m'), request.POST.get('c5g1f')],
+            [request.POST.get('c5g2m'), request.POST.get('c5g2f')],
+            [request.POST.get('c5g3m'), request.POST.get('c5g3f')],
+            [request.POST.get('c5g4m'), request.POST.get('c5g4f')],
+            [request.POST.get('c5g5m'), request.POST.get('c5g5f')]
+        ]
+
+        c6 = [
+            [request.POST.get('c6g1m'), request.POST.get('c6g1f')],
+            [request.POST.get('c6g2m'), request.POST.get('c6g2f')],
+            [request.POST.get('c6g3m'), request.POST.get('c6g3f')],
+            [request.POST.get('c6g4m'), request.POST.get('c6g4f')],
+            [request.POST.get('c6g5m'), request.POST.get('c6g5f')]
+        ]
+
+        cats = [c1,c2,c3,c4,c5,c6]
+
         intervention = Intervention.objects.get(id=request.POST.get('intervention'))
-        session = Session(intervention=intervention, evidence=request.FILES.get('evidence'))
+        session = Session(
+            intervention=intervention,
+            evidence=request.FILES.get('evidence'),
+            plist=request.FILES.get('plist'),
+            observations=request.POST.get('observations')
+        )
         session.save()
 
-        for indexA in range(1,6):
-            cat = BeneficiaryCategory(session = session,age_range=str(indexA))
+        groups = ['M', 'C', 'I', 'D', 'A']
+        for index, value in enumerate(cats):
+            cat = BeneficiaryCategory(session = session,age_range=str((index+1)))
             cat.save()
 
-            print indexA
 
-            groups = ['M','I','C','D','A']
-            for index, val in enumerate(groups):
 
-                print 'c' + str(indexA) + 'g' + str(index + 1) + 'f'
-                print 'c' + str(indexA) + 'g' + str(index + 1) + 'm'
+            for i, item in enumerate(value):
 
                 group = BeneficiaryGroup(
                     category=cat,
-                    group_name=val,
-                    femenine_individuals=0,
-                    masculine_individuals=0,
+                    group_name=groups[i],
+                    femenine_individuals=item[0],
+                    masculine_individuals=item[1]
                 )
 
                 group.save()

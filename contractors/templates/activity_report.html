@@ -515,7 +515,7 @@
                                                type="number"
                                                value="0"
                                                required="true"
-                                               name="c2g5m"
+                                               name="c3g5m"
                                                number="true"
                                                placeholder="Masculinos"
                                                min="0"
@@ -528,7 +528,7 @@
                                                type="number"
                                                value="0"
                                                required="true"
-                                               name="c2g5f"
+                                               name="c3g5f"
                                                number="true"
                                                placeholder="Femeninos"
                                                min="0"
@@ -1029,7 +1029,7 @@
 
                         <div class="tab-pane" id="tab8">
                             <h2 class="text-center text-space">Listo! <br>
-                                <small>Carga una foto de la sesión como evidencia</small>
+                                <small>Carga fotos y anota observaciones de la sesión como evidencia</small>
                             </h2>
                             <div class="row">
                                 <div class="col-md-5 col-md-offset-1">
@@ -1038,6 +1038,24 @@
                                             Evidencia
                                         </label>
                                         <input type="file" name="evidence" required="true" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Lista de personas
+                                        </label>
+                                        <input type="file" name="plist" required="true" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Observaciones
+                                        </label>
+                                        <textarea name="observations" id="" cols="30" rows="10" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>
