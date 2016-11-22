@@ -15,7 +15,7 @@ def get_support_path(instance,file):
     return 'uploads/contractors/'+str(instance.trainer.id)+'/'+file
 
 def get_interv_path(instance,file):
-    return 'uploads/interventions/session_evidence/'+str(instance.intervention)+'/'+file
+    return 'uploads/interventions/session_evidence/'+str(instance.intervention.id)+'/'+file
 
 class AppUser(User):
     ResizedImageField(
