@@ -252,7 +252,7 @@ class LineMarkerChart(_DrawingEditorMixin,Drawing):
     - **legend.y** was increased to push the legend up
     - **legend.x** was increased to move it to the right across the chart
     '''
-    def __init__(self,width=500,height=300, data=None, pairs=None, marg=250, *args,**kw):
+    def __init__(self,width=500,height=300, data=None, pairs=None, marg=250, reverse=True, *args,**kw):
         Drawing.__init__(self,width,height,*args,**kw)
         # font
         fontName = 'Helvetica'
@@ -285,7 +285,7 @@ class LineMarkerChart(_DrawingEditorMixin,Drawing):
         # y axis
         #self.chart.yValueAxis = AdjYValueAxis()
 
-        self.chart.yValueAxis.reverseDirection = True
+        self.chart.yValueAxis.reverseDirection = reverse
         self.chart.yValueAxis.visibleGrid           = 1
         self.chart.yValueAxis.visibleAxis=0
         self.chart.yValueAxis.labels.fontName       = fontName

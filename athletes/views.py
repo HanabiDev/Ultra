@@ -606,7 +606,7 @@ def report(request, athlete_id):
         (PCMYKColor(0,100,0,50,alpha=100), 'Sumatoria seis pliegues'),
     ]
 
-    graph2 = [(LineMarkerChart(data=data, pairs=p, marg=120),)]
+    graph2 = [(LineMarkerChart(data=data, pairs=p, marg=120, reverse=False),)]
     t = Table([heads] + graph2)
     text.append(t)
 
