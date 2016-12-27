@@ -11,9 +11,9 @@ from django.db.models.query_utils import Q
 from django.urls.base import reverse_lazy
 
 from contractors.forms import FormationItemForm, AchievementForm, EditContractorForm, EditContractorProfileForm, \
-    CustomPasswordChangeForm
+    CustomPasswordChangeForm, MemberForm
 from contractors.models import Contractor, FormationItem, SportsAchievements, Session, BeneficiaryCategory, \
-    BeneficiaryGroup, Intervention
+    BeneficiaryGroup, Intervention, Member
 from programs.views.subprogram_views import get_gender_resume
 
 
@@ -331,7 +331,45 @@ def delete_achievement(request, achievement_id):
 
 
 
+def contractor_groups(request):
+    groups = Intervention.objects.filter(contractor_id=request.user.id)
+    return render(request, 'groups_list.html', {'groups': groups})
 
+def group_members(request, group_id):
+    members = Intervention.objects.get(id=group_id).member_set.all()
+    return render(request, 'members_list.html', {'members': members, 'group_id':group_id})
+
+def add_member(request, group_id):
+    interv = Intervention.objects.get(id=group_id)
+    if request.method == 'GET':
+        form = MemberForm(initial={'interv': interv})
+        return render(request, 'member.html', {'interv': interv, 'form': form, 'group_id':group_id})
+
+    if request.method == 'POST':
+        form = MemberForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            member = form.save()
+            return redirect(reverse_lazy('group_members',kwargs={'group_id': str(group_id)}))
+
+        return render(request, 'member.html', {'interv': interv, 'form': form, 'group_id':group_id})
+
+
+def edit_member(request, group_id, member_id):
+    interv = Intervention.objects.get(id=group_id)
+    member = Member.objects.get(id=member_id)
+    if request.method == 'GET':
+        form = MemberForm(initial={'interv': interv}, instance=member)
+        return render(request, 'member.html', {'interv': interv, 'form': form, 'editing':True, 'group_id':group_id})
+
+    if request.method == 'POST':
+        form = MemberForm(request.POST, request.FILES, instance=member)
+
+        if form.is_valid():
+            member = form.save()
+            return redirect(reverse_lazy('group_members', kwargs={'group_id': str(group_id)}))
+
+        return render(request, 'member.html', {'interv': interv, 'form': form, 'editing':True, 'group_id':group_id})
 
 
 def send_password_restore_mail(user, password):
@@ -350,3 +388,19 @@ def send_password_restore_mail(user, password):
     )
 
 
+def load_report_form(request):
+    contractor = Contractor.objects.get(id=request.user.id)
+    intervs = contractor.intervention_set.all()
+
+    return render(request, 'intervs.html', {'intervs': intervs})
+
+
+
+
+def send_members(request, intervention_id):
+    interv = Intervention.objects.get(id=intervention_id)
+    members = interv.member_set.filter(active=True)
+    if request.method == 'GET':
+        return render(request, 'members.html', {'members': members})
+    if request.method == 'POST':
+        return redirect(reverse_lazy('home'))

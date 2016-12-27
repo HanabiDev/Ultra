@@ -85,6 +85,25 @@ class Intervention(models.Model):
     longitude = models.CharField(max_length=20, verbose_name=u'Longitud')
 
 
+class Member(models.Model):
+    SOCIAL_CONDITIONS = (
+        ('M', 'Mestizos'),
+        ('I', 'Indígenas'),
+        ('C', 'Campesinos'),
+        ('D', 'Discapacitados'),
+        ('A', 'Afrodescendientes')
+
+    )
+
+    interv = models.ForeignKey('Intervention', verbose_name=u'Grupo')
+    name = models.CharField(max_length=50, verbose_name=u'Nombres')
+    lastname = models.CharField(max_length=50, verbose_name=u'Apellidos')
+    dni = models.CharField(max_length=30, verbose_name=u'Número de documento', unique=True)
+    birthdate = models.DateField(verbose_name=u'Fecha de nacimiento')
+    social_group = models.CharField(max_length=1, choices=SOCIAL_CONDITIONS, verbose_name='Grupo social')
+    active = models.BooleanField(verbose_name='Activo')
+
+
 
 
 class TimeSchedule(models.Model):

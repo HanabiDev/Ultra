@@ -2,9 +2,9 @@
 
 {% load static %}
 
-{% block title %}Reportar actividad{% endblock %}
+{% block title %}Reportar evento{% endblock %}
 
-{% block section_title %}Reportar actividad{% endblock %}
+{% block section_title %}Reportar evento{% endblock %}
 
 {% block main %}
 
@@ -14,7 +14,7 @@
             <form id="wizardForm" method="POST" action="{{request.path}}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="header text-center">
-                    <h4 class="title">Reportar actividad</h4>
+                    <h4 class="title">Reportar evento</h4>
                     <p class="category"></p>
                 </div>
                 <div class="content">
@@ -31,18 +31,33 @@
                     <div class="tab-content">
 
                         <div class="tab-pane" id="tab1">
-                            <h5 class="text-center">Elija la intervención</h5>
+                            <h5 class="text-center">Información del evento</h5>
                             <div class="row">
-                                <div class="col-md-5 col-md-offset-1">
+                                <div class="col-md-3 col-md-offset-1">
                                     <div class="form-group">
+                                        <input type="hidden" name="intervention" value="{{intervs.first.id}}">
                                         <label class="control-label">
-                                            Intervención
+                                            Lugar
                                         </label>
-                                        <select name="intervention" class="selectpicker" data-style="btn-info btn-fill btn-block">
-                                            {% for option in intervs %}
-                                            <option value="{{option.id}}">{{option.group_name}}</option>
-                                            {% endfor %}
-                                        </select>
+                                        <input type="text" class="form-control" name="1" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <input type="hidden" value="intervs.first.id">
+                                        <label class="control-label">
+                                            Fecha
+                                        </label>
+                                        <input type="text" class="form-control datetimepicker" name="2" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="hidden" value="intervs.first.id">
+                                        <label class="control-label">
+                                            Nombre del evento
+                                        </label>
+                                        <input type="text" class="form-control" required name="3">
                                     </div>
                                 </div>
                             </div>
@@ -1040,14 +1055,14 @@
                                         <input type="file" name="evidence" required="true" class="form-control">
                                     </div>
                                 </div>
-                                <div class="col-md-5 col-md-offset-1">
+                                <!--div class="col-md-5 col-md-offset-1">
                                     <div class="form-group">
                                         <label class="control-label">
                                             Lista de personas
                                         </label>
                                         <input type="file" name="plist" required="true" class="form-control">
                                     </div>
-                                </div>
+                                </div-->
                             </div>
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">

@@ -42,9 +42,8 @@ urlpatterns = [
     url(r'^admin/encuestas/', include('polls.urls', 'polls')),
 
 
-
     url(r'^contratista/$', app_auth.views.contractor_home, name='contractor_home'),
-    url(r'^contratista/reportar-actividad/$', app_auth.views.activity_report, name='activity_report'),
+    url(r'^contratista/reportar-evento/$', app_auth.views.activity_report, name='activity_report'),
     url(r'^contratista/perfil/$', app_auth.views.contractor_profile, name='contractor_profile'),
     url(r'^contratista/perfil/actualizar/$', app_auth.views.edit_contractor_profile, name='contractor_profile_update'),
     url(r'^contratista/perfil/cambiar-clave/$', app_auth.views.set_contractor_pass, name='contractor_password'),
@@ -57,7 +56,13 @@ urlpatterns = [
     url(r'^contratista/perfil/editar-logro/(?P<achievement_id>\d+)$', app_auth.views.edit_achievement, name='edit_contractor_ach'),
     url(r'^contratista/perfil/quitar-logro/(?P<achievement_id>\d+)$', app_auth.views.delete_achievement, name='del_contractor_ach'),
 
+    url(r'^contratista/grupos/$', app_auth.views.contractor_groups, name='contractor_groups'),
+    url(r'^contratista/grupos/(?P<group_id>\d+)/$', app_auth.views.group_members, name='group_members'),
+    url(r'^contratista/grupos/(?P<group_id>\d+)/nuevo-miembro/$', app_auth.views.add_member, name='add_member'),
+    url(r'^contratista/grupos/(?P<group_id>\d+)/editar-miembro/(?P<member_id>\d+)/$', app_auth.views.edit_member, name='edit_member'),
 
+    url(r'^contratista/reportar-actividad/$', app_auth.views.load_report_form, name='report_form'),
+    url(r'^contratista/reportar-actividad/(?P<intervention_id>\d+)$', app_auth.views.send_members, name='report_form'),
 
     url(r'^configuracion/', include('settings.urls', 'settings'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

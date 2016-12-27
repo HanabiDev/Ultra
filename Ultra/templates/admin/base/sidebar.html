@@ -75,9 +75,21 @@
 
                     {% if user.type == 'M' or user.type == 'I' %}
                     <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
-	                    <a href="{% url 'activity_report' %}">
+	                    <a href="{% url 'report_form' %}">
 	                        <i class="fa fa-paste"></i>
 	                        <p>Reporte de actividad</p>
+	                    </a>
+	                </li>
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'activity_report' %}">
+	                        <i class="fa fa-paste"></i>
+	                        <p>Reporte de eventos</p>
+	                    </a>
+	                </li>
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'contractor_groups' %}">
+	                        <i class="fa fa-group"></i>
+	                        <p>Grupos</p>
 	                    </a>
 	                </li>
                     {% endif %}

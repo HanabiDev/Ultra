@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-from contractors.models import Contractor, FormationItem, SportsAchievements, Intervention
+from contractors.models import Contractor, FormationItem, SportsAchievements, Intervention, Member
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, SetPasswordForm
 
@@ -239,6 +239,31 @@ class AchievementForm(forms.ModelForm):
             'year': forms.TextInput(attrs={'class': 'form-control'}),
             'support': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+
+class MemberForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MemberForm, self).__init__(*args, **kwargs)
+
+        if kwargs.get('initial'):
+            interv = kwargs.get('initial').get('interv')
+            if interv:
+                self.fields['interv'].choices = [(interv.id, interv.group_name)]
+
+    class Meta:
+        model = Member
+        fields = '__all__'
+
+        widgets = {
+            'interv': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'lastname': forms.TextInput(attrs={'class': 'form-control'}),
+            'dni': forms.NumberInput(attrs={'class': 'form-control'}),
+            'birthdate': forms.DateInput(attrs={'class': 'form-control datepicker'}),
+            'social_group': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+        }
+
+
 
 
 class InterventionForm(b_forms.BetterModelForm):

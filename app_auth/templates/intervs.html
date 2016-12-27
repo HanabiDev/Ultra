@@ -1,0 +1,155 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Reportar actividad{% endblock %}
+
+{% block section_title %}Reportar actividad{% endblock %}
+
+{% block main %}
+
+ <div class="row">
+    <div class="col-md-12 col-md-offset-0">
+        <div class="card card-wizard" id="wizardCard">
+            <form id="wizardForm" method="POST" action="{{request.path}}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="header text-center">
+                    <h4 class="title">Reportar evento</h4>
+                    <p class="category"></p>
+                </div>
+                <div class="content">
+                    <ul class="nav">
+                        <li><a href="#tab1" data-toggle="tab">Intervención</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane" id="tab1">
+                            <h5 class="text-center">Información de intervención</h5>
+                            <div class="row">
+                                <div class="col-md-5 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            Intervención
+                                        </label>
+                                        <select name="intervention" id="interv" class="selectpicker">
+                                            {% for interv in intervs %}
+                                            <option name="intervention" value="{{interv.id}}">{{interv.group_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-default btn-fill btn-wd btn-back pull-left">Atrás</button>
+                    <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Siguiente</button>
+                    <button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finalizar</button>
+                    <div class="clearfix"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+    <script type="text/javascript">
+        $().ready(function(){
+
+            var $validator = $("#wizardForm").validate({
+    		  rules: {
+    		    email: {
+                    required: true,
+                    email: true,
+                    minlength: 5
+    		    },
+    		    first_name: {
+    		        required: false,
+                    minlength: 5
+    		    },
+    		    last_name: {
+    		        required: false,
+                    minlength: 5
+    		    },
+    		    website: {
+    		        required: true,
+                    minlength: 5,
+                    url: true
+    		    },
+    		    framework: {
+        		    required: false,
+        		    minlength: 4
+    		    },
+    		    cities: {
+        		    required: true
+    		    },
+    		    price:{
+        		    number: true
+    		    }
+    		  }
+    		});
+
+			// you can also use the nav-pills-[blue | azure | green | orange | red] for a different color of wizard
+            $('#wizardCard').bootstrapWizard({
+            	tabClass: 'nav nav-pills',
+            	nextSelector: '.btn-next',
+                previousSelector: '.btn-back',
+            	onNext: function(tab, navigation, index) {
+            		var $valid = $('#wizardForm').valid();
+
+            		if(!$valid) {
+            			$validator.focusInvalid();
+            			return false;
+            		}
+            	},
+                onInit : function(tab, navigation, index){
+
+                    //check number of tabs and fill the entire row
+                    var $total = navigation.find('li').length;
+                    $width = 100/$total;
+
+                    $display_width = $(document).width();
+
+                    if($display_width < 600 && $total > 3){
+                       $width = 50;
+                    }
+
+                    navigation.find('li').css('width',$width + '%');
+                },
+                onTabClick : function(tab, navigation, index){
+                    // Disable the posibility to click on tabs
+                    return false;
+                },
+                onTabShow: function(tab, navigation, index) {
+                    var $total = navigation.find('li').length;
+                    var $current = index+1;
+
+                    var wizard = navigation.closest('.card-wizard');
+
+                    // If it's the last tab then hide the last button and show the finish instead
+                    if($current >= $total) {
+                        $(wizard).find('.btn-next').hide();
+                        $(wizard).find('.btn-finish').show();
+                    } else if($current == 1){
+                        $(wizard).find('.btn-back').hide();
+                    } else {
+                        $(wizard).find('.btn-back').show();
+                        $(wizard).find('.btn-next').show();
+                        $(wizard).find('.btn-finish').hide();
+                    }
+                }
+            });
+        });
+
+        function onFinishWizard(){
+
+           window.location.href = '/contratista/reportar-actividad/'+$("#interv :selected").val()+'';
+        }
+	</script>
+
+{% endblock %}
