@@ -32,6 +32,9 @@ urlpatterns = [
 
     url(r'^(?P<user_id>\d+)/resultado-deportivo/(?P<result_id>\d+)/referente/(?P<ref_id>\d+)$', athletes.edit_athlete_result_ref, name='edit_athlete_result_ref'),
 
+    url(r'^(?P<athlete_id>\d+)/opciones-reporte-evolucion/$', athletes.report_options, name='report_options'),
+    url(r'^(?P<athlete_id>\d+)/reporte-evolucion/$', athletes.report, name='report'),
+
     url(r'^ver/(?P<user_id>\d+)/$', athletes.view_athlete, name='view_athlete'),
     url(r'^editar/(?P<user_id>\d+)/$', athletes.update_athlete, name='edit_athlete'),
     url(r'^municipios/$', athletes.filter_municipalities, name='municipalities'),

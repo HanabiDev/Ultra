@@ -1,0 +1,76 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}Generar reporte{% endblock %}
+
+{% block section_title %}Generar reporte{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="{% url 'athletes:report' athlete.id %}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+
+        <div class="col-md-10">
+             <div class="card">
+                <div class="header">
+                    <h4 class="title">
+                        Elija las opciones para el reporte
+                    </h4>
+                </div>
+                <div class="content">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Referente para resultados</label>
+                        <div class="col-md-9">
+                            <select class="selectpicker" name="result_ref">
+                                {% for res in results %}
+                                    {% for ref in res.markreference_set.all%}
+                                    <option value="{{ref.mark}}">
+                                        {{ref.athlete}}: {{ref.event}} {{ref.result_date | date:"Y"}}, {{ref.test}} - Puesto {{ref.ref_result}} - Marca: {{ref.mark}}
+                                    </option>
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Referente para pruebas</label>
+                        <div class="col-md-9">
+                            <select class="selectpicker" name="test_ref">
+                                {% for ref in refs %}
+                                    <option value="{{ref.value}}">
+                                        {{ref.value}} {%if ref.intl %}(internacional){% endif %}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-rigth">
+                        <input type="submit" class="btn btn-fill btn-success" value="Generar"/>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#id_province").change(function(){
+                $.get(
+                    '{% url 'athletes:municipalities' %}',
+                    {'province_id':$("#id_province").val()},
+                    function(data){
+                        $("#id_municipality").html(data)
+
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                );
+            });
+
+            $('#id_birth_date').val('{{athlete.birth_date|date:"d/m/Y"}}');
+        });
+    </script>
+{% endblock %}

@@ -26,7 +26,7 @@
             <hr>
             <div class="text-center">
                 <div class="row">
-                    <div class="col-md-5 col-md-offset-1">
+                    <div class="col-md-3 col-md-offset-1">
                         <h5>
                             <a href="{% url 'athletes:edit_athlete' athlete.id %}" class="text-warning">
                                 <i class="fa fa-pencil"></i>
@@ -35,11 +35,20 @@
                             </a>
                         </h5>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <h5>
                             <i class="ti-lock"></i>
                             <br />
                             <small>Bloquear</small>
+                        </h5>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>
+                            <a href="{% url 'athletes:report_options' athlete.id %}">
+                                <i class="ti-write"></i>
+                                <br />
+                                <small>Reporte</small>
+                            </a>
                         </h5>
                     </div>
                 </div>

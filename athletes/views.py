@@ -463,3 +463,156 @@ def create_test_ref(request, user_id):
             return redirect(reverse_lazy('athletes:athlete_ref_list', kwargs={'user_id': str(user_id)}))
 
         return render(request, 'ref.html', {'form': form})
+
+
+
+def report_options(request, athlete_id):
+    athlete = Athlete.objects.get(id=athlete_id)
+    results = athlete.result_set.all()
+    refs = TestReference.objects.all()
+
+    return render(request, 'report_options.html', {'results': results, 'refs':refs, 'athlete':athlete})
+
+
+from reports.pdf_test import header as h
+from reports.plot_types import LineMarkerChart
+from reportlab.platypus.flowables import PageBreak
+from reportlab.lib.colors import purple, PCMYKColor
+
+def report(request, athlete_id):
+    athlete = Athlete.objects.get(id=athlete_id)
+
+
+    response = HttpResponse(content_type='application/pdf')
+
+    #pdf_name = "deportistas_por_liga-%s.pdf" % (timezone.now())  # llamado clientes
+    # la linea 26 es por si deseas descargar el pdf a tu computadora
+    # response['Content-Disposition'] = 'attachment; filename=%s' % pdf_name
+    buff = BytesIO()
+    doc = SimpleDocTemplate(buff, topMargin=2.5 * cm,
+                            leftMargin=1.5 * cm,
+                            rightMargin=1.5 * cm,
+                            bottomMargin=2 * cm,
+                            pagesize=letter)
+
+    frame = Frame(1.5 * cm, doc.bottomMargin, doc.width, doc.height - doc.bottomMargin,
+                  topPadding=0.5 * cm)  # Frame(1.5*cm, 2*cm, doc.width, doc.height-2*cm, id='normal', showboundary)
+
+    header_content = Paragraph(u"REPORTE DE EVOLUCIÓN DEL DEPORTISTA", styleH2)
+    template = PageTemplate(id='test', frames=frame, onPage=partial(header, content=header_content))
+    doc.addPageTemplates([template])
+
+    text = []
+
+    headings = (Paragraph(u''+athlete.first_name.upper()+' '+athlete.last_name.upper(), styleH2),)
+    headings2 = (Paragraph(u'Evolución en resultados deportivos<br/><br/>', styleH2E),)
+    
+    results = athlete.result_set.all().order_by('result_date')
+
+    data_r = []
+    data_f = []
+
+    print request.POST
+
+    res_ref = request.POST.get('result_ref')
+    test_ref = request.POST.get('test_ref')
+
+    print res_ref
+
+    for result in results:
+        tup = (result.result_date, result.mark)
+        data_r.append(tup)
+        data_f.append((result.result_date, float(res_ref.replace(',','.'))))
+
+    p = [(PCMYKColor(0,100,100,40,alpha=100), u''+athlete.first_name+' '+athlete.last_name), (PCMYKColor(100,0,90,50,alpha=100), 'Referente')]
+
+    results_data = [
+        data_r, data_f
+    ]
+
+    graph = [(LineMarkerChart(data=results_data, pairs=p),)]
+    t = Table([headings, headings2] + graph)
+    text.append(t)
+
+    text.append(PageBreak())
+
+    heads = (Paragraph(u'<br/>Evolución en pruebas (Velocidad)<br/><br/>',styleH2E),)
+
+    tests = PhysicalTest.objects.filter(test_name='Velocidad')
+
+    data_t = []
+    data_rf = []
+
+    for test in tests:
+        data_t.append((test.date, test.result))
+        data_rf.append((test.date, float(test_ref.replace(',','.'))))
+    
+    tests_data = [
+        data_t, data_rf
+    ]
+
+    p = [(PCMYKColor(0,100,100,40,alpha=100), u''+athlete.first_name+' '+athlete.last_name), (PCMYKColor(100,0,90,50,alpha=100), 'Referente')]
+
+    graph2 = [(LineMarkerChart(data=tests_data, pairs=p),)]
+    t = Table([heads] + graph2)
+    text.append(t)
+
+
+    text.append(PageBreak())
+
+    heads = (Paragraph(u'<br/>Evolución en pruebas (Resistencia)<br/><br/>',styleH2E),)
+
+    tests = PhysicalTest.objects.filter(test_name='Resistencia')
+
+    data_t = []
+    data_rf = []
+
+    for test in tests:
+        data_t.append((test.date, test.result))
+        data_rf.append((test.date, float(test_ref.replace(',','.'))))
+    
+    tests_data = [
+        data_t, data_rf
+    ]
+
+    p = [(PCMYKColor(0,100,100,40,alpha=100), u''+athlete.first_name+' '+athlete.last_name), (PCMYKColor(100,0,90,50,alpha=100), 'Referente')]
+
+    graph2 = [(LineMarkerChart(data=tests_data, pairs=p),)]
+    t = Table([heads] + graph2)
+    text.append(t)
+
+    text.append(PageBreak())
+    heads = (Paragraph(u'<br/>Evolución biomédica (Antropometría)<br/><br/>',styleH2E),)
+
+    tabs = athlete.biomedictab_set.all()
+
+    weight = []
+    fat = []
+    muscle = []
+    skinfolds = []
+    for tab in tabs:
+        valor = tab.antropometricvaloration_set.first()
+        weight.append((tab.date, valor.body_weight))
+        fat.append((tab.date, valor.fat_weight))
+        muscle.append((tab.date, valor.muscle_weight))
+        skinfolds.append((tab.date, valor.six_skinfolds))
+
+    data = [weight, fat, muscle, skinfolds]
+
+    p = [
+        (PCMYKColor(0,100,100,40,alpha=100), u'Peso corporal'),
+        (PCMYKColor(10,0,90,50,alpha=100), 'Peso graso'),
+        (PCMYKColor(100,0,0,50,alpha=100), 'Peso muscular'),
+        (PCMYKColor(0,100,0,50,alpha=100), 'Sumatoria seis pliegues'),
+    ]
+
+    graph2 = [(LineMarkerChart(data=data, pairs=p, marg=120),)]
+    t = Table([heads] + graph2)
+    text.append(t)
+
+
+    doc.build(text)
+
+    response.write(buff.getvalue())
+    buff.close()
+    return response
