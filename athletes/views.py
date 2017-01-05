@@ -504,6 +504,10 @@ def report(request, athlete_id):
 
     text = []
 
+    import datetime
+
+    now = datetime.datetime.now()
+
     headings = (Paragraph(u''+athlete.first_name.upper()+' '+athlete.last_name.upper(), styleH2),)
     headings2 = (Paragraph(u'Evolución en resultados deportivos<br/><br/>', styleH2E),)
     
