@@ -20,10 +20,9 @@ def setItems(n, obj, attr, values):
         setattr(obj[j],attr,values[j*i % m])
 
 class BreakdownPieDrawing(_DrawingEditorMixin,Drawing):
-    def __init__(self,width=400,height=200, x=0, y=0, data=[0,0,0], labels=['None', 'none', 'none'], *args,**kw):
+    def __init__(self,width=400,height=200, x=0, y=0, data=[0,0,0], labels=['None', 'none', 'none'], percents=False, *args,**kw):
         apply(Drawing.__init__,(self,width,height)+args,kw)
         # adding a pie chart to the drawing
-
 
         self._add(self,Pie(),name='pie',validate=None,desc=None)
         self.pie.width                  = width
@@ -32,7 +31,7 @@ class BreakdownPieDrawing(_DrawingEditorMixin,Drawing):
         self.pie.y                      = y
         self.pie.data = data
         self.pie.labels = labels
-        self.pie.simpleLabels           = 1
+        self.pie.simpleLabels           = 0
 
         self.pie.slices.label_visible   = 0
         self.pie.slices.popout = 2
@@ -61,9 +60,13 @@ class BreakdownPieDrawing(_DrawingEditorMixin,Drawing):
         self.legend.dividerLines    = 1|2|4
         self.legend.dividerOffsY    = 8
         self.legend.subCols.rpad    = 30
+
         n = len(self.pie.data)
         setItems(n,self.pie.slices,'fillColor',pdf_chart_colors)
-        self.legend.colorNamePairs = [(self.pie.slices[i].fillColor, (labels[i][0:20], '%d' % data[i])) for i in xrange(n)]
+        if percents:
+            self.legend.colorNamePairs = [(self.pie.slices[i].fillColor, (labels[i][0:20], '%d%%' % data[i])) for i in xrange(n)]
+        else:
+            self.legend.colorNamePairs = [(self.pie.slices[i].fillColor, (labels[i][0:20], '%d' % data[i])) for i in xrange(n)]
 
 
 

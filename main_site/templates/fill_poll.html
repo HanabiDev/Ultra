@@ -1,0 +1,50 @@
+{% extends 'site/base/base.html' %}
+
+{% block title %}Responder encuesta{% endblock %}
+
+{% block section_title %}
+    {% if editing %}
+        Editar información de la encuesta<br><small style="font-size:12px">{{poll.title}}</small>
+    {% else %}Registrar encuesta{% endif %}
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-10">
+             <div class="card">
+                <div class="content">
+                    <h2 class="title">{{ poll.title }}</h2>
+                    <p>{{ poll.description|safe }}</p>
+                    <hr>
+                    {% for question in poll.question_set.all %}
+                        <div class="form-group">
+                            <label class="col-md-10 text-left">
+                                <p>{{question.statement}}</p>
+                            </label>
+                            <div class="col-md-8">
+                                <select name="q_{{ question.id }}" id="" class="selectpicker">
+                                    {% for option in question.option_set.all %}
+                                        <option value="{{ option.id }}">{{ option.text }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'polls:list_polls' %}">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Registrar encuesta{% endif %}">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

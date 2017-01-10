@@ -6,7 +6,7 @@ from django.db import models
 class Poll(models.Model):
     title = models.CharField(max_length=50, verbose_name=u'Título')
     description = models.TextField(verbose_name=u'Descripción')
-    creation_date = models.DateField(auto_now=True)
+    creation_date = models.DateField(auto_created=True)
     closed = models.BooleanField(verbose_name=u'Cerrada')
     hits = models.IntegerField(default=0)
 

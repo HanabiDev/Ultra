@@ -1,0 +1,68 @@
+{% load static %}
+{% load nav_tags %}
+
+<div class="sidebar" data-background-color="white" data-active-color="success">
+	    <!--
+			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
+			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+		-->
+			<div class="logo">
+				<a href="/" class="simple-text">
+                    <img src="{% static 'assets/img/logo.png' %}" alt="Ultra logo" height="40px">
+				</a>
+			</div>
+			<div class="logo logo-mini">
+				<a href="/" class="simple-text">
+					<img src="{% static 'assets/img/logo-small.png' %}" alt="Ultra logo" height="40px">
+				</a>
+			</div>
+	    	<div class="sidebar-wrapper">
+
+	            <ul class="nav">
+                    <li class="{% navactive request 'list_contractors new_contractor view_contractor edit_contractor' %}">
+	                    <a href="{% url 'site:home' %}">
+	                        <i class="fa fa-home"></i>
+	                        <p>Inicio</p>
+	                    </a>
+	                </li>
+
+                    <li class="{% navactive request 'list_programs new_program view_program edit_program list_subprograms new_subprogram view_subprogram edit_subprogram list_projects new_project view_project edit_project' %}">
+                        <a data-toggle="collapse" href="#programs">
+	                        <i class="fa fa-bar-chart"></i>
+	                        <p>
+								Programas
+	                           <b class="caret"></b>
+	                        </p>
+	                    </a>
+	                    <div class="collapse" id="programs">
+	                        <ul class="nav">
+								<li class="{% navactive request 'list_programs new_program view_program edit_program' %}">
+									<a href="{% url 'programs:list_programs' %}">Programas</a>
+								</li>
+								<li class="{% navactive request 'list_subprograms new_subprogram view_subprogram edit_subprogram' %}">
+									<a href="{% url 'subprograms:list_subprograms' %}">Subprogramas</a>
+								</li>
+								<li class="{% navactive request 'list_projects new_project view_project edit_project' %}">
+									<a href="{% url 'projects:list_projects' %}">Proyectos</a>
+								</li>
+	                        </ul>
+	                    </div>
+	                </li>
+
+
+
+                    <li class="{% navactive request 'list_polls new_contractor view_contractor edit_contractor' %}">
+	                    <a href="{% url 'site:polls' %}">
+	                        <i class="fa fa-tasks"></i>
+	                        <p>Encuestas</p>
+	                    </a>
+	                </li>
+                    <li class="{% navactive request 'list_contractors new_contractor view_contractor edit_contractor' %}">
+	                    <a href="{% url 'contractors:list_contractors' %}">
+	                        <i class="fa fa-trophy"></i>
+	                        <p>Eventos</p>
+	                    </a>
+	                </li>
+	            </ul>
+	    	</div>
+	    </div>

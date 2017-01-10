@@ -2,10 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ccd9a37-3582-4d44-8802-1d93d7665926" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Ultra/templates/site/base/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Ultra/templates/site/base/sidebar.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Ultra/templates/site/base/topbar.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/events/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/events/templates/event.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/events/templates/event_detail.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/events/templates/events_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/events/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main_site/templates/fill_poll.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main_site/templates/poll_index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main_site/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.pdf" afterPath="$PROJECT_DIR$/test.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Ultra.iml" afterPath="$PROJECT_DIR$/.idea/Ultra.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/athletes/views.py" afterPath="$PROJECT_DIR$/athletes/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ultra/settings.py" afterPath="$PROJECT_DIR$/Ultra/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ultra/urls.py" afterPath="$PROJECT_DIR$/Ultra/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/views.py" afterPath="$PROJECT_DIR$/app_auth/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/migrations/0002_beneficiarycategory_beneficiarygroup_intervention_session_timeschedule.py" afterPath="$PROJECT_DIR$/contractors/migrations/0002_beneficiarycategory_beneficiarygroup_intervention_session_timeschedule.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/migrations/0008_member.py" afterPath="$PROJECT_DIR$/contractors/migrations/0008_member.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/models.py" afterPath="$PROJECT_DIR$/contractors/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/activity_report.html" afterPath="$PROJECT_DIR$/contractors/templates/activity_report.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/models.py" afterPath="$PROJECT_DIR$/polls/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/templates/poll.html" afterPath="$PROJECT_DIR$/polls/templates/poll.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/templates/poll_detail.html" afterPath="$PROJECT_DIR$/polls/templates/poll_detail.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/templates/polls_list.html" afterPath="$PROJECT_DIR$/polls/templates/polls_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/urls.py" afterPath="$PROJECT_DIR$/polls/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/polls/views.py" afterPath="$PROJECT_DIR$/polls/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/programs/views/subprogram_views.py" afterPath="$PROJECT_DIR$/programs/views/subprogram_views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reports/plot_types.py" afterPath="$PROJECT_DIR$/reports/plot_types.py" />
     </list>
     <ignored path="Ultra.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -19,7 +45,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Ultra$Django.coverage" NAME="Django Coverage Results" MODIFIED="1482854340076" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Ultra$Django.coverage" NAME="Django Coverage Results" MODIFIED="1484066200461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Ultra$report_components.coverage" NAME="report_components Coverage Results" MODIFIED="1478029887866" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reports" />
     <SUITE FILE_PATH="coverage/Ultra$pdf_test.coverage" NAME="pdf_test Coverage Results" MODIFIED="1477924048600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/reports" />
   </component>
@@ -40,125 +66,46 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+        <entry file="file://$PROJECT_DIR$/main_site/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-646">
-              <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-              <folding>
-                <element signature="e#10363#10525#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/athletes/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="510" column="86" selection-start-line="510" selection-start-column="86" selection-end-line="510" selection-end-column="86" />
+            <state relative-caret-position="156">
+              <caret line="13" column="81" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sidebar.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="77" column="52" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="members.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_auth/templates/members.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="87" selection-start-line="31" selection-start-column="87" selection-end-line="31" selection-end-column="87" />
-              <folding>
-                <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="programs_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/programs/templates/programs_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="20" selection-start-line="20" selection-start-column="12" selection-end-line="46" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_report.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-              <folding>
-                <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#5;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#5;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#5;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#0;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#1;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#2;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#3;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-                <element signature="n#div#4;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
+        <entry file="file://$PROJECT_DIR$/main_site/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="64" column="58" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="58" />
+            <state relative-caret-position="170">
+              <caret line="10" column="85" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Ultra/templates/site/base/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="183" column="84" selection-start-line="183" selection-start-column="84" selection-end-line="183" selection-end-column="84" />
+              <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+              <folding>
+                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#img#0;n#p#0;n#div#1;n#div#1;n#li#0;n#ul#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ultra/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -180,34 +127,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/reports/pdf_test.py" />
-        <option value="$PROJECT_DIR$/programs/views/subprogram_views.py" />
-        <option value="$PROJECT_DIR$/reports/plot_types.py" />
-        <option value="$PROJECT_DIR$/contractors/urls.py" />
-        <option value="$PROJECT_DIR$/athletes/templates/athlete.html" />
-        <option value="$PROJECT_DIR$/contractors/views.py" />
-        <option value="$PROJECT_DIR$/contractors/templates/contractor_interv.html" />
-        <option value="$PROJECT_DIR$/Ultra/settings.py" />
-        <option value="$PROJECT_DIR$/polls/templates/polls_list.html" />
-        <option value="$PROJECT_DIR$/polls/templates/poll.html" />
-        <option value="$PROJECT_DIR$/polls/urls.py" />
-        <option value="$PROJECT_DIR$/polls/forms.py" />
-        <option value="$PROJECT_DIR$/polls/models.py" />
-        <option value="$PROJECT_DIR$/polls/templates/question.html" />
-        <option value="$PROJECT_DIR$/polls/templates/poll_detail.html" />
-        <option value="$PROJECT_DIR$/polls/templates/option.html" />
-        <option value="$PROJECT_DIR$/polls/templates/question_detail.html" />
-        <option value="$PROJECT_DIR$/polls/views.py" />
-        <option value="$PROJECT_DIR$/athletes/templates/athlete_card.html" />
-        <option value="$PROJECT_DIR$/athletes/templates/athletes_list.html" />
-        <option value="$PROJECT_DIR$/athletes/templates/athlete_result.html" />
-        <option value="$PROJECT_DIR$/athletes/templates/result_ref.html" />
-        <option value="$PROJECT_DIR$/athletes/templates/refs.html" />
-        <option value="$PROJECT_DIR$/athletes/templates/ref.html" />
         <option value="$PROJECT_DIR$/athletes/templates/refs_list.html" />
         <option value="$PROJECT_DIR$/athletes/urls.py" />
         <option value="$PROJECT_DIR$/athletes/forms.py" />
-        <option value="$PROJECT_DIR$/athletes/models.py" />
         <option value="$PROJECT_DIR$/athletes/templates/athlete_detail.html" />
         <option value="$PROJECT_DIR$/Ultra/templates/admin/base/base.html" />
         <option value="$PROJECT_DIR$/contractors/templates/formation.html" />
@@ -220,17 +142,42 @@
         <option value="$PROJECT_DIR$/contractors/templates/contractor_detail.html" />
         <option value="$PROJECT_DIR$/Ultra/static/assets/js/jquery.validate.min.js" />
         <option value="$PROJECT_DIR$/app_auth/templates/groups_list.html" />
-        <option value="$PROJECT_DIR$/contractors/models.py" />
-        <option value="$PROJECT_DIR$/contractors/forms.py" />
         <option value="$PROJECT_DIR$/app_auth/templates/members_list.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/member.html" />
-        <option value="$PROJECT_DIR$/contractors/templates/activity_report.html" />
         <option value="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
-        <option value="$PROJECT_DIR$/Ultra/urls.py" />
         <option value="$PROJECT_DIR$/app_auth/templates/intervs.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/members.html" />
-        <option value="$PROJECT_DIR$/app_auth/views.py" />
         <option value="$PROJECT_DIR$/athletes/views.py" />
+        <option value="$PROJECT_DIR$/contractors/migrations/0002_beneficiarycategory_beneficiarygroup_intervention_session_timeschedule.py" />
+        <option value="$PROJECT_DIR$/contractors/migrations/0008_member.py" />
+        <option value="$PROJECT_DIR$/contractors/templates/activity_report.html" />
+        <option value="$PROJECT_DIR$/programs/views/subprogram_views.py" />
+        <option value="$PROJECT_DIR$/athletes/models.py" />
+        <option value="$PROJECT_DIR$/polls/templates/poll.html" />
+        <option value="$PROJECT_DIR$/events/urls.py" />
+        <option value="$PROJECT_DIR$/contractors/models.py" />
+        <option value="$PROJECT_DIR$/contractors/forms.py" />
+        <option value="$PROJECT_DIR$/events/forms.py" />
+        <option value="$PROJECT_DIR$/events/models.py" />
+        <option value="$PROJECT_DIR$/events/templates/events_list.html" />
+        <option value="$PROJECT_DIR$/events/templates/event.html" />
+        <option value="$PROJECT_DIR$/polls/templates/poll_detail.html" />
+        <option value="$PROJECT_DIR$/events/views.py" />
+        <option value="$PROJECT_DIR$/events/templates/event_detail.html" />
+        <option value="$PROJECT_DIR$/Ultra/urls.py" />
+        <option value="$PROJECT_DIR$/app_auth/views.py" />
+        <option value="$PROJECT_DIR$/main_site/templates/fill_poll.html" />
+        <option value="$PROJECT_DIR$/polls/models.py" />
+        <option value="$PROJECT_DIR$/Ultra/templates/site/base/sidebar.html" />
+        <option value="$PROJECT_DIR$/main_site/templates/poll_index.html" />
+        <option value="$PROJECT_DIR$/polls/templates/polls_list.html" />
+        <option value="$PROJECT_DIR$/polls/urls.py" />
+        <option value="$PROJECT_DIR$/reports/plot_types.py" />
+        <option value="$PROJECT_DIR$/polls/views.py" />
+        <option value="$PROJECT_DIR$/main_site/views.py" />
+        <option value="$PROJECT_DIR$/Ultra/settings.py" />
+        <option value="$PROJECT_DIR$/main_site/urls.py" />
+        <option value="$PROJECT_DIR$/Ultra/templates/site/base/base.html" />
       </list>
     </option>
   </component>
@@ -271,7 +218,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -318,6 +264,52 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="polls" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main_site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main_site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -332,7 +324,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="contractors" />
+              <option name="myItemId" value="Ultra" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -346,43 +338,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="contractors" />
+              <option name="myItemId" value="Ultra" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
+              <option name="myItemId" value="site" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="contractors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="migrations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="athletes" />
+              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -397,35 +365,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Ultra" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Scripts/python.exe" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Ultra/settings.py" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\app_auth\templates" />
-      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\athletes\templates" />
-      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\polls\templates" />
-      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\polls" />
-      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\contractors\templates" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\polls" />
       <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\app_auth\templates" />
       <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\Ultra\static\assets\img" />
       <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\Ultra\static\assets\css" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\Ultra\templates\site\base" />
+      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\main_site" />
+      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\events\templates" />
+      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\events" />
+      <recent name="C:\Users\Juan\Repos\UltraEnv\Ultra\app_auth\templates" />
     </key>
   </component>
   <component name="RunManager" selected="Python.Django">
@@ -732,15 +705,16 @@
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21428572" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22036473" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32026145" sideWeight="0.5029762" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32626426" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32789558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6830065" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30228758" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36215335" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20261438" sideWeight="0.49702382" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23491028" sideWeight="0.49702382" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -748,7 +722,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
@@ -771,184 +744,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/polls/templates/question_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="59" column="97" selection-start-line="59" selection-start-column="97" selection-end-line="59" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/athlete_card.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/athletes_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="43" column="59" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/athlete_result.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="44" column="83" selection-start-line="44" selection-start-column="83" selection-end-line="44" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/result_ref.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="44" column="92" selection-start-line="44" selection-start-column="92" selection-end-line="44" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/biomedic_card.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="67" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/refs.html" />
-    <entry file="file://$PROJECT_DIR$/polls/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="21" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/ref.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="32" column="149" selection-start-line="32" selection-start-column="149" selection-end-line="32" selection-end-column="149" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/refs_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="99" selection-start-line="15" selection-start-column="99" selection-end-line="15" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="18" column="72" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/templates/athlete_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="492" column="76" selection-start-line="492" selection-start-column="76" selection-end-line="492" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="93" selection-start-line="11" selection-start-column="93" selection-end-line="11" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Lib/site-packages/django/urls/resolvers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="321" column="0" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ultra/templates/admin/base/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-219">
-          <caret line="73" column="32" selection-start-line="73" selection-start-column="32" selection-end-line="73" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app_auth/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/formation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="38" column="97" selection-start-line="38" selection-start-column="97" selection-end-line="38" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="17" column="82" selection-start-line="17" selection-start-column="82" selection-end-line="17" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="45" column="95" selection-start-line="45" selection-start-column="95" selection-end-line="45" selection-end-column="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="178" column="0" selection-start-line="161" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/update_password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="43" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/set_password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="56" column="14" selection-start-line="56" selection-start-column="14" selection-end-line="56" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractors_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/static/examples/dashboard/overview.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/static/examples/forms/wizard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/uploads/contractors/None/user.png" />
-    <entry file="file://$PROJECT_DIR$/uploads/avatars/face-0.jpg" />
     <entry file="file://$PROJECT_DIR$/uploads/avatars/face-1.jpg" />
     <entry file="file://$PROJECT_DIR$/uploads/avatars/face-2.jpg">
       <provider selected="true" editor-type-id="images">
@@ -970,20 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="203" column="44" selection-start-line="203" selection-start-column="44" selection-end-line="203" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="74" column="70" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/programs/views/program_views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -998,21 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="37" column="86" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="97" column="67" selection-start-line="97" selection-start-column="67" selection-end-line="97" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_auth/templates/members_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1020,87 +786,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="261" column="85" selection-start-line="261" selection-start-column="85" selection-end-line="261" selection-end-column="85" />
-          <folding>
-            <element signature="e#7831#8589#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_auth/templates/member.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="83">
           <caret line="29" column="101" selection-start-line="29" selection-start-column="101" selection-end-line="29" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#5;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#5;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#5;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#0;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#1;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#2;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#3;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#div#4;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="64" column="58" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1134,9 +823,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/athletes/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="501" column="82" selection-start-line="501" selection-start-column="82" selection-end-line="501" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/migrations/0002_beneficiarycategory_beneficiarygroup_intervention_session_timeschedule.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="27" column="127" selection-start-line="27" selection-start-column="127" selection-end-line="27" selection-end-column="127" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/migrations/0008_member.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="23" column="129" selection-start-line="23" selection-start-column="129" selection-end-line="23" selection-end-column="129" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="951" column="65" selection-start-line="951" selection-start-column="65" selection-end-line="951" selection-end-column="65" />
+          <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#3;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#2;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#3;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#4;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#5;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#6;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app_auth/templates/members.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state relative-caret-position="525">
           <caret line="31" column="87" selection-start-line="31" selection-start-column="87" selection-end-line="31" selection-end-column="87" />
           <folding>
             <element signature="n#div#1;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
@@ -1144,21 +904,299 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+    <entry file="file://$PROJECT_DIR$/app_auth/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-646">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#10363#10525#0" expanded="false" />
+            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/athletes/views.py">
+    <entry file="file://$PROJECT_DIR$/athletes/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="510" column="86" selection-start-line="510" selection-start-column="86" selection-end-line="510" selection-end-column="86" />
+        <state relative-caret-position="1462">
+          <caret line="93" column="87" selection-start-line="93" selection-start-column="19" selection-end-line="93" selection-end-column="87" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/migrations/0002_auto_20170110_0642.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-73">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/athletes/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="37" column="86" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="30" column="84" selection-start-line="30" selection-start-column="84" selection-end-line="30" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="261" column="25" selection-start-line="261" selection-start-column="25" selection-end-line="261" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploads/events/atachments/714324.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/event.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/templates/poll_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="95" selection-start-line="6" selection-start-column="95" selection-end-line="6" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#43#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="21" column="60" selection-start-line="21" selection-start-column="60" selection-end-line="21" selection-end-column="60" />
+          <folding>
+            <element signature="e#16#55#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/events_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/templates/event_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+          <folding>
+            <element signature="e#2333#2439#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="25" column="60" selection-start-line="25" selection-start-column="60" selection-end-line="25" selection-end-column="60" />
+          <folding>
+            <element signature="e#18#77#0" expanded="false" />
+            <element signature="e#10443#10605#0" expanded="false" />
+            <marker date="1484055320011" expanded="true" signature="909:1085" placeholder="..." />
+            <marker date="1484055320011" expanded="true" signature="1111:1827" placeholder="..." />
+            <marker date="1484055320011" expanded="true" signature="1201:1747" placeholder="..." />
+            <marker date="1484055320011" expanded="true" signature="1323:1679" placeholder="..." />
+            <marker date="1484055320011" expanded="true" signature="1426:1611" placeholder="..." />
+            <marker date="1484055320011" expanded="true" signature="1461:1566" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_auth/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="33" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#32#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/templates/poll.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="6" column="78" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/templates/site/base/sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="54" column="46" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_site/templates/fill_poll.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="45" column="19" selection-start-line="16" selection-start-column="12" selection-end-line="45" selection-end-column="19" />
+          <folding>
+            <element signature="e#504#2057#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_site/templates/poll_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="59" selection-start-line="23" selection-start-column="59" selection-end-line="23" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2016.1/system/python_stubs/-1286681105/_io.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="853" column="8" selection-start-line="853" selection-start-column="8" selection-end-line="853" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="57" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/templates/polls_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="58" column="57" selection-start-line="58" selection-start-column="57" selection-end-line="58" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/polls/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="115" column="108" selection-start-line="115" selection-start-column="108" selection-end-line="115" selection-end-column="108" />
+          <folding>
+            <element signature="e#17#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reports/plot_types.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="113" column="14" selection-start-line="113" selection-start-column="14" selection-end-line="113" selection-end-column="14" />
+          <folding>
+            <element signature="e#17#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_site/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="13" column="81" selection-start-line="13" selection-start-column="81" selection-end-line="13" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main_site/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="85" selection-start-line="10" selection-start-column="85" selection-end-line="10" selection-end-column="85" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/templates/site/base/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="183" column="84" selection-start-line="183" selection-start-column="84" selection-end-line="183" selection-end-column="84" />
+          <caret line="178" column="81" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+          <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#p#0;n#div#1;n#div#1;n#li#0;n#ul#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

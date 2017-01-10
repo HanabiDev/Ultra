@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             name='BeneficiaryGroup',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('group_name', models.CharField(choices=[('M', 'Mestizos'), ('I', 'Ind\xedgenas'), ('C', 'Campesinos'), ('D', 'Discapacitados'), ('A', 'Afrodescendientes')], max_length=2)),
+                ('group_name', models.CharField(choices=[('M', 'Mestizos'), ('I', 'Ind\xedgenas'), ('C', 'Campesinos'), ('D', 'Pers. con discapacidad'), ('A', 'Afrodescendientes')], max_length=2)),
                 ('femenine_individuals', models.IntegerField()),
                 ('masculine_individuals', models.IntegerField()),
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contractors.BeneficiaryCategory')),

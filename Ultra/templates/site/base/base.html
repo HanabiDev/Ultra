@@ -1,0 +1,299 @@
+{% load static %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>{% block title %}Sitio público{% endblock %} | Ultra</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+     <!-- Bootstrap core CSS     -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static 'assets/css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static 'assets/css/fresh-table.css' %}" rel="stylesheet" />
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static 'assets/css/demo.css' %}" rel="stylesheet" />
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static 'assets/css/themify-icons.css' %}" rel="stylesheet">
+
+	<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+	{% block style %}
+
+	{% endblock %}
+</head>
+
+<body class="{% if request.session.sidebar_off %} sidebar-mini {% endif %}">
+	<div class="wrapper">
+
+        {% include 'site/base/sidebar.html' %}
+
+	    <div class="main-panel">
+
+            <nav class="navbar navbar-ct-success navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-minimize">
+                        <button id="minimizeSidebar" class="btn btn-fill btn-icon btn-success">
+                            <i class="ti-more-alt"></i>
+                        </button>
+                    </div>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar bar1"></span>
+                            <span class="icon-bar bar2"></span>
+                            <span class="icon-bar bar3"></span>
+                        </button>
+                        <a class="navbar-brand" href="#Dashboard">
+                            {% block section_title %}Inicio{% endblock %}
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+
+                        <!--form class="navbar-form navbar-left navbar-search-form" role="search">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                            </div>
+                        </form-->
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <!--li>
+                                <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
+                                    <i class="ti-panel"></i>
+                                    <p>Stats</p>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
+                                    <i class="ti-bell"></i>
+                                    <span class="notification">5</span>
+                                    <p class="hidden-md hidden-lg">
+                                        Notifications
+                                        <b class="caret"></b>
+                                    </p>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#not1">Notification 1</a></li>
+                                    <li><a href="#not2">Notification 2</a></li>
+                                    <li><a href="#not3">Notification 3</a></li>
+                                    <li><a href="#not4">Notification 4</a></li>
+                                    <li><a href="#another">Another notification</a></li>
+                                </ul-->
+                            </li>
+                            <li>
+                                <a href="{% url 'login' %}" class="btn-rotate">
+                                    <i class="fa fa-lock"></i> &nbsp;
+                                    Ingresar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+	        <div class="content" {% block instyle %}{% endblock %}>
+
+                <div class="container-fluid">
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% block main %}
+                    <div class="row">
+						<div class="col-md-6">
+                            <h2 class="title">Últimas encuestas</h2>
+							<ul class="timeline timeline-simple">
+                                {% for poll in polls %}
+							    <li class="timeline-inverted">
+							        <div class="timeline-badge success">
+										<i class="fa fa-tasks"></i>
+								    </div>
+							    	<div class="timeline-panel">
+								        <div class="timeline-heading">
+								        	<span class="label label-success">{{ poll.title }}</span>
+								        </div>
+								        <div class="timeline-body">
+								        	{{ poll.description|safe }}
+								        </div>
+										<h6>
+                                            <a href="{% url 'site:fill_poll' poll.id %}">
+                                                <i class="fa fa-edit"></i>
+                                                Responder esta encuesta
+                                            </a>
+										</h6>
+							    	</div>
+							    </li>
+                                {% endfor %}
+							</ul>
+						</div>
+                        <div class="col-md-6">
+                            <h2 class="title">Nuevos eventos</h2>
+							<ul class="timeline timeline-simple">
+                                {% for event in events %}
+							    <li class="timeline-inverted">
+							        <div class="timeline-badge danger">
+										<i class="fa fa-trophy"></i>
+								    </div>
+							    	<div class="timeline-panel">
+								        <div class="timeline-heading">
+								        	<span class="label label-danger">{{ event.name }}</span>
+								        </div>
+								        <div class="timeline-body">
+								        	{% if event.attachment %}
+                                            <p>
+                                                <img src="/media/{{ event.attachment }}" style="max-width: 100%">
+                                            </p>
+                                            {% endif %}
+                                            <p>
+                                                <b>Fecha:</b>
+                                                {% if event.start_date == event.end_date %}
+                                                    {{ event.start_date|date:"d \d\e F \d\e Y" }}
+                                                {% else %}
+                                                    del {{ event.start_date|date:"d" }} al {{ event.end_date|date:"d \d\e F \d\e Y" }}
+                                                {% endif %}
+                                            </p>
+
+                                            <p>
+                                                <b>Costo:</b>
+                                                {% if event.price %}${{ event.price|floatformat:0|intcomma }}{% else %}Gratuito{% endif %}
+                                            </p>
+
+								        </div>
+										<h6>
+                                            <a href="{% url 'site:event' event.id %}">
+                                                <i class="fa fa-chevron-right"></i>
+                                                Más información
+                                            </a>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <a href="{% url 'site:suscribe' event.id %}">
+                                                <i class="fa fa-edit"></i>
+                                                Inscribirse a este evento
+                                            </a>
+										</h6>
+							    	</div>
+							    </li>
+                                {% endfor %}
+							</ul>
+						</div>
+	                </div>
+
+                    {% endblock %}
+	            </div>
+	        </div>
+
+	        <footer class="footer">
+	            <div class="container-fluid">
+	                <nav class="pull-left">
+	                    <!--ul>
+	                        <li>
+	                            <a href="http://www.creative-tim.com">
+	                                Creative Tim
+	                            </a>
+	                        </li>
+	                        <li>
+	                            <a href="http://blog.creative-tim.com">
+	                               Blog
+	                            </a>
+	                        </li>
+	                        <li>
+	                            <a href="http://www.creative-tim.com/license">
+	                                Licenses
+	                            </a>
+	                        </li>
+	                    </ul-->
+	                </nav>
+	                <div class="copyright pull-right">
+	                    &copy; 2016 Indeportes Boyacá
+	                </div>
+	            </div>
+	        </footer>
+	    </div>
+	</div>
+</body>
+
+    <!--   Core JS Files. Extra: PerfectScrollbar + TouchPunch libraries inside jquery-ui.min.js   -->
+    <script src="{% static 'assets/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static 'assets/js/jquery-ui.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'assets/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Forms Validations Plugin -->
+	<script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+
+	<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+	<script src="{% static 'assets/js/moment.min.js' %}"></script>
+
+    <!--  Date Time Picker Plugin is included in this js file -->
+    <script src="{% static 'assets/js/bootstrap-datetimepicker.js' %}"></script>
+
+    <!--  Select Picker Plugin -->
+    <script src="{% static 'assets/js/bootstrap-selectpicker.js' %}"></script>
+
+	<!--  Checkbox, Radio, Switch and Tags Input Plugins -->
+	<script src="{% static 'assets/js/bootstrap-checkbox-radio-switch-tags.js' %}"></script>
+
+	<!-- Circle Percentage-chart -->
+	<script src="{% static 'assets/js/jquery.easypiechart.min.js' %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static 'assets/js/chartist.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'assets/js/bootstrap-notify.js' %}"></script>
+
+    <!-- Sweet Alert 2 plugin -->
+	<script src="{% static 'assets/js/sweetalert2.js' %}"></script>
+
+    <!-- Vector Map plugin -->
+	<script src="{% static 'assets/js/jquery-jvectormap.js' %}"></script>
+
+	<!-- Wizard Plugin    -->
+    <script src="{% static 'assets/js/jquery.bootstrap.wizard.min.js' %}"></script>
+
+    <!--  Bootstrap Table Plugin    -->
+    <script src="{% static 'assets/js/bootstrap-table.js' %}"></script>
+
+    <!--  Full Calendar Plugin    -->
+    <script src="{% static 'assets/js/fullcalendar.min.js' %}"></script>
+
+    <!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+	<script src="{% static 'assets/js/paper-dashboard.js' %}"></script>
+
+    <!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
+	<script src="{% static 'assets/js/demo.js' %}"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+			//demo.initStatsDashboard();
+			//demo.initVectorMap();
+			//demo.initCirclePercentage();
+			demo.initFormExtendedDatetimepickers();
+    	});
+
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove();
+            });
+        }, 4000);
+	</script>
+
+	{% block script %}
+
+    {% endblock %}
+
+</html>

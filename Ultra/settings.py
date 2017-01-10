@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'athletes',
     'settings',
     'polls',
+    'events',
+    'main_site',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

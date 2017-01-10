@@ -1,0 +1,155 @@
+{% extends "admin/base/base.html" %}
+
+{% load static %}
+
+{% block title %}Ver Evento{% endblock %}
+
+{% block section_title %}Información del Evento<br><small style="font-size:12px">{{event.name}}</small>{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">
+                    Nombre del evento <br>
+                    <small>{{event.name}}</small>
+                </h4>
+                <hr>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label>Inscripciones abiertas</label>
+                            <p class="form-control-static">
+                            {% if event.open %}
+                            Si
+                            {% else %}
+                            No
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Inicio:</label>
+                            {{event.start_date|date:"d \d\e F \d\e Y"}}
+                        </div>
+                        <div class="form-group">
+                            <label>Cierre:</label>
+                            {{event.end_date|date:"d \d\e F \d\e Y"}}
+                        </div>
+                        <div class="form-group">
+                            <label>Deporte:</label>
+                            {{event.sport}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+                <hr>
+                <p class="text-center">
+                    <a class="btn btn-fill btn-warning" href="{% url 'events:edit_event' event.id %}">
+                        Editar información del evento
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8">
+        <div class="fresh-table color-green">
+
+            <div class="toolbar">
+                <span style="font-size: 1.5em;font-weight: 300;vertical-align: middle;display: inline-block; margin-right:20px;">
+                    Participantes
+                </span>
+            </div>
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Enunciado">Nombre</th>
+                    <th data-sortable="true" data-field="Doc">Documento</th>
+                    <th data-sortable="true" data-field="Tel">Teléfono</th>
+                    <th data-sortable="true" data-field="mail">Correo</th>
+                </thead>
+                <tbody>
+                    {% for contestant in event.contestant_set.all %}
+                    <tr>
+                        <td>{{contestant.number}}</td>
+                        <td>{{contestant.first_name}} {{contestant.last_name}}</td>
+                        <td>{{contestant.dni}}</td>
+                        <td>{{contestant.phone}}</td>
+                        <td>{{contestant.email}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

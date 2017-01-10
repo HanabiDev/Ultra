@@ -24,6 +24,9 @@ class AppUser(User):
 
     ).contribute_to_class(User, 'avatar')
 
+    def __unicode__(self):
+        return self.first_name+' '+self.last_name
+
 
 class Contractor(AppUser):
 
@@ -90,7 +93,7 @@ class Member(models.Model):
         ('M', 'Mestizos'),
         ('I', 'Indígenas'),
         ('C', 'Campesinos'),
-        ('D', 'Discapacitados'),
+        ('D', 'Pers. con discapacidad'),
         ('A', 'Afrodescendientes')
 
     )
@@ -151,7 +154,7 @@ class BeneficiaryGroup(models.Model):
         ('M', 'Mestizos'),
         ('I', 'Indígenas'),
         ('C', 'Campesinos'),
-        ('D', 'Discapacitados'),
+        ('D', 'Pers. con discapacidad'),
         ('A', 'Afrodescendientes')
 
     )

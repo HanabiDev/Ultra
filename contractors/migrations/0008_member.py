@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('lastname', models.CharField(max_length=50, verbose_name='Apellidos')),
                 ('dni', models.CharField(max_length=30, unique=True, verbose_name='N\xfamero de documento')),
                 ('birthdate', models.DateField(verbose_name='Fecha de nacimiento')),
-                ('social_group', models.CharField(choices=[('M', 'Mestizos'), ('I', 'Ind\xedgenas'), ('C', 'Campesinos'), ('D', 'Discapacitados'), ('A', 'Afrodescendientes')], max_length=1, verbose_name='Grupo social')),
+                ('social_group', models.CharField(choices=[('M', 'Mestizos'), ('I', 'Ind\xedgenas'), ('C', 'Campesinos'), ('D', 'Pers. con discapacidad'), ('A', 'Afrodescendientes')], max_length=1, verbose_name='Grupo social')),
                 ('interv', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contractors.Intervention')),
             ],
         ),

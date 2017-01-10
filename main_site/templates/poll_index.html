@@ -1,0 +1,33 @@
+{% extends 'site/base/base.html' %}
+
+{% block title %}Encuestas{% endblock %}
+
+{% block section_title %}
+    Encuestas
+{% endblock %}
+
+{% block main %}
+    {% for poll in polls %}
+        <div class="col-md-6">
+             <div class="card">
+                <div class="content">
+                    <h4 class="title">{{ poll.title }}</h4>
+                    <hr>
+                    {{ poll.description|safe }}
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-8">
+                            Publicada el {{ poll.creation_date|date:"d \d\e F \d\e Y" }}
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-link" href="{% url 'site:fill_poll' poll.id %}">
+                                <i class="fa fa-edit"></i> Responder
+                            </a>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -17,11 +17,15 @@ from contractors.models import Contractor, FormationItem, SportsAchievements, Se
 from programs.views.subprogram_views import get_gender_resume
 
 
-@login_required(login_url=reverse_lazy('login'))
 def home(request):
+    return redirect(reverse_lazy('site:home'))
+
+@login_required(login_url=reverse_lazy('login'))
+def admin_home(request):
     if request.user.is_staff or request.user.is_superuser:
         return redirect(reverse_lazy('programs:list_programs'))
     return redirect(reverse_lazy('contractor_home'))
+
 
 def app_login(request):
 
@@ -37,7 +41,7 @@ def app_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect(reverse_lazy('home'))
+                    return redirect(reverse_lazy('admin_home'))
 
                 error = 'Usuario no activo'
             else:

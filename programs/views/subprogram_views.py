@@ -235,7 +235,7 @@ def get_social_resume(subprogram):
                 G5 += cat.beneficiarygroup_set.get(group_name='A').masculine_individuals
                 G5 += cat.beneficiarygroup_set.get(group_name='A').femenine_individuals
 
-    return ([G1, G2, G3, G4, G5],['Mestizos', 'Indígenas', 'Campesinos', 'Discapacitados', 'Afrodescendientes'])
+    return ([G1, G2, G3, G4, G5],['Mestizos', 'Indígenas', 'Campesinos', 'Pers. con discapacidad', 'Afrodescendientes'])
 
 
 def get_category_resume(subprogram):
@@ -309,7 +309,7 @@ def get_gender_social_resume(subprogram):
         ['Hombres', None] + [str(d) for d in data[0]],
         ['Mujeres', None] + [str(d) for d in data[1]]
     ]
-    categories = ['Mest.', 'Indíg.', 'Camp.', 'Discap.', 'Afrodesc.']
+    categories = ['Mest.', 'Indíg.', 'Camp.', 'Pers. con discap.', 'Afrodesc.']
 
     return (data,labels,categories)
 
@@ -388,7 +388,7 @@ def get_social_category_resume(subprogram):
         ['Mest.', None] + [str(d) for d in data[0]],
         ['Indíg.', None] + [str(d) for d in data[1]],
         ['Camp.', None] + [str(d) for d in data[2]],
-        ['Discap.', None] + [str(d) for d in data[3]],
+        ['Pers. con discap.', None] + [str(d) for d in data[3]],
         ['Afrodesc.', None] + [str(d) for d in data[4]],
     ]
     categories = ['0 a 5', '6 a 12', '13 a 17', '18 a 29', '30 a 59', '> 60']

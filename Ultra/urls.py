@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^$', app_auth.views.home, name='home'),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^toggle_sidebar/', toggle_sidebar),
+    url(r'^admin/$', app_auth.views.admin_home, name='admin_home'),
     url(r'^admin/auth/', include('app_auth.urls', 'auth')),
     url(r'^admin/auth/login/$', app_auth.views.app_login, name='login'),
     url(r'^admin/auth/logout/$', app_auth.views.app_logout, name='logout'),
@@ -40,6 +41,8 @@ urlpatterns = [
     url(r'^admin/contratistas/', include('contractors.urls', 'contractors')),
     url(r'^admin/deportistas/', include('athletes.urls', 'athletes')),
     url(r'^admin/encuestas/', include('polls.urls', 'polls')),
+    url(r'^eventos/', include('events.urls', 'events')),
+    url(r'^sitio/', include('main_site.urls', 'site')),
 
 
     url(r'^contratista/$', app_auth.views.contractor_home, name='contractor_home'),

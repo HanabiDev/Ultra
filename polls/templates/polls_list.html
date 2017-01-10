@@ -25,6 +25,7 @@
                     <th data-sortable="true" data-field="Fecha">Fecha de creación</th>
                     <th data-sortable="true" data-field="Estado" class="text-center">Abierta</th>
                     <th data-sortable="true" data-field="Preguntas" class="text-center">Preguntas</th>
+                    <th data-sortable="true" data-field="Respuestas" class="text-center">Envíos</th>
                     <th data-field="" class="disabled-sorting">Acción</th>
                 </thead>
                 <tbody>
@@ -46,11 +47,17 @@
                             {{poll.question_set.all.count}}
                         </td>
                         <td>
+                            {{poll.hits}}
+                        </td>
+                        <td>
                             <a href="{% url 'polls:view_poll' poll.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="fa fa-eye"></i>
                             </a>
                             <a href="{% url 'polls:edit_poll' poll.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="{% url 'polls:report_poll' poll.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-file"></i>
                             </a>
                         </td>
                     </tr>
