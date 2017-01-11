@@ -92,6 +92,12 @@
 	                        <p>Grupos</p>
 	                    </a>
 	                </li>
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'events:list_events' %}">
+	                        <i class="fa fa-trophy"></i>
+	                        <p>Eventos rankeables</p>
+	                    </a>
+	                </li>
                     {% endif %}
                     {% if user.is_superuser %}
                     <li class="{% navactive request 'list_polls' %}">

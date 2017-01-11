@@ -80,7 +80,7 @@
                 <tbody>
                     {% for contestant in event.contestant_set.all %}
                     <tr>
-                        <td>{{contestant.number}}</td>
+                        <td>{{contestant.cid}}</td>
                         <td>{{contestant.first_name}} {{contestant.last_name}}</td>
                         <td>{{contestant.dni}}</td>
                         <td>{{contestant.phone}}</td>

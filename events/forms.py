@@ -3,7 +3,7 @@
 from betterforms import forms as b_forms
 from django import forms
 
-from events.models import Event
+from events.models import Event, Contestant
 from polls.models import Poll, Question, Option
 from programs.models import Program, Subprogram, Project
 
@@ -36,25 +36,27 @@ class EventForm(b_forms.BetterModelForm):
         }
 
 
-class QuestionForm(b_forms.BetterModelForm):
+class ContestantForm(b_forms.BetterModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ContestantForm, self).__init__(*args, **kwargs)
+
+        if kwargs.get('initial'):
+            event = kwargs.get('initial').get('event')
+            if event:
+                self.fields['event'].choices = [(event.id, event.name)]
 
     class Meta:
-        model = Question
+        model = Contestant
         fields = '__all__'
 
         widgets = {
-            'poll': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
-            'statement': forms.TextInput(attrs={'class': 'form-control'}),
-        }
-
-
-class OptionForm(b_forms.BetterModelForm):
-
-    class Meta:
-        model = Option
-        exclude = ['hits']
-
-        widgets = {
-            'question': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
-            'text': forms.TextInput(attrs={'class': 'form-control'}),
+            'event': forms.Select(attrs={'class': 'selectpicker', 'data-style':'btn-info btn-fill btn-block'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'dni': forms.NumberInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'support': forms.FileInput(attrs={'class': 'form-control'}),
+            'cid': forms.HiddenInput()
         }

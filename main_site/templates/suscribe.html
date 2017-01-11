@@ -1,11 +1,9 @@
-{% extends 'admin/base/base.html' %}
+{% extends 'site/base/base.html' %}
 
-{% block title %}{% if editing %}Editar evento{% else %}Crear evento{% endif %}{% endblock %}
+{% block title %}Inscribirse al evento{% endblock %}
 
 {% block section_title %}
-    {% if editing %}
-        Editar información del evento<br><small style="font-size:12px">{{event.name}}</small>
-    {% else %}Crear evento{% endif %}
+    Inscripción al evento
 {% endblock %}
 
 {% block main %}
@@ -13,13 +11,18 @@
 <div class="row">
     <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
         {% csrf_token %}
-        <div class="col-md-10">
+        {{ form.errors }}
+        <div class="col-md-8">
              <div class="card">
                 <div class="content">
                     {% for field in form %}
                         <div class="form-group">
-                            <label class="col-md-3 control-label">{{field.label}}</label>
-                            <div class="col-md-8">
+                            <label class="col-md-4 control-label">
+                                {% if not field.is_hidden %}
+                                {{field.label}}
+                                {% endif %}
+                            </label>
+                            <div class="col-md-6">
                                 {{field}}
                             </div>
                         </div>
@@ -27,10 +30,10 @@
                     <hr>
                     <div class="form-group">
                         <div class="col-md-12 text-right">
-                            <a class="btn btn-fill btn-danger" href="{% url 'events:list_events' %}">
+                            <a class="btn btn-fill btn-danger" href="{% url 'site:events' %}">
                                 Cancelar
                             </a>
-                            <input type="submit" class="btn btn-fill btn-success" value="{% if editing %}Guardar cambios{% else %}Crear evento{% endif %}">
+                            <input type="submit" class="btn btn-fill btn-success" value="Inscribirse">
                         </div>
                     </div>
                 </div>

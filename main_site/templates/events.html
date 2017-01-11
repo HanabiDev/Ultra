@@ -1,0 +1,51 @@
+{% extends 'site/base/base.html' %}
+{% load humanize %}
+
+{% block title %}Encuestas{% endblock %}
+
+{% block section_title %}
+    Encuestas
+{% endblock %}
+
+{% block main %}
+    {% for event in events %}
+        <div class="col-md-6">
+             <div class="card">
+                <div class="content">
+                    <h4 class="title">{{ event.name }}</h4>
+                    <hr>
+                    {{ event.description|safe }}
+                    <div class="row" style="padding: 10px 15px;">
+                        {% if event.attachment %}
+                        <p>
+                            <img src="/media/{{ event.attachment }}" style="max-width: 100%">
+                        </p>
+                        {% endif %}
+                        {{ event.description|safe }}
+                        <p>
+                            <b>Fecha:</b>
+                            {% if event.start_date == event.end_date %}
+                                {{ event.start_date|date:"d \d\e F \d\e Y" }}
+                            {% else %}
+                                del {{ event.start_date|date:"d" }} al {{ event.end_date|date:"d \d\e F \d\e Y" }}
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            <b>Costo:</b>
+                            {% if event.price %}${{ event.price|floatformat:0|intcomma }}{% else %}Gratuito{% endif %}
+                        </p>
+                        <hr>
+                        <h6>
+                            <a href="{% url 'site:suscribe' event.id %}">
+                                <i class="fa fa-edit"></i>
+                                Inscribirse a este evento
+                            </a>
+                        </h6>
+                    </div>
+                </div>
+             </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

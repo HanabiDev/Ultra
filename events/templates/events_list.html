@@ -39,13 +39,11 @@
                         <td>{{event.end_date}}</td>
                         <td>{{event.contestant_set.all.count}}</td>
                         <td class="text-center">
-                            <a href="{% url 'events:toggle_event' event.id %}">
                             {% if event.open %}
                                 <span class="fa fa-circle text-success"></span>
                             {% else %}
                                 <span class="fa fa-circle text-danger"></span>
                             {% endif %}
-                            </a>
                         </td>
                         <td>
                             <a href="{% url 'events:view_event' event.id %}" class="btn btn-simple text-success btn-icon edit">
@@ -54,6 +52,15 @@
                             <a href="{% url 'events:edit_event' event.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="fa fa-pencil"></i>
                             </a>
+                            {% if event.rank_set.all.count == 0 %}
+                            <a href="{% url 'events:rank_event' event.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                <i class="fa fa-trophy"></i>
+                            </a>
+                            {% else %}
+                                <a href="{% url 'events:rank_report' event.id %}" class="btn btn-simple btn-warning btn-icon edit">
+                                    <i class="fa fa-file"></i>
+                                </a>
+                            {% endif  %}
                         </td>
                     </tr>
                     {% endfor %}

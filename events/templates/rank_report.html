@@ -1,0 +1,95 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Eventos{% endblock %}
+
+{% block section_title %}Eventos{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="fresh-table color-green">
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-sortable="true" data-field="ID">ID</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Deporte">Puesto</th>
+                </thead>
+                <tbody>
+                    {% for rank in ranks %}
+                    <tr>
+                        <td>{{rank.contestant.cid}}</td>
+                        <td>{{rank.contestant.first_name}} {{rank.contestant.last_name}}</td>
+                        <td>{{rank.rank}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

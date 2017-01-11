@@ -6,7 +6,7 @@ from django.urls.base import reverse_lazy
 
 from contractors.models import AppUser
 from events.forms import EventForm
-from events.models import Event
+from events.models import Event, Rank
 
 
 def list_events(request):
@@ -51,6 +51,22 @@ def update_event(request, event_id):
         return render(request, 'event.html', {'form': form})
 
 
-def toggle_event(request, event_id):
-    pass
+def rank_event(request, event_id):
+    event = Event.objects.get(id=event_id)
+    if request.method == 'GET':
+        return render(request, 'rank_event.html', {'event':event})
 
+    if request.method == 'POST':
+        for cont in event.contestant_set.all():
+            number = request.POST.get(str(cont.id))
+            rank = Rank()
+            rank.event = event
+            rank.contestant = cont
+            rank.rank = number
+            rank.save()
+
+        return redirect(reverse_lazy('events:list_events'))
+
+def rank_report(request, event_id):
+    ranks = Rank.objects.filter(event_id=event_id).order_by('rank')
+    return render(request, 'rank_report.html', {'ranks':ranks})

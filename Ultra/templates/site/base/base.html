@@ -116,7 +116,7 @@
                     {% endfor %}
                     {% block main %}
                     <div class="row">
-						<div class="col-md-6">
+						<div class="col-md-5">
                             <h2 class="title">Últimas encuestas</h2>
 							<ul class="timeline timeline-simple">
                                 {% for poll in polls %}
@@ -142,7 +142,7 @@
                                 {% endfor %}
 							</ul>
 						</div>
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <h2 class="title">Nuevos eventos</h2>
 							<ul class="timeline timeline-simple">
                                 {% for event in events %}
@@ -160,6 +160,7 @@
                                                 <img src="/media/{{ event.attachment }}" style="max-width: 100%">
                                             </p>
                                             {% endif %}
+                                            {{ event.description|safe }}
                                             <p>
                                                 <b>Fecha:</b>
                                                 {% if event.start_date == event.end_date %}
@@ -176,11 +177,6 @@
 
 								        </div>
 										<h6>
-                                            <a href="{% url 'site:event' event.id %}">
-                                                <i class="fa fa-chevron-right"></i>
-                                                Más información
-                                            </a>
-                                            &nbsp;&nbsp;&nbsp;
                                             <a href="{% url 'site:suscribe' event.id %}">
                                                 <i class="fa fa-edit"></i>
                                                 Inscribirse a este evento

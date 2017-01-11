@@ -1,0 +1,55 @@
+{% extends 'admin/base/base.html' %}
+
+{% block title %}Establecer clasificación{% endblock %}
+
+{% block section_title %}
+    Establecer clasificación
+{% endblock %}
+
+{% block main %}
+
+<div class="row">
+    <form action="{{request.path}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <div class="col-md-10">
+             <div class="card">
+                <div class="content">
+                    <div class="row">
+
+                        <div class="col-md-8 col-md-offset-2">
+
+                            <table id="fresh-table" class="table">
+                                <thead>
+                                <th data-sortable="true" data-field="ID">ID</th>
+                                <th data-sortable="true" data-field="Nombre">Nombre</th>
+                                <th data-sortable="true" data-field="Puesto">Puesto</th>
+                                </thead>
+                                <tbody>
+                                {% for contestant in event.contestant_set.all %}
+                                    <tr>
+                                        <td>{{contestant.cid}}</td>
+                                        <td>{{contestant.first_name}} {{contestant.last_name}}</td>
+                                        <td>
+                                            <input type="number" class="form-control" name="{{ contestant.id }}">
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-fill btn-danger" href="{% url 'events:list_events' %}">
+                                Cancelar
+                            </a>
+                            <input type="submit" class="btn btn-fill btn-success" value="Guardar clasificación">
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
