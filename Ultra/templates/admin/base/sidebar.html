@@ -92,7 +92,7 @@
 	                        <p>Grupos</p>
 	                    </a>
 	                </li>
-                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+                    <li class="{% navactive request 'list_events new_event view_event edit_event rank_event rank_report' %}">
 	                    <a href="{% url 'events:list_events' %}">
 	                        <i class="fa fa-trophy"></i>
 	                        <p>Eventos rankeables</p>
@@ -100,7 +100,7 @@
 	                </li>
                     {% endif %}
                     {% if user.is_superuser %}
-                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+                    <li class="{% navactive request 'list_events new_event view_event edit_event rank_event rank_report' %}">
 	                    <a href="{% url 'events:list_events' %}">
 	                        <i class="fa fa-calendar-check-o"></i>
 	                        <p>Eventos rankeables</p>
