@@ -6,7 +6,14 @@
 
 {% block section_title %}Programas{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a class="active"><span class="fa fa-bar-chart"> </span> Programas</a></li>
+{% endblock %}
+
 {% block main %}
+
+
 <div class="row">
     <div class="col-md-12">
 

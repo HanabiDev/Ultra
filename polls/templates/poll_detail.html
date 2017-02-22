@@ -6,6 +6,12 @@
 
 {% block section_title %}Información de Encuesta <br><small style="font-size:12px">{{poll.title}}</small>{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'polls:list_polls' %}"><span class="fa fa-tasks"> </span> Encuestas</a></li>
+<li><a class="active"><span class="fa fa-certificate"> </span> {{poll.title}}</a></li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-4 col-md-4">
@@ -79,7 +85,7 @@
                         <td>{{question.option_set.all.count}}</td>
                         <td>
                             <a href="{% url 'polls:view_question' question.poll.id  question.id %}" class="btn btn-simple text-success btn-icon edit">
-                                <i class="fa fa-plus"></i>
+                                <i class="fa fa-eye"></i>
                             </a>
                             <a href="{% url 'polls:edit_question' question.poll.id  question.id %}" class="btn btn-simple btn-warning btn-icon edit">
                                 <i class="fa fa-pencil"></i>

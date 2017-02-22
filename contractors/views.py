@@ -140,7 +140,7 @@ def edit_achievement(request, user_id, achievement_id):
 
     if request.method == 'GET':
         form = FormationItemForm(instance=achievement, initial={'trainer':contractor})
-        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'editing':True})
 
     if request.method == 'POST':
         form = FormationItemForm(request.POST, request.FILES, instance=achievement)
@@ -149,7 +149,7 @@ def edit_achievement(request, user_id, achievement_id):
             achievement = form.save()
             return redirect(reverse_lazy('contractors:view_contractor', kwargs={'user_id': str(contractor.id)}))
 
-        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'formation':True, 'editing':True})
+        return render(request, 'formation.html', {'contractor':contractor, 'form': form, 'editing':True})
 
 
 @user_passes_test(permissions, login_url='login')

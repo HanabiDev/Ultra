@@ -8,6 +8,17 @@
     {% else %}Registrar deporte{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'settings:settings_home' %}"><span class="fa fa-gears"> </span> Configuración</a></li>
+<li><a href="{% url 'settings:sports_index' %}"><span class="fa fa-futbol-o"> </span> Deportes</a></li>
+<li>
+    <a class="active"><span class="fa {% if editing %}fa-edit{% else %}fa-plus{% endif %}"> 
+        </span> {% if editing %}Editar Deporte{% else %}Registrar Deporte{% endif %}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

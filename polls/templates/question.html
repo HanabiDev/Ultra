@@ -8,6 +8,17 @@
     {% else %}Registrar pregunta{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'polls:list_polls' %}"><span class="fa fa-tasks"> </span> Encuestas</a></li>
+<li><a href="{% url 'polls:view_poll' poll.id %}"><span class="fa fa-tasks"> </span> {{poll.title}}</a></li>
+<li>   
+    <a class="active">
+        <span class="fa fa-certificate"> </span> {% if editing %}Editar pregunta{% else %}Registrar pregunta{% endif %}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

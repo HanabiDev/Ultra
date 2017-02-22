@@ -182,7 +182,7 @@ def create_question(request, poll_id):
     poll = Poll.objects.get(id=poll_id)
     if request.method == 'GET':
         form = QuestionForm(initial={'poll':poll})
-        return render(request, 'question.html', {'form': form})
+        return render(request, 'question.html', {'form': form, 'poll':poll})
 
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES)
@@ -192,7 +192,7 @@ def create_question(request, poll_id):
             return redirect(reverse_lazy('polls:view_question',
                                          kwargs={'poll_id': str(poll.id), 'question_id': str(new_question.id)}))
 
-        return render(request, 'question.html', {'form': form})
+        return render(request, 'question.html', {'form': form, 'poll':poll})
 
 
 
@@ -210,7 +210,7 @@ def update_question(request, poll_id, question_id):
     question = Question.objects.get(id=question_id)
     if request.method == 'GET':
         form = QuestionForm(instance=question, initial={'poll':poll})
-        return render(request, 'question.html', {'question':question, 'form': form, 'editing': True})
+        return render(request, 'question.html', {'question':question, 'poll':poll, 'form': form, 'editing': True})
 
     if request.method == 'POST':
         form = QuestionForm(request.POST, request.FILES, instance=question)
@@ -219,7 +219,7 @@ def update_question(request, poll_id, question_id):
             question = form.save()
             return redirect(reverse_lazy('polls:view_poll', kwargs={'poll_id': str(poll.id)}))
 
-        return render(request, 'question.html', {'poll':poll, 'form': form, 'editing':True})
+        return render(request, 'question.html', {'question':question, 'poll':poll, 'form': form, 'editing': True})
 
 
 @user_passes_test(permissions, login_url='login')
@@ -230,7 +230,7 @@ def create_option(request, poll_id, question_id):
 
     if request.method == 'GET':
         form = OptionForm(initial={'question':question})
-        return render(request, 'option.html', {'form': form})
+        return render(request, 'option.html', {'form': form, 'poll':poll, 'question':question})
 
     if request.method == 'POST':
         form = OptionForm(request.POST, request.FILES)
@@ -240,7 +240,7 @@ def create_option(request, poll_id, question_id):
             return redirect(reverse_lazy('polls:view_question',
                                          kwargs={'poll_id': str(poll.id), 'question_id': str(question.id)}))
 
-        return render(request, 'option.html', {'form': form})
+        return render(request, 'option.html', {'form': form, 'poll':poll, 'question':question})
 
 
 @user_passes_test(permissions, login_url='login')
@@ -252,7 +252,7 @@ def update_option(request, poll_id, question_id, option_id):
 
     if request.method == 'GET':
         form = OptionForm(instance=option, initial={'question':question})
-        return render(request, 'option.html', {'question':question, 'form': form, 'editing': True})
+        return render(request, 'option.html', {'question':question, 'form': form, 'poll':poll, 'question':question, 'editing': True})
 
     if request.method == 'POST':
         form = OptionForm(request.POST, request.FILES, instance=option)
@@ -262,4 +262,4 @@ def update_option(request, poll_id, question_id, option_id):
             return redirect(reverse_lazy('polls:view_question',
                                          kwargs={'poll_id': str(poll.id), 'question_id': str(question.id)}))
 
-        return render(request, 'option.html', {'poll':poll, 'form': form, 'editing':True})
+        return render(request, 'option.html', {'question':question, 'form': form, 'poll':poll, 'question':question, 'editing': True})

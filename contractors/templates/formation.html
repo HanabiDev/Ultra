@@ -11,6 +11,23 @@
     <br><small style="font-size:12px">{{contractor.get_full_name}}</small>
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'contractors:list_contractors' %}"><span class="fa fa-user"> </span> Contratistas</a></li>
+<li>
+    <a href="{% url 'contractors:view_contractor' contractor.id %}">
+        <span class="fa fa-certificate"> </span> {{contractor.get_full_name}}
+    </a>
+</li>
+<li>
+    <a class="active">
+        <span class="fa {% if formation %}fa-mortar-board{%else%}fa-trophy{% endif %}"> </span>
+        {% if editing %}Editar {% if formation %}item de formación{% else %}logro deportivo{% endif %}
+        {% else %}Registrar {% if formation %}item de formación{% else %}logro deportivo{% endif %}{% endif %}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

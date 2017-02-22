@@ -6,9 +6,9 @@
 			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
-			<div class="logo">
+			<div class="logo" style="height:95px;">
 				<a href="/" class="simple-text">
-                    <img src="{% static 'assets/img/logo.png' %}" alt="Ultra logo" height="40px">
+                    <img src="{% static 'assets/img/logo.png' %}" alt="Ultra logo" height="60px">
 				</a>
 			</div>
 			<div class="logo logo-mini">
@@ -100,6 +100,12 @@
 	                </li>
                     {% endif %}
                     {% if user.is_superuser %}
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'events:list_events' %}">
+	                        <i class="fa fa-calendar-check-o"></i>
+	                        <p>Eventos rankeables</p>
+	                    </a>
+	                </li>
                     <li class="{% navactive request 'list_polls' %}">
 	                    <a href="{% url 'polls:list_polls' %}">
 	                        <i class="fa fa-tasks"></i>

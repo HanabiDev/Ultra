@@ -8,6 +8,16 @@
     {% else %}Registrar encuesta{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'polls:list_polls' %}"><span class="fa fa-tasks"> </span> Encuestas</a></li>
+{% if editing %}
+<li><a class="active"><span class="fa fa-edit"> </span> Editar encuesta</a></li>
+{% else %}
+<li><a class="active"><span class="fa fa-plus"> </span> Registrar encuesta</a></li>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

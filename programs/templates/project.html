@@ -7,6 +7,16 @@
     {% else %}Registrar proyecto{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'projects:list_projects' %}"><span class="fa fa-bar-chart"> </span> Proyectos</a></li>
+{% if editing %}
+<li><a class="active"><span class="fa fa-edit"> </span> Editar proyecto</a></li>
+{% else %}
+<li><a class="active"><span class="fa fa-plus"> </span> Registrar proyecto</a></li>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

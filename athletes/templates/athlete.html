@@ -4,6 +4,16 @@
 
 {% block section_title %}{% if editing %}Editar deportista{% else %}Nuevo deportista{% endif %}{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'athletes:list_athletes' %}"><span class="fa fa-trophy"> </span> Deportistas</a></li>
+{% if editing %}
+<li><a class="active"><span class="fa fa-edit"> </span> Editar deportista</a></li>
+{% else %}
+<li><a class="active"><span class="fa fa-plus"> </span> Registrar deportista</a></li>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

@@ -9,6 +9,22 @@
 
 {% block section_title %}{% if editing %}Editar intervención{% else %}Nueva intervención{% endif %}{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'contractors:list_contractors' %}"><span class="fa fa-user"> </span> Contratistas</a></li>
+<li>
+    <a href="{% url 'contractors:view_contractor' contractor.id %}">
+        <span class="fa fa-certificate"> </span> {{contractor.get_full_name}}
+    </a>
+</li>
+<li>
+    <a class="active">
+        <span class="fa {% if editing %}fa-edit{%else%}fa-plus{% endif %}"> </span>
+        {% if editing %}Editar intervención{% else %}Nueva intervención{% endif %}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

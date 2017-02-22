@@ -8,6 +8,17 @@
     {% else %}Registrar Club{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'settings:settings_home' %}"><span class="fa fa-gears"> </span> Configuración</a></li>
+<li><a href="{% url 'settings:clubs_index' %}"><span class="fa fa-flag-checkered"> </span> Clubes</a></li>
+<li>
+    <a class="active"><span class="fa {% if editing %}fa-edit{% else %}fa-plus{% endif %}"> 
+        </span> {% if editing %}Editar Club{% else %}Registrar Club{% endif %}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

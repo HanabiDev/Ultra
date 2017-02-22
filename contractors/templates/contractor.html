@@ -4,6 +4,16 @@
 
 {% block section_title %}{% if editing %}Editar contratista{% else %}Nuevo contratista{% endif %}{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'contractors:list_contractors' %}"><span class="fa fa-user"> </span> Contratistas</a></li>
+{% if editing %}
+<li><a class="active"><span class="fa fa-edit"> </span> Editar contratista</a></li>
+{% else %}
+<li><a class="active"><span class="fa fa-plus"> </span> Registrar contratista</a></li>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

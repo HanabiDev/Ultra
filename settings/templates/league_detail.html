@@ -6,6 +6,17 @@
 
 {% block section_title %}Información de la Liga <br><small style="font-size:12px">{{league.name}}</small>{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'settings:settings_home' %}"><span class="fa fa-gears"> </span> Configuración</a></li>
+<li><a href="{% url 'settings:leagues_index' %}"><span class="fa fa-spinner"> </span> Ligas</a></li>
+<li>
+    <a class="active"><span class="fa fa-certificate"> 
+        </span> {{ league.name }}
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-6 col-md-6">

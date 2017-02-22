@@ -10,11 +10,11 @@ from events.models import Event, Rank
 
 
 def list_events(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(owner_id=request.user.id)
     return render(request, 'events_list.html', {'events':events})
 
 def create_event(request):
-    owner = AppUser.objects.get(user_ptr=request.user.id)
+    owner = User.objects.get(id=request.user.id)
     if request.method == 'GET':
         form = EventForm(initial={'owner':owner})
         return render(request, 'event.html', {'form': form})

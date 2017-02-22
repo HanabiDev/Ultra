@@ -18,7 +18,7 @@ from athletes.forms import AthleteForm, AthleteCardForm, AthleteResultForm, Athl
     TestReferenceForm, PhysicalTestForm
 from athletes.forms import AntropometricValorationForm, PsicologicValorationForm, PhysiologicalTestForm
 from athletes.models import Athlete, SportsTab, Result, BiomedicTab, League, MarkReference, TestReference, \
-    PhysiologicalTest, PhysicalTest
+    PhysiologicalTest, PhysicalTest, SocialCard
 from django.urls.base import reverse_lazy
 
 from athletes.templatetags.user_tags import upto
@@ -226,7 +226,7 @@ def create_athlete_socialcard(request, user_id):
 
     if request.method == 'GET':
         form = AthleteSocialCardForm(initial={'athlete':athlete})
-        return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete, 'sports':True})
+        return render(request, 'social_card.html', {'form': form, 'athlete':athlete})
 
     if request.method == 'POST':
         form = AthleteSocialCardForm(request.POST, request.FILES)
@@ -236,7 +236,7 @@ def create_athlete_socialcard(request, user_id):
             return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
             #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
 
-        return render(request, 'athlete.html', {'form': form})
+        return render(request, 'social_card.html', {'form': form, 'athlete':athlete})
 
 
 #=======================================================================  Athlete Social Card ================#
@@ -246,21 +246,21 @@ def create_athlete_socialcard(request, user_id):
 @login_required(login_url='login')
 def edit_athlete_socialcard(request, user_id):
     athlete = Athlete.objects.get(id=user_id)
-    card = SportsTab.objects.get(athlete__id=user_id)
+    card = SocialCard.objects.get(athlete__id=user_id)
 
     if request.method == 'GET':
-        form = AthleteCardForm(instance=card, initial={'athlete':athlete})
-        return render(request, 'athlete_card.html', {'form': form, 'athlete':athlete, 'sports':True})
+        form = AthleteSocialCardForm(instance=card, initial={'athlete':athlete})
+        return render(request, 'social_card.html', {'form': form, 'athlete':athlete})
 
     if request.method == 'POST':
-        form = AthleteCardForm(request.POST, request.FILES, instance=card)
+        form = AthleteSocialCardForm(request.POST, request.FILES, instance=card)
 
         if form.is_valid():
             new_card = form.save()
             return redirect(reverse_lazy('athletes:view_athlete', kwargs={'user_id': str(athlete.id)}))
             #return redirect(reverse_lazy('athletes:view', kwargs={'user_id': str(new_athlete.id)}))
 
-        return render(request, 'athlete.html', {'form': form})
+        return render(request, 'social_card.html', {'form': form, 'athlete':athlete})
 
 
 #==================================================================  Athlete Biomedic Card ===================#

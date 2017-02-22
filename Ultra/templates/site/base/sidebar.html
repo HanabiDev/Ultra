@@ -6,9 +6,9 @@
 			Tip 1: you can change the color of the sidebar's background using: data-background-color="white | brown"
 			Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
 		-->
-			<div class="logo">
+			<div class="logo" style="height:95px;">
 				<a href="/" class="simple-text">
-                    <img src="{% static 'assets/img/logo.png' %}" alt="Ultra logo" height="40px">
+                    <img src="{% static 'assets/img/logo.png' %}" alt="Ultra logo" height="60px">
 				</a>
 			</div>
 			<div class="logo logo-mini">
@@ -18,7 +18,7 @@
 			</div>
 	    	<div class="sidebar-wrapper">
 
-	            <ul class="nav">
+	            <ul class="nav" style="margin-top:0">
                     <li class="{% navactive request 'list_contractors new_contractor view_contractor edit_contractor' %}">
 	                    <a href="{% url 'site:home' %}">
 	                        <i class="fa fa-home"></i>

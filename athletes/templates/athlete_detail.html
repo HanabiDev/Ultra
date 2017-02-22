@@ -7,6 +7,12 @@
 
 {% block section_title %}Ver deportista{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'athletes:list_athletes' %}"><span class="fa fa-trophy"> </span> Deportistas</a></li>
+<li><a class="active"><span class="fa fa-certificate"> </span> {{athlete}}</a></li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-4 col-md-5">
@@ -205,6 +211,11 @@
         <div class="card">
             <div class="header">
                 <h4 class="title">Información Socio-Económica</h4>
+                <p class="text-right">
+                    {% if athlete.socialcard_set.all.count == 1%}
+                         <a class="btn btn-fill btn-success" href="{% url 'athletes:edit_athlete_scard' athlete.id %}">Editar información</a>
+                    {% endif %}
+                </p>
                 <hr>
             </div>
             <div class="content">

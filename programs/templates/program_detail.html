@@ -6,6 +6,12 @@
 
 {% block section_title %}Información de Programa <br><small style="font-size:12px">{{program.name}}</small>{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'programs:list_programs' %}"><span class="fa fa-bar-chart"> </span> Programas</a></li>
+<li><a class="active"><span class="fa fa-certificate"> </span> {{program.name}}</a></li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-5 col-md-5">

@@ -8,11 +8,12 @@ from django.urls.base import reverse_lazy
 from events.forms import EventForm, ContestantForm
 from events.models import Event, Contestant
 from polls.models import Poll, Option
-
+import datetime
 
 def home(request):
+    now = datetime.datetime.now()
     polls = Poll.objects.filter(closed=False).order_by('-creation_date')[:5]
-    events = Event.objects.filter(open=True)[:5]
+    events = Event.objects.filter(open=True, end_date__gte=now.date()).order_by('start_date')[:5]
     return render(request, 'site/base/base.html', {'polls':polls, 'events':events})
 
 def list_polls(request):
@@ -39,7 +40,8 @@ def answer_poll(request, poll_id):
         return redirect(reverse_lazy('site:home'))
 
 def list_events(request):
-    events = Event.objects.filter(open=True)
+    now = datetime.datetime.now()
+    events = Event.objects.filter(open=True, end_date__gte=now.date()).order_by('start_date')
     return render(request, 'events.html', {'events':events})
 
 def event_suscribe(request, event_id):

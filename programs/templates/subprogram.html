@@ -7,6 +7,16 @@
     {% else %}Registrar subprograma{% endif %}
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'subprograms:list_subprograms' %}"><span class="fa fa-bar-chart"> </span> Subprogramas</a></li>
+{% if editing %}
+<li><a class="active"><span class="fa fa-edit"> </span> Editar subprograma</a></li>
+{% else %}
+<li><a class="active"><span class="fa fa-plus"> </span> Registrar subprograma</a></li>
+{% endif %}
+{% endblock %}
+
 {% block main %}
 
 <div class="row">

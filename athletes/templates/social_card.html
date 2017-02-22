@@ -1,13 +1,13 @@
 {% extends 'admin/base/base.html' %}
 
 {% block title %}
-    {% if editing %}Editar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}
-    {% else %}Registrar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}{% endif %}
+    {% if editing %}Editar información socio-económica
+    {% else %}Registrar información socio-económica{% endif %}
 {% endblock %}
 
 {% block section_title %}
-    {% if editing %}Editar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}
-    {% else %}Registrar {% if sports %}ficha deportiva{% else %}ficha biomédica{% endif %}{% endif %}
+    {% if editing %}Editar información socio-económica
+    {% else %}Registrar información socio-económica{% endif %}
     <br><small style="font-size:12px">{{athlete.first_name}} {{athlete.last_name}}</small>
 {% endblock %}
 
@@ -15,7 +15,7 @@
 <li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
 <li><a href="{% url 'athletes:list_athletes' %}"><span class="fa fa-trophy"> </span> Deportistas</a></li>
 <li><a href="{% url 'athletes:view_athlete' athlete.id %}"><span class="fa fa-certificate"> </span> {{athlete}}</a></li>
-<li><a class="active"><span class="fa fa-certificate"> </span> Ficha deportiva</a></li>
+<li><a class="active"><span class="fa fa-certificate"> </span> Informacion socio-económica</a></li>
 {% endblock %}
 
 {% block main %}

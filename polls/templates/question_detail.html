@@ -6,6 +6,17 @@
 
 {% block section_title %}Información de Pregunta <br><small style="font-size:12px">{{question.name}}</small>{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'polls:list_polls' %}"><span class="fa fa-tasks"> </span> Encuestas</a></li>
+<li><a href="{% url 'polls:view_poll' question.poll.id %}"><span class="fa fa-tasks"> </span> {{question.poll.title}}</a></li>
+<li>   
+    <a class="active">
+        <span class="fa fa-certificate"> </span> Ver pregunta ({{question.statement}})
+    </a>
+</li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-5 col-md-5">
@@ -27,7 +38,7 @@
                 <hr>
                 <p class="text-center">
                     <a class="btn btn-fill btn-warning" href="{% url 'polls:edit_question' question.poll.id question.id %}">
-                        Editar información del pregunta
+                        Editar información de la pregunta
                     </a>
                 </p>
             </div>

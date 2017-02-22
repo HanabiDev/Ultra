@@ -6,6 +6,12 @@
 
 {% block section_title %}Ver información de proyecto <br><small style="font-size:12px">{{project.name}}</small>{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'projects:list_projects' %}"><span class="fa fa-bar-chart"> </span> Proyectos</a></li>
+<li><a class="active"><span class="fa fa-certificate"> </span> {{project.name}}</a></li>
+{% endblock %}
+
 {% block main %}
 <div class="row">
     <div class="col-lg-12 col-md-12">

@@ -9,7 +9,7 @@ from contractors.models import AppUser
 
 
 class Event(models.Model):
-    owner = models.ForeignKey(AppUser, verbose_name=u'Organizador')
+    owner = models.ForeignKey(User, verbose_name=u'Organizador')
     name = models.CharField(max_length=100, verbose_name=u'Nombre del evento')
     description = models.TextField(verbose_name=u'Descripción')
     sport = models.ForeignKey(Sport, verbose_name=u'Deporte')

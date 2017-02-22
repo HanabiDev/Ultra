@@ -107,6 +107,14 @@
 
 	        <div class="content" {% block instyle %}{% endblock %}>
 	            <div class="container-fluid">
+                    <div class="row hidden-xs">
+                    	<ul id="breadcrumb">
+                            {% block breadcrumb %}
+
+                            {% endblock %}
+                        </ul>
+                    </div>
+                    
                     {% block main %}
 
 	                <div class="row">
