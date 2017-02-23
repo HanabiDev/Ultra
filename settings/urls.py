@@ -27,7 +27,9 @@ urlpatterns = [
 	url(r'^clubes/ver/(?P<club_id>\d+)/$', settings.view_club, name='view_club'),
 	url(r'^clubes/editar/(?P<club_id>\d+)/$', settings.edit_club, name='edit_club'),
 	url(r'^clubes/eliminar/(?P<club_id>\d+)/$', settings.delete_club, name='delete_club'),
-    
-    #url(r'^editar/(?P<user_id>\d+)/', athletes.update_athlete, name='edit_athlete'),
-    #url(r'^municipios/', athletes.filter_municipalities, name='municipalities'),
+
+	url(r'^usuarios/$', settings.users_index, name='users_index'),
+	url(r'^usuarios/ver/(?P<user_id>\d+)/$', settings.view_user, name='view_user'),
+    #url(r'^usuarios/nuevo/$', settings.create_user, name='new_user'),
+	#url(r'^usuarios/editar/(?P<club_id>\d+)/$', settings.edit_club, name='edit_user'),
 ]
