@@ -68,8 +68,8 @@ def restore_password(request):
             send_password_restore_mail(user, password)
             message = 'Se ha enviado un mensaje a su cuenta de correo con la información para restablecer la contraseña.'
             return render(request, 'login.html', {'message':message, 'restoring':True})
-        finally:
-            error = 'El usuario no existe'
+        except Exception:
+            error = 'Ha ocurrido un error'
             return render(request, 'login.html', {'message': error, 'restoring': True})
 
     else:
