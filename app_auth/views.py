@@ -9,13 +9,21 @@ from django.contrib.auth.models import User
 from django.db.models.query_utils import Q
 
 from django.urls.base import reverse_lazy
+from django.utils.timesince import timesince
 
+from athletes.templatetags.user_tags import upto
 from contractors.forms import FormationItemForm, AchievementForm, EditContractorForm, EditContractorProfileForm, \
     CustomPasswordChangeForm, MemberForm
 from contractors.models import Contractor, FormationItem, SportsAchievements, Session, BeneficiaryCategory, \
-    BeneficiaryGroup, Intervention, Member
+    BeneficiaryGroup, Intervention, Member, MassiveEvent, EventBeneficiaryCategory, SessionBeneficiaryCategory
 from programs.views.subprogram_views import get_gender_resume
 
+
+from datetime import date
+
+def calculate_age(born):
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 def home(request):
     return redirect(reverse_lazy('site:home'))
@@ -87,7 +95,7 @@ def contractor_home(request):
 
         for session in interv.session_set.all():
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for cat in categories:
                 Mt = cat.beneficiarygroup_set.all().aggregate(
@@ -100,17 +108,31 @@ def contractor_home(request):
 
                 benefs += Mt
                 benefs += Ft
+
+    for event in contractor.massiveevent_set.all():
+        categories = event.eventbeneficiarycategory_set.all()
+
+        for cat in categories:
+            Mt = cat.beneficiarygroup_set.all().aggregate(
+                Mtotal=Sum('masculine_individuals')
+            )['Mtotal']
+
+            Ft = cat.beneficiarygroup_set.all().aggregate(
+                Mtotal=Sum('femenine_individuals')
+            )['Mtotal']
+
+            benefs += Mt
+            benefs += Ft
         
     return render(request, 'contractor_home.html', {'contractor':contractor, 'sessions':sessions, 'benefs':benefs})
 
 @login_required(login_url='login')
 def activity_report(request):
 
+    contractor = Contractor.objects.get(id=request.user.id)
     if request.method == 'GET':
-        contractor = Contractor.objects.get(id=request.user.id)
-        intervs = contractor.intervention_set.all()
+        return render(request, 'activity_report.html')
 
-        return render(request, 'activity_report.html', {'intervs':intervs})
     if request.method == 'POST':
 
         c1 = [
@@ -162,21 +184,20 @@ def activity_report(request):
 
         cats = [c1,c2,c3,c4,c5,c6]
 
-        intervention = Intervention.objects.get(id=request.POST.get('intervention'))
-        session = Session(
-            intervention=intervention,
+        event = MassiveEvent(
+            contractor=contractor,
+            place=request.POST.get('place'),
+            name=request.POST.get('name'),
             evidence=request.FILES.get('evidence'),
-            plist=request.FILES.get('plist'),
-            observations=request.POST.get('observations')
+            observations=request.POST.get('observations'),
+            date=request.POST.get('date')
         )
-        session.save()
+        event.save()
 
         groups = ['M', 'C', 'I', 'D', 'A']
         for index, value in enumerate(cats):
-            cat = BeneficiaryCategory(session = session,age_range=str((index+1)))
+            cat = EventBeneficiaryCategory(age_range=str((index+1)), event=event)
             cat.save()
-
-
 
             for i, item in enumerate(value):
 
@@ -190,11 +211,6 @@ def activity_report(request):
                 group.save()
 
         return redirect(reverse_lazy('contractor_home'))
-
-
-
-
-        return render(request, 'activity_report.html', {'intervs': intervs})
 
 
 @login_required(login_url='login')
@@ -400,11 +416,115 @@ def load_report_form(request):
 
 
 
-
 def send_members(request, intervention_id):
     interv = Intervention.objects.get(id=intervention_id)
     members = interv.member_set.filter(active=True)
+
     if request.method == 'GET':
         return render(request, 'members.html', {'members': members})
+
     if request.method == 'POST':
-        return redirect(reverse_lazy('home'))
+
+        ids = request.POST.getlist('contestants')
+
+        print ids
+
+        session = Session(
+            intervention=interv,
+            evidence=request.FILES.get('evidence'),
+            observations=request.POST.get('observations'),
+        )
+        session.save()
+
+        members = Member.objects.filter(id__in=ids)
+
+
+        c1 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+        c2 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+        c3 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+        c4 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+        c5 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+        c6 = [
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0]
+        ]
+
+
+
+        groups =  ['M', 'C', 'I', 'D', 'A']
+
+        for member in members:
+            age = calculate_age(member.birthdate)
+
+            print type(age)
+
+            i = groups.index(member.social_group)
+            g = 0 if member.gender == 'M' else 1
+
+            if  age >= 0 and age <= 5:
+                c1[i][g]+=1
+            elif age >= 6 and age <= 12:
+                c2[i][g] += 1
+            elif age >=13 and age <= 17:
+                c3[i][g]+=1
+            elif age >= 18 and age <= 29:
+                c4[i][g]+=1
+            elif age >= 30 and age < 59:
+                c5[i][g]+=1
+            else:
+                c6[i][g]+=1
+
+        cats = [c1,c2, c3, c4, c5, c6]
+        for index, value in enumerate(cats):
+            cat = SessionBeneficiaryCategory(age_range=str((index + 1)), category_session=session)
+            cat.save()
+
+            for i, item in enumerate(value):
+                group = BeneficiaryGroup(
+                    category=cat,
+                    group_name=groups[i],
+                    femenine_individuals=item[1],
+                    masculine_individuals=item[0]
+                )
+
+                group.save()
+
+        return redirect(reverse_lazy('contractor_home'))

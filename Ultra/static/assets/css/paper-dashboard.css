@@ -10790,3 +10790,9 @@ input.ct-danger + span + label + span.switch-right {
 #breadcrumb li a:active:after {
     border-left-color: #16a085;
 }
+
+.card .btn-group.bootstrap-select .dropdown-menu {
+    min-width: 100%;
+    overflow: inherit !important;
+    max-height: 350px;
+}
