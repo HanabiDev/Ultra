@@ -14,6 +14,9 @@ def get_path(instance,file):
 def get_support_path(instance,file):
     return 'uploads/contractors/'+str(instance.trainer.id)+'/'+file
 
+def get_event_path(instance,file):
+    return 'uploads/events/event_evidence/'+str(instance.id)+'/'+file
+
 def get_interv_path(instance,file):
     return 'uploads/interventions/session_evidence/'+str(instance.intervention.id)+'/'+file
 
@@ -98,11 +101,17 @@ class Member(models.Model):
 
     )
 
+    GENRES = (
+        ('M', 'Masculino'),
+        ('F', 'Femenino')
+    )
+
     interv = models.ForeignKey('Intervention', verbose_name=u'Grupo')
     name = models.CharField(max_length=50, verbose_name=u'Nombres')
     lastname = models.CharField(max_length=50, verbose_name=u'Apellidos')
     dni = models.CharField(max_length=30, verbose_name=u'Número de documento', unique=True)
     birthdate = models.DateField(verbose_name=u'Fecha de nacimiento')
+    gender = models.CharField(max_length=1, verbose_name=u'Género', choices=GENRES)
     social_group = models.CharField(max_length=1, choices=SOCIAL_CONDITIONS, verbose_name='Grupo social')
     active = models.BooleanField(verbose_name='Activo')
 
@@ -126,12 +135,19 @@ class TimeSchedule(models.Model):
     startTime = models.TimeField()
     endTime = models.TimeField()
 
+class MassiveEvent(models.Model):
+    contractor = models.ForeignKey('Contractor')
+    date = models.DateTimeField()
+    place = models.CharField(max_length=50)
+    name =  models.CharField(max_length=50)
+    evidence = models.ImageField(upload_to=get_event_path, verbose_name=u'Evidencia')
+    observations = models.TextField()
+
 
 class Session(models.Model):
     date = models.DateTimeField(auto_now=True)
     intervention = models.ForeignKey('Intervention')
     evidence = models.ImageField(upload_to=get_interv_path, verbose_name=u'Evidencia')
-    plist = models.ImageField(upload_to=get_interv_path, verbose_name=u'Lista de personas')
     observations = models.TextField()
 
 
@@ -145,9 +161,13 @@ class BeneficiaryCategory(models.Model):
         ('5', '30 a 59 Años'),
         ('6', 'Más de 60 Años')
     )
-    session = models.ForeignKey('Session')
     age_range =  models.CharField(max_length=2, choices=AGE_RANGES)
 
+class SessionBeneficiaryCategory(BeneficiaryCategory):
+    category_session = models.ForeignKey('Session')
+
+class EventBeneficiaryCategory(BeneficiaryCategory):
+    event = models.ForeignKey('MassiveEvent')
 
 class BeneficiaryGroup(models.Model):
     SOCIAL_CONDITIONS = (

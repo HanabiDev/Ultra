@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>{{member.name}} {{member.lastname}}</td>
                                         <td>
-                                            <input type="checkbox" checked>
+                                            <input type="checkbox" value="{{ member.id }}" checked name="contestants">
                                         </td>
                                     </tr>
                                     {% endfor %}

@@ -49,6 +49,11 @@
                     {% endfor %}
 
                     {% if forloop.last  %}
+                    <div class="content">
+                        <a href="{% url 'contractors:pass' contractor.id %}" class="btn btn-fill btn-success" style="width:100%">
+                            Cambiar contraseña
+                        </a>
+                    </div>
                     <hr>
                     <div class="form-group">
                         <label class="col-md-4 control-label">{{field.label}}</label>

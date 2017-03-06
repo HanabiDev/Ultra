@@ -75,17 +75,20 @@ class EditContractorForm(b_forms.BetterModelForm):
         self.fields['last_name'].required = True
 
         self.fields['avatar'].required = False
+        """
         self.fields['password'].required = False
         self.fields['password'].widget = Button(
             attrs={
-                'class':'btn waves-attach col-xs-12', 
+                'class':'btn waves-attach col-xs-12',
                 'href':reverse_lazy('contractors:pass', kwargs={'user_id':self.instance.id})
             }
         )
+        """
+
 
     def save(self, commit=True):
         user = super(EditContractorForm, self).save(commit=False)
-        user.set_password(self.cleaned_data['password'])
+        #user.set_password(self.cleaned_data['password'])
 
 
         if commit:
@@ -96,7 +99,7 @@ class EditContractorForm(b_forms.BetterModelForm):
         model = Contractor
         fields = [
             'first_name', 'last_name', 'dni_type','dni', 'address',
-            'phone', 'mobile', 'avatar', 'type', 'username', 'password', 'email',
+            'phone', 'mobile', 'avatar', 'type', 'username', 'email',
         ]
 
         widgets = {
@@ -120,7 +123,7 @@ class EditContractorForm(b_forms.BetterModelForm):
             ), legend=u'1. Datos básicos'),
 
             Fieldset('account', fields=(
-                'avatar', 'type', 'username', 'password', 'email',
+                'avatar', 'type', 'username', 'email',
             ), legend=u'2. Información de la cuenta'),
         )
 
@@ -261,6 +264,7 @@ class MemberForm(forms.ModelForm):
             'dni': forms.NumberInput(attrs={'class': 'form-control'}),
             'birthdate': forms.DateInput(attrs={'class': 'form-control datepicker'}),
             'social_group': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
+            'gender': forms.Select(attrs={'class': 'selectpicker', 'data-style': 'btn-info btn-fill btn-block'}),
         }
 
 
