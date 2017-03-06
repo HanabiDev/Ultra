@@ -1,0 +1,160 @@
+{% extends "admin/base/base.html" %}
+{% load user_tags %}
+{% load static %}
+
+{% block title %}Ver Usuario{% endblock %}
+
+{% block section_title %}Información del Usuario <br><small style="font-size:12px">{{user.get_full_name}}</small>{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a href="{% url 'settings:settings_home' %}"><span class="fa fa-gears"> </span> Configuración</a></li>
+<li><a href="{% url 'settings:users_index' %}"><span class="fa fa-users"> </span> Usuarios</a></li>
+<li>
+    <a class="active"><span class="fa fa-certificate"> 
+        </span> {{ user.get_full_name }}
+    </a>
+</li>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">
+                    {{ user.get_full_name }} <br>
+                    <small>Administrador</small>
+                </h4>
+                <hr>
+            </div>
+            <div class="content">
+                <p class="text-justify">
+                    <b>Correo electrónico: </b>{{ user.email }}
+                </p>
+                <p class="text-justify">
+                    <b>Nombre de usuario: </b>{{ user.username }}
+                </p>
+                <p class="text-justify">
+                    <b>Estado: </b>{% if user.is_active %}Activo{% else %}Inactivo{% endif %}
+                </p>
+                <p class="text-justify">
+                    <b>Usuario desde: </b>{{user.date_joined|date}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+    <script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+        var $table2 = $('#fresh-table2'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table2.bootstrapTable({
+                toolbar: ".toolbar2",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table2.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

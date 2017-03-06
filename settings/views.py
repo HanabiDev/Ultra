@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from athletes.models import Sport, League, Club
 from django.urls.base import reverse_lazy
 
-from settings.forms import SportForm, LeagueForm, ClubForm
+from settings.forms import SportForm, LeagueForm, ClubForm, AddUserForm
+from django.contrib.auth.models import User
 
 def home(request):
 	return render(request, "settings.html")
@@ -179,3 +180,20 @@ def delete_club(request, club_id):
 	club.delete()
 
 	return redirect(reverse_lazy('settings:clubs_index'))
+
+
+
+
+
+
+
+
+
+def users_index(request):
+	users = User.objects.filter(type='')
+	return render(request, "users.html", {'users':users})
+
+
+def view_user(request, user_id):
+	user = User.objects.get(id=user_id)
+	return render(request, 'user_detail.html', {'user': user})
