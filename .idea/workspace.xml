@@ -3,18 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2ccd9a37-3582-4d44-8802-1d93d7665926" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.pdf" afterPath="$PROJECT_DIR$/test.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ultra/static/assets/css/paper-dashboard.css" afterPath="$PROJECT_DIR$/Ultra/static/assets/css/paper-dashboard.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" afterPath="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/templates/intervs.html" afterPath="$PROJECT_DIR$/app_auth/templates/intervs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/templates/members.html" afterPath="$PROJECT_DIR$/app_auth/templates/members.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/views.py" afterPath="$PROJECT_DIR$/app_auth/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/forms.py" afterPath="$PROJECT_DIR$/contractors/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/models.py" afterPath="$PROJECT_DIR$/contractors/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/activity_report.html" afterPath="$PROJECT_DIR$/contractors/templates/activity_report.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/contractor.html" afterPath="$PROJECT_DIR$/contractors/templates/contractor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/contractor_home.html" afterPath="$PROJECT_DIR$/contractors/templates/contractor_home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/contractor_interv.html" afterPath="$PROJECT_DIR$/contractors/templates/contractor_interv.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/programs/views/subprogram_views.py" afterPath="$PROJECT_DIR$/programs/views/subprogram_views.py" />
     </list>
     <ignored path="Ultra.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -92,11 +82,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_report.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_report.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="222">
               <caret line="1096" column="35" selection-start-line="1096" selection-start-column="35" selection-end-line="1096" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="subprogram_views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="189" column="33" selection-start-line="189" selection-start-column="33" selection-end-line="189" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contractor.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/contractors/templates/contractor.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -147,7 +157,6 @@
         <option value="$PROJECT_DIR$/athletes/views.py" />
         <option value="$PROJECT_DIR$/contractors/migrations/0002_beneficiarycategory_beneficiarygroup_intervention_session_timeschedule.py" />
         <option value="$PROJECT_DIR$/contractors/migrations/0008_member.py" />
-        <option value="$PROJECT_DIR$/programs/views/subprogram_views.py" />
         <option value="$PROJECT_DIR$/athletes/models.py" />
         <option value="$PROJECT_DIR$/polls/templates/poll.html" />
         <option value="$PROJECT_DIR$/polls/templates/poll_detail.html" />
@@ -178,7 +187,6 @@
         <option value="$PROJECT_DIR$/events/templates/rank_report.html" />
         <option value="$PROJECT_DIR$/events/templates/rank_event.html" />
         <option value="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
-        <option value="$PROJECT_DIR$/contractors/templates/contractor.html" />
         <option value="$PROJECT_DIR$/contractors/migrations/0011_auto_20170305_2002.py" />
         <option value="$PROJECT_DIR$/contractors/templates/contractor_home.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/intervs.html" />
@@ -189,6 +197,8 @@
         <option value="$PROJECT_DIR$/Ultra/static/assets/css/paper-dashboard.css" />
         <option value="$PROJECT_DIR$/contractors/templates/contractor_interv.html" />
         <option value="$PROJECT_DIR$/contractors/templates/activity_report.html" />
+        <option value="$PROJECT_DIR$/programs/views/subprogram_views.py" />
+        <option value="$PROJECT_DIR$/contractors/templates/contractor.html" />
       </list>
     </option>
   </component>
@@ -272,56 +282,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="contractors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="athletes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="athletes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templatetags" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="athletes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -675,7 +635,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22416413" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -683,7 +643,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6830065" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.078431375" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.078431375" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23366013" sideWeight="0.49702382" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -783,16 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="113" column="14" selection-start-line="113" selection-start-column="14" selection-end-line="113" selection-end-column="14" />
-          <folding>
-            <element signature="e#17#46#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -966,16 +916,6 @@
           <caret line="9" column="82" selection-start-line="9" selection-start-column="72" selection-end-line="9" selection-end-column="82" />
           <caret line="10" column="92" selection-start-line="10" selection-start-column="81" selection-end-line="10" selection-end-column="92" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="52" column="127" selection-start-line="52" selection-start-column="127" selection-end-line="52" selection-end-column="127" />
-          <folding>
-            <element signature="e#2057#2075#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1164,6 +1104,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
           <caret line="1096" column="35" selection-start-line="1096" selection-start-column="35" selection-end-line="1096" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="189" column="33" selection-start-line="189" selection-start-column="33" selection-end-line="189" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
           <folding />
         </state>
       </provider>

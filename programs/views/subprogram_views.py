@@ -187,7 +187,7 @@ def get_gender_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for cat in categories:
                 Mt = cat.beneficiarygroup_set.all().aggregate(
@@ -217,7 +217,7 @@ def get_social_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for cat in categories:
                 G1 += cat.beneficiarygroup_set.get(group_name='M').masculine_individuals
@@ -246,7 +246,7 @@ def get_category_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for index, cat in enumerate(categories):
                 masc = cat.beneficiarygroup_set.all().aggregate(
@@ -282,7 +282,7 @@ def get_gender_social_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for cat in categories:
                 G1 += cat.beneficiarygroup_set.get(group_name='M').masculine_individuals
@@ -322,7 +322,7 @@ def get_gender_category_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for index, cat in enumerate(categories):
                 masc = cat.beneficiarygroup_set.all().aggregate(
@@ -362,7 +362,7 @@ def get_social_category_resume(subprogram):
         sessions = interv.session_set.all()
         for session in sessions:
 
-            categories = session.beneficiarycategory_set.all()
+            categories = session.sessionbeneficiarycategory_set.all()
 
             for index,cat in enumerate(categories):
 
