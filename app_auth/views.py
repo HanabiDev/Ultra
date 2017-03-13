@@ -538,3 +538,14 @@ def report_list(request, contractor_id):
     session_reports = Session.objects.filter(intervention__contractor_id=contractor_id)
     event_reports = MassiveEvent.objects.filter(contractor_id=contractor_id)
     return render(request, 'contractor_reports.html', {'contractor':contractor, 'sessions':session_reports, 'events':event_reports})
+
+def session_report(request, contractor_id, session_id):
+    session = Session.objects.get(id=session_id, intervention__contractor_id=contractor_id)
+
+    print session.sessionbeneficiarycategory_set.all()
+
+    return render(request, 'session_report.html', {'session':session})
+
+
+def event_report(request, contractor_id, event_id):
+    pass

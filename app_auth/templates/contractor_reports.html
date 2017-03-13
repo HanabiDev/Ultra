@@ -8,7 +8,8 @@
 
 {% block breadcrumb %}
 <li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
-<li><a class="active"><span class="fa fa-user"> </span> Contratistas</a></li>
+<li><a href="{% url 'contractor_reports' %}"><span class="fa fa-calendar-check-o"> </span> Supervisión</a></li>
+<li><a class="active"><span class="fa fa-user"> </span> {{contractor.get_full_name}}</a></li>
 {% endblock %}
 
 
@@ -31,7 +32,7 @@
                         <td>{{session.intervention.subprogram}}</td>
                         <td>{{session.intervention.group_name}}</td>
                         <td>
-                            <a href="{% url 'report_list' contractor.id %}" class="btn btn-simple text-success btn-icon edit">
+                            <a href="{% url 'session_report' contractor.id session.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="fa fa-eye"></i>
                             </a>
                         </td>
@@ -43,7 +44,7 @@
                         <td>{{event.contractor.intervention_set.first.subprogram}}</td>
                         <td>{{event.name}}</td>
                         <td>
-                            <a href="{% url 'report_list' contractor.id %}" class="btn btn-simple text-success btn-icon edit">
+                            <a href="{% url 'event_report' contractor.id event.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="fa fa-eye"></i>
                             </a>
                         </td>

@@ -69,6 +69,8 @@ urlpatterns = [
 
     url(r'^contratista/supervision/$', app_auth.views.list_contractors_reports, name='contractor_reports'),
     url(r'^contratista/supervision/(?P<contractor_id>\d+)$', app_auth.views.report_list, name='report_list'),
+    url(r'^contratista/supervision/(?P<contractor_id>\d+)/(?P<session_id>\d+)$', app_auth.views.session_report, name='session_report'),
+    url(r'^contratista/supervision/(?P<contractor_id>\d+)/(?P<event_id>\d+)$', app_auth.views.event_report, name='event_report'),
 
     url(r'^configuracion/', include('settings.urls', 'settings'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
