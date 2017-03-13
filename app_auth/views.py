@@ -542,10 +542,10 @@ def report_list(request, contractor_id):
 def session_report(request, contractor_id, session_id):
     session = Session.objects.get(id=session_id, intervention__contractor_id=contractor_id)
 
-    print session.sessionbeneficiarycategory_set.all()
-
     return render(request, 'session_report.html', {'session':session})
 
 
 def event_report(request, contractor_id, event_id):
-    pass
+    event = MassiveEvent.objects.get(id=event_id, contractor_id=contractor_id)
+
+    return render(request, 'event_report.html', {'event':event})
