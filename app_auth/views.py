@@ -528,3 +528,13 @@ def send_members(request, intervention_id):
                 group.save()
 
         return redirect(reverse_lazy('contractor_home'))
+
+def list_contractors_reports(request):
+    contractors = Contractor.objects.all()
+    return render(request, 'contractors_reports.html', {'contractors':contractors})
+
+def report_list(request, contractor_id):
+    contractor = Contractor.objects.get(id=contractor_id)
+    session_reports = Session.objects.filter(intervention__contractor_id=contractor_id)
+    event_reports = MassiveEvent.objects.filter(contractor_id=contractor_id)
+    return render(request, 'contractor_reports.html', {'contractor':contractor, 'sessions':session_reports, 'events':event_reports})

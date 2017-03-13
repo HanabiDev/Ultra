@@ -67,5 +67,8 @@ urlpatterns = [
     url(r'^contratista/reportar-actividad/$', app_auth.views.load_report_form, name='report_form'),
     url(r'^contratista/reportar-actividad/(?P<intervention_id>\d+)$', app_auth.views.send_members, name='report_form'),
 
+    url(r'^contratista/supervision/$', app_auth.views.list_contractors_reports, name='contractor_reports'),
+    url(r'^contratista/supervision/(?P<contractor_id>\d+)$', app_auth.views.report_list, name='report_list'),
+
     url(r'^configuracion/', include('settings.urls', 'settings'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

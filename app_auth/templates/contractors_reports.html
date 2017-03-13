@@ -1,0 +1,113 @@
+{% extends 'admin/base/base.html' %}
+
+{% load static %}
+
+{% block title %}Contratistas{% endblock %}
+
+{% block section_title %}Contratistas{% endblock %}
+
+{% block breadcrumb %}
+<li><a href="{% url 'admin_home' %}"><span class="fa fa-home"> </span></a></li>
+<li><a class="active"><span class="fa fa-user"> </span> Contratistas</a></li>
+{% endblock %}
+
+
+{% block main %}
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="fresh-table color-green">
+
+            <table id="fresh-table" class="table">
+                <thead>
+                    <th data-field="Foto" class="disabled-sorting"><span style="color:#fff;">Foto</span></th>
+                    <th data-sortable="true" data-field="Documento">Documento</th>
+                    <th data-sortable="true" data-field="Nombre">Nombre</th>
+                    <th data-sortable="true" data-field="Subprograma">Subprograma</th>
+                    <!--th data-sortable="true" data-field="Sesiones">Sessiones</th>
+                    <th data-sortable="true" data-field="Eventos">Eventos</th-->
+                    <th data-field="" class="disabled-sorting">Acción</th>
+                </thead>
+                <tbody>
+                    {% for contractor in contractors %}
+                    <tr>
+                        <td><img src="/media/uploads/avatars/face-2.jpg" class="img-circle" style="max-height:40px;"></td>
+                        <td>{{contractor.dni}}</td>
+                        <td>{{contractor.get_full_name}}</td>
+                        <td>{{contractor.intervention_set.first.subprogram}}</td>
+                        <!--td>{{sessions}}</td>
+                        <td>{{events}}</td-->
+                        <td>
+                            <a href="{% url 'report_list' contractor.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+    <!--  Plugin for DataTables.net  -->
+	<script src="{% static 'assets/js/jquery.datatables.js' %}"></script>
+
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'),
+            full_screen = false;
+
+        $().ready(function(){
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: false,
+                search: true,
+                showToggle: false,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                pageSize: 10,
+                pageList: [10,25,50,100,"Todos"],
+
+                formatAllRows: function () {
+                    return 'Todos';
+                },
+
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                },
+
+                formatNoMatches: function () {
+                    return 'No se encontraron registros';
+                },
+
+                formatSearch: function () {
+                    return 'Buscar';
+                },
+
+                formatRecordsPerPage: function(pageNumber){
+                    return " Mostrar "+pageNumber+" registros";
+                },
+
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+
+            $(window).resize(function () {
+                $table.bootstrapTable('resetView');
+            });
+
+        });
+
+
+    </script>
+{% endblock %}

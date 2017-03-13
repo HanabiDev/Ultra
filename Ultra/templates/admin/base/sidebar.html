@@ -100,8 +100,8 @@
 	                </li>
                     {% endif %}
                     {% if user.type == 'M' %}
-                    <li class="{% navactive request 'list_events new_event view_event edit_event rank_event rank_report' %}">
-	                    <a href="{% url 'events:list_events' %}">
+                    <li class="{% navactive request 'contractor_reports' %}">
+	                    <a href="{% url 'contractor_reports' %}">
 	                        <i class="fa fa-calendar-check-o"></i>
 	                        <p>Supervisión</p>
 	                    </a>
