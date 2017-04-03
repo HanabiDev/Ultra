@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ccd9a37-3582-4d44-8802-1d93d7665926" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.pdf" afterPath="$PROJECT_DIR$/test.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" afterPath="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/templates/session_report.html" afterPath="$PROJECT_DIR$/app_auth/templates/session_report.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_auth/views.py" afterPath="$PROJECT_DIR$/app_auth/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/models.py" afterPath="$PROJECT_DIR$/contractors/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/activity_report.html" afterPath="$PROJECT_DIR$/contractors/templates/activity_report.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/contractors/templates/contractor_home.html" afterPath="$PROJECT_DIR$/contractors/templates/contractor_home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/programs/templates/program_map.html" afterPath="$PROJECT_DIR$/programs/templates/program_map.html" />
     </list>
     <ignored path="Ultra.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,42 +48,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+      <file leaf-file-name="sidebar.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="544" column="54" selection-start-line="544" selection-start-column="54" selection-end-line="544" selection-end-column="54" />
-              <folding>
-                <element signature="e#18#77#0" expanded="true" />
-                <element signature="e#1242#1413#0" expanded="false" />
-                <element signature="e#1445#2155#0" expanded="false" />
-                <element signature="e#2187#2245#0" expanded="false" />
-                <element signature="e#2283#3128#0" expanded="false" />
-                <element signature="e#3200#4496#0" expanded="false" />
-                <element signature="e#4568#7872#0" expanded="false" />
-                <element signature="e#8165#8965#0" expanded="false" />
-                <element signature="e#9042#9474#0" expanded="false" />
-                <element signature="e#9546#10157#0" expanded="false" />
-                <element signature="e#10243#11006#0" expanded="false" />
-                <element signature="e#11092#11254#0" expanded="false" />
-                <element signature="e#11327#11895#0" expanded="false" />
-                <element signature="e#11985#12738#0" expanded="false" />
-                <element signature="e#12829#13002#0" expanded="false" />
-                <element signature="e#13042#13176#0" expanded="false" />
-                <element signature="e#13220#13375#0" expanded="false" />
-                <element signature="e#13416#13996#0" expanded="false" />
-                <element signature="e#14050#14743#0" expanded="false" />
-                <element signature="e#14798#15762#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="session_report.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app_auth/templates/session_report.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="113" column="16" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
+            <state relative-caret-position="390">
+              <caret line="86" column="28" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -84,9 +61,84 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/contractors/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="184" column="25" selection-start-line="184" selection-start-column="4" selection-end-line="184" selection-end-column="25" />
+            <state relative-caret-position="143">
+              <caret line="93" column="6" selection-start-line="93" selection-start-column="6" selection-end-line="93" selection-end-column="6" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="47" column="80" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="subprogram_views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="74" column="36" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program_map.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/programs/templates/program_map.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="93" column="84" selection-start-line="93" selection-start-column="84" selection-end-line="93" selection-end-column="84" />
+              <folding>
+                <element signature="e#18#77#0" expanded="true" />
+                <marker date="1491220719447" expanded="false" signature="1237:1413" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="1439:2155" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="2182:2245" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="2278:3128" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="4139:7449" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="7736:8542" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="8614:9051" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="9117:9734" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="9814:10583" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="10664:10831" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="10898:11472" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="11556:12315" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="12401:12579" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="12614:12753" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="12792:12952" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="12988:13573" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="13622:14320" placeholder="..." />
+                <marker date="1491220719447" expanded="false" signature="14370:15339" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contractor_home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/contractors/templates/contractor_home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+              <folding>
+                <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#3;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#4;n#div#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,7 +159,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app_auth/templates/groups_list.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/members_list.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/member.html" />
         <option value="$PROJECT_DIR$/athletes/views.py" />
@@ -142,22 +193,23 @@
         <option value="$PROJECT_DIR$/events/templates/rank_report.html" />
         <option value="$PROJECT_DIR$/events/templates/rank_event.html" />
         <option value="$PROJECT_DIR$/contractors/migrations/0011_auto_20170305_2002.py" />
-        <option value="$PROJECT_DIR$/contractors/templates/contractor_home.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/intervs.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/members.html" />
-        <option value="$PROJECT_DIR$/contractors/models.py" />
         <option value="$PROJECT_DIR$/contractors/forms.py" />
         <option value="$PROJECT_DIR$/Ultra/static/assets/css/paper-dashboard.css" />
         <option value="$PROJECT_DIR$/contractors/templates/contractor_interv.html" />
-        <option value="$PROJECT_DIR$/contractors/templates/activity_report.html" />
         <option value="$PROJECT_DIR$/programs/views/subprogram_views.py" />
         <option value="$PROJECT_DIR$/contractors/templates/contractor.html" />
-        <option value="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
         <option value="$PROJECT_DIR$/Ultra/urls.py" />
         <option value="$PROJECT_DIR$/app_auth/templates/contractors_reports.html" />
         <option value="$PROJECT_DIR$/app_auth/templates/contractor_reports.html" />
-        <option value="$PROJECT_DIR$/app_auth/views.py" />
         <option value="$PROJECT_DIR$/app_auth/templates/session_report.html" />
+        <option value="$PROJECT_DIR$/contractors/models.py" />
+        <option value="$PROJECT_DIR$/contractors/templates/activity_report.html" />
+        <option value="$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html" />
+        <option value="$PROJECT_DIR$/programs/templates/program_map.html" />
+        <option value="$PROJECT_DIR$/contractors/templates/contractor_home.html" />
+        <option value="$PROJECT_DIR$/app_auth/views.py" />
       </list>
     </option>
   </component>
@@ -201,88 +253,7 @@
       <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contractors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="contractors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app_auth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Ultra" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app_auth" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -293,6 +264,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
+    <property name="SearchEverywhereHistoryKey" value="contractor_home&#9;null&#9;null&#10;contractor&#9;FILE&#9;file://C:/Users/Juan/Repos/UltraEnv/Ultra/contractors/templates/contractor_home.html&#10;subprogra&#9;FILE&#9;file://C:/Users/Juan/Repos/UltraEnv/Ultra/programs/views/subprogram_views.py&#10;urls&#9;FILE&#9;file://C:/Users/Juan/Repos/UltraEnv/Ultra/Ultra/urls.py&#10;sideba&#9;FILE&#9;file://C:/Users/Juan/Repos/UltraEnv/Ultra/Ultra/templates/admin/base/sidebar.html&#10;report&#9;FILE&#9;file://C:/Users/Juan/Repos/UltraEnv/Ultra/contractors/templates/activity_report.html&#10;intervention&#9;null&#9;null" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -614,13 +586,13 @@
     <frame x="-8" y="-8" width="1376" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22720365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22720365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32026145" sideWeight="0.5029762" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6830065" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42647058" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23039216" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23366013" sideWeight="0.49702382" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -635,6 +607,28 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32026145" sideWeight="0.5029762" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6830065" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42647058" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23366013" sideWeight="0.49702382" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22720365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="manage.py@Ultra" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3611111" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32626426" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -654,16 +648,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/polls/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="57" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/polls/templates/polls_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -724,6 +708,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -875,14 +860,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor_home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="41">
-          <caret line="91" column="54" selection-start-line="91" selection-start-column="54" selection-end-line="91" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contractors/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3442">
@@ -973,42 +950,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18632">
-          <caret line="1096" column="35" selection-start-line="1096" selection-start-column="35" selection-end-line="1096" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2771">
-          <caret line="189" column="33" selection-start-line="189" selection-start-column="33" selection-end-line="189" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/contractors/templates/contractor.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="292">
           <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="102" column="72" selection-start-line="102" selection-start-column="72" selection-end-line="102" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="72" column="87" selection-start-line="72" selection-start-column="87" selection-end-line="72" selection-end-column="87" />
           <folding />
         </state>
       </provider>
@@ -1029,48 +974,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+    <entry file="file://$PROJECT_DIR$/app_auth/templates/session_report.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="544" column="54" selection-start-line="544" selection-start-column="54" selection-end-line="544" selection-end-column="54" />
+        <state relative-caret-position="17">
+          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/templates/activity_report.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="1083" column="38" selection-start-line="1083" selection-start-column="38" selection-end-line="1083" selection-end-column="38" />
           <folding>
-            <element signature="e#18#77#0" expanded="true" />
-            <element signature="e#1242#1413#0" expanded="false" />
-            <element signature="e#1445#2155#0" expanded="false" />
-            <element signature="e#2187#2245#0" expanded="false" />
-            <element signature="e#2283#3128#0" expanded="false" />
-            <element signature="e#3200#4496#0" expanded="false" />
-            <element signature="e#4568#7872#0" expanded="false" />
-            <element signature="e#8165#8965#0" expanded="false" />
-            <element signature="e#9042#9474#0" expanded="false" />
-            <element signature="e#9546#10157#0" expanded="false" />
-            <element signature="e#10243#11006#0" expanded="false" />
-            <element signature="e#11092#11254#0" expanded="false" />
-            <element signature="e#11327#11895#0" expanded="false" />
-            <element signature="e#11985#12738#0" expanded="false" />
-            <element signature="e#12829#13002#0" expanded="false" />
-            <element signature="e#13042#13176#0" expanded="false" />
-            <element signature="e#13220#13375#0" expanded="false" />
-            <element signature="e#13416#13996#0" expanded="false" />
-            <element signature="e#14050#14743#0" expanded="false" />
-            <element signature="e#14798#15762#0" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="47" column="80" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Ultra/templates/admin/base/sidebar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="86" column="28" selection-start-line="86" selection-start-column="28" selection-end-line="86" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/programs/templates/program_map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="40" column="19" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/contractors/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="184" column="25" selection-start-line="184" selection-start-column="4" selection-end-line="184" selection-end-column="25" />
+        <state relative-caret-position="143">
+          <caret line="93" column="6" selection-start-line="93" selection-start-column="6" selection-end-line="93" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_auth/templates/session_report.html">
+    <entry file="file://$PROJECT_DIR$/programs/views/subprogram_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="113" column="16" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
+        <state relative-caret-position="236">
+          <caret line="74" column="36" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contractors/templates/contractor_home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_auth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="93" column="84" selection-start-line="93" selection-start-column="84" selection-end-line="93" selection-end-column="84" />
+          <folding>
+            <element signature="e#18#77#0" expanded="true" />
+            <marker date="1491220719447" expanded="false" signature="1237:1413" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="1439:2155" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="2182:2245" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="2278:3128" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="4139:7449" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="7736:8542" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="8614:9051" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="9117:9734" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="9814:10583" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="10664:10831" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="10898:11472" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="11556:12315" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="12401:12579" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="12614:12753" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="12792:12952" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="12988:13573" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="13622:14320" placeholder="..." />
+            <marker date="1491220719447" expanded="false" signature="14370:15339" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -21,22 +21,24 @@
        var projects = [
 
        {% for intervention in intervs %}
-       {
-            id: {{intervention.id}},
-	    contractor: "{{intervention.contractor}}",
-            name: "{{intervention.group_name}}",
-            address: "{{intervention.address}}",
-            neighborhood:"{{intervention.neighborhood}}",
-            municipality:"{{intervention.municipality}}",
-            department:'Boyacá',
-            imagePlace: 'img/CEA4.jpg',
-            program: "{{intervention.subprogram.program}}",
-            subprogram:"{{intervention.subprogram}}",
-            veedor:"{{intervention.veedor}}",
-	    veedor_phone:"{{intervention.veedor_phone}}",
-            lat:{{intervention.latitude}},
-            lon:{{intervention.longitude}},
-       },
+           {% if intervention.latitude and intervention.longitude %}
+           {
+                id: {{intervention.id}},
+            contractor: "{{intervention.contractor}}",
+                name: "{{intervention.group_name}}",
+                address: "{{intervention.address}}",
+                neighborhood:"{{intervention.neighborhood}}",
+                municipality:"{{intervention.municipality}}",
+                department:'Boyacá',
+                imagePlace: 'img/CEA4.jpg',
+                program: "{{intervention.subprogram.program}}",
+                subprogram:"{{intervention.subprogram}}",
+                veedor:"{{intervention.veedor}}",
+                veedor_phone:"{{intervention.veedor_phone}}",
+                lat:{{intervention.latitude}},
+                lon:{{intervention.longitude}},
+           },
+           {% endif %}
        {% endfor %}
 
        ];

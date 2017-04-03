@@ -88,26 +88,11 @@ def restore_password(request):
 @login_required(login_url='login')
 def contractor_home(request):
     contractor = Contractor.objects.get(id=request.user.id)
-    sessions = 0
-    benefs = 0
-    for interv in contractor.intervention_set.all():
-        sessions += interv.session_set.all().count()
+    sessions = Session.objects.filter(intervention__contractor_id=request.user.id).count();
+    e_benefs = 0
 
-        for session in interv.session_set.all():
+    s_benefs = Member.objects.filter(interv__contractor_id=request.user.id).count();
 
-            categories = session.sessionbeneficiarycategory_set.all()
-
-            for cat in categories:
-                Mt = cat.beneficiarygroup_set.all().aggregate(
-                    Mtotal=Sum('masculine_individuals')
-                )['Mtotal']
-
-                Ft = cat.beneficiarygroup_set.all().aggregate(
-                    Mtotal=Sum('femenine_individuals')
-                )['Mtotal']
-
-                benefs += Mt
-                benefs += Ft
 
     for event in contractor.massiveevent_set.all():
         categories = event.eventbeneficiarycategory_set.all()
@@ -121,10 +106,10 @@ def contractor_home(request):
                 Mtotal=Sum('femenine_individuals')
             )['Mtotal']
 
-            benefs += Mt
-            benefs += Ft
+            e_benefs += Mt
+            e_benefs += Ft
         
-    return render(request, 'contractor_home.html', {'contractor':contractor, 'sessions':sessions, 'benefs':benefs})
+    return render(request, 'contractor_home.html', {'contractor':contractor, 'sessions':sessions, 's_benefs':s_benefs, 'e_benefs':e_benefs})
 
 @login_required(login_url='login')
 def activity_report(request):

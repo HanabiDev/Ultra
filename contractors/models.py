@@ -87,8 +87,8 @@ class Intervention(models.Model):
     group_name = models.CharField(max_length=100, verbose_name=u'Nombre del grupo')
     veedor = models.CharField(max_length=100, verbose_name=u'Veedor del grupo')
     veedor_phone = models.CharField(max_length=100, verbose_name=u'Teléfono del veedor')
-    latitude = models.CharField(max_length=20, verbose_name=u'Latitud')
-    longitude = models.CharField(max_length=20, verbose_name=u'Longitud')
+    latitude = models.CharField(max_length=20, blank=True, null=True, verbose_name=u'Latitud')
+    longitude = models.CharField(max_length=20, blank=True, null=True, verbose_name=u'Longitud')
 
 
 class Member(models.Model):

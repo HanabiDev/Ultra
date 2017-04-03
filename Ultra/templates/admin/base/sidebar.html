@@ -75,6 +75,12 @@
 
                     {% if user.type == 'M' or user.type == 'I' or user.type == 'E' %}
                     <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
+	                    <a href="{% url 'contractor_home' %}">
+	                        <i class="fa fa-home"></i>
+	                        <p>Inicio</p>
+	                    </a>
+	                </li>
+                    <li class="{% navactive request 'list_athletes new_athlete view_athlete edit_athlete' %}">
 	                    <a href="{% url 'report_form' %}">
 	                        <i class="fa fa-paste"></i>
 	                        <p>Reporte de actividad</p>
