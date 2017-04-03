@@ -8,7 +8,6 @@ def navactive(request, views):
     views = [str(view) for view in views.split()]
     try:
         view = urlresolvers.resolve(request.path).url_name
-        print view
 
         if view in views:
             return "active"
