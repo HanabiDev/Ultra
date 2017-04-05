@@ -41,6 +41,9 @@
                             <a href="{% url 'report_list' contractor.id %}" class="btn btn-simple text-success btn-icon edit">
                                 <i class="fa fa-eye"></i>
                             </a>
+                            <a href="{% url 'report_pdf' contractor.id %}" class="btn btn-simple text-success btn-icon edit">
+                                <i class="fa fa-file"></i>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

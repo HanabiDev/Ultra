@@ -514,6 +514,116 @@ def send_members(request, intervention_id):
 
         return redirect(reverse_lazy('contractor_home'))
 
+from datetime import datetime
+from django.http.response import HttpResponse
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import cm
+from reportlab.pdfgen import canvas
+from reportlab.platypus.doctemplate import SimpleDocTemplate, BaseDocTemplate, PageTemplate
+from reportlab.platypus.flowables import PageBreak
+from reportlab.platypus.frames import Frame
+from reportlab.platypus.paragraph import Paragraph
+from reportlab.platypus.tables import Table, TableStyle
+from functools import partial
+from io import BytesIO
+from reportlab.lib.pagesizes import letter, landscape
+from reports.pdf_test import styleH2, header, styleH, styleH2E, styleN, styleH2M, styleNC
+def contractor_report_pdf(request, contractor_id):
+    if request.method == 'GET':
+        return render(request, 'date_selector.html', {})
+    if request.method == 'POST':
+        month = 03
+
+        sessions = Session.objects.filter(intervention__contractor_id=contractor_id, date__month=month)
+
+        response = HttpResponse(content_type='application/pdf')
+
+        #pdf_name = "deportistas_por_liga-%s.pdf" % (timezone.now())  # llamado clientes
+        
+        buff = BytesIO()
+        doc = SimpleDocTemplate(buff, topMargin=2.5 * cm,
+                                leftMargin=1.5 * cm,
+                                rightMargin=1.5 * cm,
+                                bottomMargin=2 * cm,
+                                pagesize=letter)
+
+        frame = Frame(1.5 * cm, doc.bottomMargin, doc.width, doc.height - doc.bottomMargin,
+                      topPadding=0.5 * cm)  # Frame(1.5*cm, 2*cm, doc.width, doc.height-2*cm, id='normal', showboundary)
+
+        header_content = Paragraph("REPORTE MENSUAL POR CONTRATISTA", styleH2)
+        template = PageTemplate(id='test', frames=frame, onPage=partial(header, content=header_content))
+        doc.addPageTemplates([template])
+
+        text = []
+        text.append(Paragraph("<br/>", styleH))
+
+        for session in sessions:
+            text.append(Paragraph("Sesión del "+session.date.strftime("%Y-%m-%d"), styleH))
+
+            for category in session.sessionbeneficiarycategory_set.all():
+                
+                title=[[category.get_age_range_display()]]
+                headings = []
+                subs = [["M","F","M","F","M","F","M","F","M","F"]]
+                for group in category.beneficiarygroup_set.all():
+                    headings.append(group.get_group_name_display())
+                    headings.append("")
+
+                print headings
+
+                #headings = ["AA", "", "AB", "", "AC", "AD", "AE"]
+                    
+                data = []
+                for group in category.beneficiarygroup_set.all():
+                    data.append(group.masculine_individuals)
+                    data.append(group.femenine_individuals)
+                totals = []
+                for group in category.beneficiarygroup_set.all():
+                    totals.append(group.masculine_individuals + group.femenine_individuals)
+                    totals.append("")
+
+                data = [headings] + subs + [data] + [totals]
+
+                t = Table(title + data, colWidths=[1.5*cm,1.5*cm,1.5*cm,1.5*cm,1.5*cm,1.5*cm,2.5*cm,2.5*cm,2*cm,2*cm])
+                t.setStyle(TableStyle([
+                                       ('SPAN', (0, 0), (-1, 0)),
+                                       ('SPAN', (0, 1), (1, 1)),
+                                       ('SPAN', (2, 1), (3, 1)),
+                                       ('SPAN', (4, 1), (5, 1)),
+                                       ('SPAN', (6, 1), (7, 1)),
+                                       ('SPAN', (8, 1), (9, 1)),
+                                       ('SPAN', (0, -1), (1, -1)),
+                                       ('SPAN', (2, -1), (3, -1)),
+                                       ('SPAN', (4, -1), (5, -1)),
+                                       ('SPAN', (6, -1), (7, -1)),
+                                       ('SPAN', (8, -1), (9, -1)),
+                                       ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                                       ('VALIGN', (0, 1), (-1, -1), 'MIDDLE'),
+                                       ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                                       ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor("#333333")),
+                                       ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                                       ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.transparent),
+                                       ('INNERGRID', (0, 1), (-1, -1), 0.5, colors.HexColor("#27ae60")),
+                                       ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#27ae60")),
+                                       ('BACKGROUND', (0, 1), (-1, 1), colors.HexColor("#27ae60")),
+                                       ('TEXTCOLOR', (0, 1), (-1, 1), colors.white),
+                                       ('BACKGROUND', (0, 2), (-1, 2), colors.HexColor("#2ecc71")),
+                                       ('TEXTCOLOR', (0, 2), (-1, 2), colors.white),
+                                       ('BOX', (0, 0), (-1, -1), 1, colors.HexColor("#27ae60")),
+                                       ]))
+                text.append(t)
+                text.append(Paragraph("<br/>", styleH))
+
+
+        doc.build(text)
+
+        response.write(buff.getvalue())
+        buff.close()
+        return response
+
+
 def list_contractors_reports(request):
     contractors = Contractor.objects.all()
     return render(request, 'contractors_reports.html', {'contractors':contractors})
@@ -532,5 +642,4 @@ def session_report(request, contractor_id, session_id):
 
 def event_report(request, contractor_id, event_id):
     event = MassiveEvent.objects.get(id=event_id, contractor_id=contractor_id)
-
     return render(request, 'event_report.html', {'event':event})

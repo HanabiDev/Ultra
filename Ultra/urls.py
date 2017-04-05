@@ -68,6 +68,7 @@ urlpatterns = [
     url(r'^contratista/reportar-actividad/(?P<intervention_id>\d+)$', app_auth.views.send_members, name='report_form'),
 
     url(r'^contratista/supervision/$', app_auth.views.list_contractors_reports, name='contractor_reports'),
+    url(r'^contratista/supervision/reporte-pdf/(?P<contractor_id>\d+)$', app_auth.views.contractor_report_pdf, name='report_pdf'),
     url(r'^contratista/supervision/(?P<contractor_id>\d+)$', app_auth.views.report_list, name='report_list'),
     url(r'^contratista/supervision/sesion/(?P<contractor_id>\d+)/(?P<session_id>\d+)$', app_auth.views.session_report, name='session_report'),
     url(r'^contratista/supervision/evento/(?P<contractor_id>\d+)/(?P<event_id>\d+)$', app_auth.views.event_report, name='event_report'),
