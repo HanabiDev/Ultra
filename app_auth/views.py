@@ -514,6 +514,99 @@ def send_members(request, intervention_id):
 
         return redirect(reverse_lazy('contractor_home'))
 
+
+
+from django.http.response import HttpResponse
+from xls_utils import WriteToExcel
+
+def contractor_report_pdf(request, contractor_id):
+
+    if request.method == 'GET':
+        return render(request, 'date_selector.html', {})
+    if request.method == 'POST':
+
+        month = 3
+
+        sessions = Session.objects.filter(intervention__contractor_id=contractor_id, date__month=month)
+
+        """
+        for session in sessions:
+            text.append(Paragraph("Sesión del "+session.date.strftime("%Y-%m-%d"), styleH))
+
+            for category in session.sessionbeneficiarycategory_set.all():
+                
+                title=[[category.get_age_range_display()]]
+                headings = []
+                subs = [["M","F","M","F","M","F","M","F","M","F"]]
+                for group in category.beneficiarygroup_set.all():
+                    headings.append(group.get_group_name_display())
+                    headings.append("")
+
+                print headings
+
+                #headings = ["AA", "", "AB", "", "AC", "AD", "AE"]
+                    
+                data = []
+                for group in category.beneficiarygroup_set.all():
+                    data.append(group.masculine_individuals)
+                    data.append(group.femenine_individuals)
+                totals = []
+                for group in category.beneficiarygroup_set.all():
+                    totals.append(group.masculine_individuals + group.femenine_individuals)
+                    totals.append("")
+
+                data = [headings] + subs + [data] + [totals]
+
+                t = Table(title + data, colWidths=[1.5*cm,1.5*cm,1.5*cm,1.5*cm,1.5*cm,1.5*cm,2.5*cm,2.5*cm,2*cm,2*cm])
+                t.setStyle(TableStyle([
+                                       ('SPAN', (0, 0), (-1, 0)),
+                                       ('SPAN', (0, 1), (1, 1)),
+                                       ('SPAN', (2, 1), (3, 1)),
+                                       ('SPAN', (4, 1), (5, 1)),
+                                       ('SPAN', (6, 1), (7, 1)),
+                                       ('SPAN', (8, 1), (9, 1)),
+                                       ('SPAN', (0, -1), (1, -1)),
+                                       ('SPAN', (2, -1), (3, -1)),
+                                       ('SPAN', (4, -1), (5, -1)),
+                                       ('SPAN', (6, -1), (7, -1)),
+                                       ('SPAN', (8, -1), (9, -1)),
+                                       ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                                       ('VALIGN', (0, 1), (-1, -1), 'MIDDLE'),
+                                       ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                                       ('TEXTCOLOR', (0, 1), (-1, -1), colors.HexColor("#333333")),
+                                       ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                                       ('INNERGRID', (0, 0), (-1, -1), 0.5, colors.transparent),
+                                       ('INNERGRID', (0, 1), (-1, -1), 0.5, colors.HexColor("#27ae60")),
+                                       ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#27ae60")),
+                                       ('BACKGROUND', (0, 1), (-1, 1), colors.HexColor("#27ae60")),
+                                       ('TEXTCOLOR', (0, 1), (-1, 1), colors.white),
+                                       ('BACKGROUND', (0, 2), (-1, 2), colors.HexColor("#2ecc71")),
+                                       ('TEXTCOLOR', (0, 2), (-1, 2), colors.white),
+                                       ('BOX', (0, 0), (-1, -1), 1, colors.HexColor("#27ae60")),
+                                       ]))
+                text.append(t)
+                text.append(Paragraph("<br/>", styleH))
+        """
+
+
+
+        response = HttpResponse(content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=Report.xlsx'
+        xlsx_data = WriteToExcel(sessions)
+        response.write(xlsx_data)
+        return response
+
+
+
+
+
+
+
+
+
+
+"""
+
 from datetime import datetime
 from django.http.response import HttpResponse
 from reportlab.lib import colors
@@ -623,6 +716,7 @@ def contractor_report_pdf(request, contractor_id):
         buff.close()
         return response
 
+"""
 
 def list_contractors_reports(request):
     contractors = Contractor.objects.all()
