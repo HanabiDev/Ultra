@@ -518,6 +518,8 @@ def send_members(request, intervention_id):
 
 from django.http.response import HttpResponse
 from xls_utils import WriteToExcel
+import calendar
+from django.utils.translation import ugettext
 
 def contractor_report_pdf(request, contractor_id):
 
@@ -527,7 +529,10 @@ def contractor_report_pdf(request, contractor_id):
 
         month = 3
 
+        contractor = Contractor.objects.get(id=contractor_id)
         sessions = Session.objects.filter(intervention__contractor_id=contractor_id, date__month=month)
+        events = MassiveEvent.objects.filter(contractor_id=contractor_id, date__month=month)
+
 
         """
         for session in sessions:
@@ -591,8 +596,8 @@ def contractor_report_pdf(request, contractor_id):
 
 
         response = HttpResponse(content_type='application/vnd.ms-excel')
-        response['Content-Disposition'] = 'attachment; filename=Report.xlsx'
-        xlsx_data = WriteToExcel(sessions)
+        response['Content-Disposition'] = 'attachment; filename=Reporte_Actividades_'+ugettext(calendar.month_name[month])+'-'+contractor.get_full_name()+'.xlsx'
+        xlsx_data = WriteToExcel(sessions, events)
         response.write(xlsx_data)
         return response
 
